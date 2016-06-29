@@ -1,0 +1,22 @@
+<div class="col-lg-8 col-md-9 col-xs-12 col-sm-12">
+    <table class="table table-condensed table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Contacts</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="group in groups  | filter: query">
+            <td>{{group.name}}</td>
+            <td>{{group.contacts}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="removeContact(contact.id)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

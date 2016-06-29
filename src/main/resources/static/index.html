@@ -1,0 +1,50 @@
+<html>
+<head>
+<!-- META -->
+<meta charset="utf-8">
+<!-- Optimize mobile viewport -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>AddressBook</title>
+<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+	<!-- Header -->
+
+	<div ui-view="header"></div>
+	
+	<!--  main - content  -->
+	<div class="container main-container">
+		<div ui-view="main"></div>
+	</div>
+
+	
+	<!-- Footer -->
+	
+	<div ui-view = "footer"></div>
+
+</div>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+	<script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+	<script src="modules/core/app/config.js"></script>
+	<script src="modules/core/app/init.js"></script>
+	<script src="modules/core/core.module.js"></script>
+	<script src="modules/contact/contact.module.js"></script>
+	<script src="modules/common/common.module.js"></script>
+	<script src="modules/user/user.module.js"></script>
+	<script src="modules/group/group.module.js"></script>
+	<script src="modules/core/service/auth.interceptor.js"></script>
+	<script src="modules/user/service/userservice.js"></script>
+	<script src="modules/user/service/authenticateservice.js"></script>
+	<script src="modules/user/controller/logincontroller.js"></script>
+	<script src="modules/user/controller/registercontroller.js"></script>
+	<script src="modules/contact/controller/contactcontroller.js"></script>
+	<script src="modules/common/controller/headercontroller.js"></script>
+	<script src="modules/group/controller/groupcontroller.js"></script>
+	
+</body>
+</html>

@@ -1,0 +1,22 @@
+<nav class="navbar navbar-default">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand">Addressbook</a>
+		</div>
+		<ul class="nav navbar-nav">
+			<li><a data-ng-active-tab data-ng-href="#/contacts">Kontakty</a></li>
+			<li><a data-ng-active-tab data-ng-href="#/groups">Grupy</a></li>
+		</ul>
+		<ul class="nav navbar-nav no-content navbar-right">
+			<li uib-dropdown><a uib-dropdown-toggle id="profile-dropdown">
+					 {{user.name}} <span class="caret"></span>
+			</a>
+				<ul class="dropdown-menu" uib-dropdown-menu
+					aria-labelledby="profile-dropdown">
+					<li><a href> Profile </a></li>
+					<li><a href data-ng-click="logout()"> Logout </a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</nav>

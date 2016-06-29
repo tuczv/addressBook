@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="col-lg-8 col-md-9 col-xs-12 col-sm-12">
+		<p></p>
+		<p>Contact List:</p>
+		<form>
+			<div>
+				<label>Name</label>
+				<input type="name" class="form-control" placeholder="name" ng-model="contact.name">
+
+				<label>LastName</label>
+				<input type="lastname" class="form-control" placeholder="lastname" ng-model="contact.lastName">
+
+				<label>Email</label>
+				<input type="email" class="form-control" placeholder="email" ng-model="contact.email">
+
+				<label>Phone</label>
+				<input type="phone" class="form-control" placeholder="phone" ng-model="contact.phone">
+
+				<label>Group</label>
+				<select class="form-control" name="group" required ng-model="contact.group" ng-options="group.name as group.name for group in groups ">
+				</select>
+				<button type="submit" ng-click="saveContact()">Create</button>
+
+			</div>
+		</form>
+
+		<table class="table table-condensed table-bordered table-striped">
+			<thead>
+			<tr>
+				<th>Name</th>
+				<th>LastName</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Group</th>
+				<th></th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<tr ng-repeat="contact in contacts  | filter: query">
+				<td>{{contact.name}}</td>
+				<td>{{contact.lastName}}</td>
+				<td>{{contact.email}}</td>
+				<td>{{contact.phone}}</td>
+				<td>{{contact.group}}</td>
+				<td>
+					<button class="btn btn-danger" ng-click="removeContact(contact.id)">
+						Delete
+					</button>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+	</div>
+</div>
