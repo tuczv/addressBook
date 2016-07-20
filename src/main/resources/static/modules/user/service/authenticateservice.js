@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 angular.module('user').factory('Authentication',['$http','$q',
     function($http,$q){
 		var self = {

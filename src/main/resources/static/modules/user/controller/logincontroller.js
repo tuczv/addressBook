@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 angular.module('user').controller('loginController',['$scope','$state','userService',
     function($scope,$state,userService){
 		$scope.user = {};

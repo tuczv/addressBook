@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 angular.module('core').factory('authInterceptor',['$q','$injector',
     function($q,$injector){
 		return{

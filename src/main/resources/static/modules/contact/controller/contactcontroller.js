@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 angular
 	.module('contact').controller('contactController',['$scope','$http',
     function($scope,$http){
@@ -26,6 +27,19 @@ angular
 			.error(function () {
 				alert("error getting data");
 			});
+
+		$scope.currentPage = 1;
+		$scope.totalItems = $scope.contacts.length;
+		console.log($scope.totalItems);
+		$scope.numPerPage = 5;
+
+		// $scope.paginate = function (value) {
+		// 	var begin, end, index;
+		// 	begin = ($scope.currentPage - 1) * $scope.numPerPage;
+		// 	end = begin + $scope.numPerPage;
+		// 	index = $scope.contacts.indexOf(value);
+		// 	return (begin <= index && index < end);
+		// };
 
 		$scope.saveContact = function () {
 

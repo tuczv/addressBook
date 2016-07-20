@@ -11,17 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping(value = "/api/users")
-public class UserService {
+import java.util.List;
 
-    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+@RestController
+@RequestMapping(value = "/api")
+public class UserResource {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserResource.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -29,7 +27,12 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @RequestMapping(value="/register",method = RequestMethod.POST)
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    @RequestMapping(value="/users/register",method = RequestMethod.POST)
     public ResponseEntity<User> registerUser(@RequestBody User user){
         if(userRepository.findByUsername(user.getUsername())== null){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -39,7 +42,7 @@ public class UserService {
         return new ResponseEntity<User>(HttpStatus.CONFLICT);
     }
 
-    @RequestMapping(value="/me",method = RequestMethod.GET)
+    @RequestMapping(value="/users/me",method = RequestMethod.GET)
     public ResponseEntity<UserDTO> me(){
         String username;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -53,7 +56,7 @@ public class UserService {
         return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("id") String id) {
         userRepository.delete(id);
     }

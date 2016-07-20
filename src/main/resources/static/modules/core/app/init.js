@@ -43,7 +43,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$statePr
                 }
             })
             .state('contact', {
-                'url': '/contacts',
+                'url': '/contacts?page&sort',
                 'views': {
                     'main': {
                         'templateUrl': '/modules/contact/views/contacts.html',
@@ -67,6 +67,25 @@ angular.module(ApplicationConfiguration.applicationModuleName).config(['$statePr
                     'main': {
                         'templateUrl': '/modules/group/views/groups.html',
                         'controller': 'groupController'
+                    },
+                    'header': {
+                        'templateUrl': '/modules/common/views/navbar-authorised.html',
+                        'controller': 'headerController'
+                    },
+                    'footer': {
+                        'templateUrl': '/modules/common/views/footer.html'
+                    }
+                },
+                'data': {
+                    'requiresLogin': true
+                }
+            })
+            .state('chat', {
+                'url': '/chat',
+                'views': {
+                    'main': {
+                        'templateUrl': '/modules/chat/views/chat.html',
+                        'controller': 'chatController'
                     },
                     'header': {
                         'templateUrl': '/modules/common/views/navbar-authorised.html',

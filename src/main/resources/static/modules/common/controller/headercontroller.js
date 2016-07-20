@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 angular.module('common').controller('headerController',['$scope','$state','Authentication','userService',
     function($scope,$state,Authentication,userService){
 		$scope.user = Authentication.currentUser;

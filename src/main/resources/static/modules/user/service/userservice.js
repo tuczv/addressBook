@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 angular.module('user').factory('userService',['$http',
     function($http){
 		return{
