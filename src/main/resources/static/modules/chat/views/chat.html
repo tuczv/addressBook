@@ -1,29 +1,31 @@
 <div class="container">
-        <div class="row">
-            <div class="col-lg-6">
-                <section class="">
-                    <h1>Wiadomości</h1>
-                </section>
-                <div>
-                    <div class="row">
+    <div class="row">
+        <div class="col-lg-6">
+            <section class="">
+                <h1>Wiadomości</h1>
+            </section>
+            <div>
+                <div class="row">
 
-                        <div class="col-md-12">
-                            <div class="panel panel-info">
-                                <div class="panel-heading">
-                                    <strong><span class=""></span> Historia Czatu</strong>
+                    <div class="col-md-12">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <strong> Historia Czatu <span class=""><button
+                                        ng-click="exportPDF()">Wydruk do PDF</button></span> </strong>
+                            </div>
+                            <div id="exportPDF">
+                                <div ng-repeat="message in messages">
+                                    <span><p>[{{message.date}}] - {{message.author}}: {{message.text}}</p></span>
                                 </div>
-                                <div class="panel-body fixed-panel">
-                                    <div ng-repeat="message in messages">
-                                        <span><p>[{{message.date}}] - {{message.author}}: {{message.text}}</p></span>
-                                    </div>
-                                </div>
-                                <div class="panel-footer">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Enter Message" ng-model="message.text" autofocus=""/>
-                                        <span class="input-group-btn">
-                                        <button class="btn btn-info" type="button" ng-click="sendTo()">SEND <span class=""></span></button>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Enter Message"
+                                           ng-model="message.text" autofocus=""/>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info" type="button" ng-click="sendTo()">SEND <span
+                                                class=""></span></button>
                                     </span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -31,4 +33,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </div>

@@ -9,7 +9,7 @@ angular.module('common').controller('headerController',['$scope','$state','Authe
 				Authentication.currentUser = null;
 				$state.go('login');
 			});
-		}
+		};
 		
 		$scope.$watch(function(){
 			return Authentication.currentUser

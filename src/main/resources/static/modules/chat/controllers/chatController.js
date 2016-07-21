@@ -30,6 +30,7 @@ angular
             //add message
             $scope.sendTo = function () {
                 stompClient.send('/api/chat', {}, JSON.stringify($scope.message));
+                $scope.message = '';
             };
 
             function init () {
@@ -45,4 +46,20 @@ angular
 
            init();
 
+        //export to PDF
+            $scope.exportPDF = function () {
+
+                html2canvas(document.getElementById('exportPDF'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var definition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(definition).download("Historia_Czatu.pdf");
+                    }
+                });
+            };
     }]);
