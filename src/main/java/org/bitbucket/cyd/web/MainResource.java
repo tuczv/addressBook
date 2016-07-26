@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api")
 public class MainResource {
+
     private static final Logger logger = LoggerFactory.getLogger(MainResource.class);
 
     @Autowired
@@ -56,7 +57,15 @@ public class MainResource {
 
     @RequestMapping(value = "/contacts/{id}", method = RequestMethod.PUT)
     public Contact updateContact(@PathVariable("id") String id, @RequestBody Contact contact) {
-        return contactRepository.save(contact);
+        Contact current = contactRepository.getContactById(id);
+
+        current.setName(contact.getName());
+        current.setLastName(contact.getLastName());
+        current.setEmail(contact.getEmail());
+        current.setPhone(contact.getPhone());
+        current.setGroup(contact.getGroup());
+
+        return contactRepository.save(current);
     }
 
 

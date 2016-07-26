@@ -1,74 +1,167 @@
-<div class="row">
-	<div class="col-lg-8 col-md-9 col-xs-12 col-sm-12">
-		<p></p>
-		<p>Contact List:</p>
-		<form name="contactForm" >
-			<div>
-				<label>Name</label>
-				<input type="name" class="form-control" placeholder="name" ng-model="contact.name">
+<!--<div class="row">-->
+<!--<div class="col-lg-8 col-md-9 col-xs-12 col-sm-12">-->
+<!--<p></p>-->
+<!--<p>Contact List:</p>-->
+<!--<form name="contactForm" >-->
+<!--<div>-->
+<!--<label>Name</label>-->
+<!--<input type="name" class="form-control" placeholder="name" ng-model="contact.name">-->
 
-				<label>LastName</label>
-				<input type="lastname" class="form-control" placeholder="lastname" ng-model="contact.lastName">
+<!--<label>LastName</label>-->
+<!--<input type="lastname" class="form-control" placeholder="lastname" ng-model="contact.lastName">-->
 
-				<label>Email</label>
-				<input type="email" class="form-control" placeholder="email" ng-model="contact.email">
+<!--<label>Email</label>-->
+<!--<input type="email" class="form-control" placeholder="email" ng-model="contact.email">-->
 
-				<label>Phone</label>
-				<input type="phone" class="form-control" placeholder="phone" ng-model="contact.phone">
+<!--<label>Phone</label>-->
+<!--<input type="phone" class="form-control" placeholder="phone" ng-model="contact.phone">-->
 
-				<label>Group</label>
-				<select class="form-control" name="group" required ng-model="contact.group" ng-options="group.name as group.name for group in groups ">
-				</select>
-				<button type="submit" ng-click="saveContact()">Create</button>
+<!--<label>Group</label>-->
+<!--<select class="form-control" name="group" required ng-model="contact.group" ng-options="group.name as group.name for group in groups ">-->
+<!--</select>-->
+<!--<button type="submit" ng-click="saveContact()">Create</button>-->
 
-			</div>
-		</form>
+<!--</div>-->
+<!--</form>-->
 
-		<form class="form-inline">
-			<div class="form-group">
-				<label>Szukaj</label>
-				<input type="text" data-ng-model="search" class="form-control" placeholder="Szukaj">
-			</div>
-		</form>
+<!--<form class="form-inline">-->
+<!--<div class="form-group">-->
+<!--<label>Szukaj</label>-->
+<!--<input type="text" data-ng-model="search" class="form-control" placeholder="Szukaj">-->
+<!--</div>-->
+<!--</form>-->
 
-		<div class="bs-component">
-		<table class="table table-condensed table-bordered table-striped">
-			<thead>
-			<p>Ilość kontaktów:  {{contacts.content.length}}</p>
-			<tr>
-				<th>
-					Name
-				</th>
-				<th>LastName</th>
-				<th>Email</th>
-				<th>Phone</th>
-				<th>Group</th>
-				<th></th>
-			</tr>
-			</thead>
+<!--<div class="bs-component">-->
+<!--<table class="table table-condensed table-bordered table-striped">-->
+<!--<thead>-->
+<!--<p>Ilość kontaktów:  {{contacts.content.length}}</p>-->
+<!--<tr>-->
+<!--<th>-->
+<!--Name-->
+<!--</th>-->
+<!--<th>LastName</th>-->
+<!--<th>Email</th>-->
+<!--<th>Phone</th>-->
+<!--<th>Group</th>-->
+<!--<th></th>-->
+<!--</tr>-->
+<!--</thead>-->
 
-			<tbody>
-			<tr ng-repeat="contact in contacts.content  | filter: paginate | filter: search ">
-				<td>{{contact.name}}</td>
-				<td>{{contact.lastName}}</td>
-				<td>{{contact.email}}</td>
-				<td>{{contact.phone}}</td>
-				<td>{{contact.group}}</td>
-				<td>
-					<button class="btn btn-danger" ng-click="removeContact(contact.id)">
-						Delete
-					</button>
-				</td>
-			</tr>
-			</tbody>
-		</table>
-		</div>
-	</div>
-	<div class="text-center">
-		<uib-pagination
-				total-items="totalItems" ng-model="currentPage"
-				max-size="5" boundary-links="true"
-				items-per-page="numPerPage" class="pagination-sm">
-		</uib-pagination>
-	</div>
+<!--<tbody>-->
+<!--<tr ng-repeat="contact in contacts.content  | filter: paginate | filter: search ">-->
+<!--<td>{{contact.name}}</td>-->
+<!--<td>{{contact.lastName}}</td>-->
+<!--<td>{{contact.email}}</td>-->
+<!--<td>{{contact.phone}}</td>-->
+<!--<td>{{contact.group}}</td>-->
+<!--<td>-->
+<!--<button class="btn btn-danger" ng-click="removeContact(contact.id)">-->
+<!--Delete-->
+<!--</button>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="text-center">-->
+<!--<uib-pagination-->
+<!--total-items="totalItems" ng-model="currentPage"-->
+<!--max-size="5" boundary-links="true"-->
+<!--items-per-page="numPerPage" class="pagination-sm">-->
+<!--</uib-pagination>-->
+<!--</div>-->
+<!--</div>-->
+<div layout="row" layout-margin>
+<div flex="20" layout="column" class="boxWithHeight">
+    <section>
+        <md-whiteframe class="md-whiteframe-4dp" flex>
+            <md-toolbar class="md-table-toolbar menu-toolbar">
+                <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="">
+                        <ng-md-icon icon="person" style="fill: white"></ng-md-icon>
+                    </md-button>
+                    <span>{{user.username}} {{user.name}}</span>
+                </div>
+            </md-toolbar>
+        </md-whiteframe>
+        <br>
+        <md-content layout-align="center center">
+            <md-list ng-repeat="group in groups">
+                <md-list-item>{{group.name}}</md-list-item>
+            </md-list>
+        </md-content>
+    </section>
+</div>
+<div flex layout="column" class="boxWithHeight" layout-fill>
+    <section>
+        <md-whiteframe class="md-whiteframe-4dp" flex>
+            <md-toolbar class="md-table-toolbar md-default">
+                <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+                    <md-button class="md-icon-button" aria-label="Icon">
+                        <md-tooltip>Icon</md-tooltip>
+                        <ng-md-icon icon="my_library_books" style="fill: gray"></ng-md-icon>
+                    </md-button>
+                    <span>Kontakty</span>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Search" data-ng-click="clickAdd($event)">
+                        <md-tooltip>Add Contact</md-tooltip>
+                        <ng-md-icon icon="add" style="fill: gray"></ng-md-icon>
+                    </md-button>
+                    <md-button class="md-icon-button" aria-label="Search" data-ng-click="showMobileMainHeader = false">
+                        <md-tooltip>Find</md-tooltip>
+                        <ng-md-icon icon="more_vert" style="fill: gray"></ng-md-icon>
+                    </md-button>
+
+                </div>
+                <div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
+                    <md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true">
+                        <md-tooltip>Back</md-tooltip>
+                        <ng-md-icon icon="keyboard_backspace" style="fill: gray"></ng-md-icon>
+                    </md-button>
+                    <md-input-container md-no-float class="md-accent" style="padding-bottom:0px;">
+                        <input ng-model="searchInput" placeholder="Search here" style="color:dimgray;">
+                    </md-input-container>
+                    <span flex></span>
+                    <md-button class="md-icon-button" aria-label="Search">
+                        <md-tooltip>Search</md-tooltip>
+                        <ng-md-icon icon="search" style="fill: gray"></ng-md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+            <md-divider></md-divider>
+            <md-content>
+                <md-table-container>
+                    <table md-table id="table">
+                        <thead md-head md-order="$root.tableFilter.order" md-on-reorder="contacts">
+                        <tr md-row>
+                            <th md-column md-order-by="name">Imię</th>
+                            <th md-column md-order-by="lastName">Nazwisko</th>
+                            <th md-column md-numeric="email">Poczta</th>
+                            <th md-column md-numeric="phone">Telefon</th>
+                            <th md-column md-numeric="group">Grupa</th>
+                        </tr>
+                        </thead>
+                        <tbody md-body>
+                        <tr md-row
+                            ng-repeat="contact in contacts.content | orderBy: $root.tableFilter.order | filter:searchInput"
+                            ng-click="clickEdit(contact, $event)">
+                            <td md-cell>{{contact.name}}</td>
+                            <td md-cell>{{contact.lastName}}</td>
+                            <td md-cell>{{contact.email}}</td>
+                            <td md-cell>{{contact.phone}}</td>
+                            <td md-cell>{{contact.group}}</td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <md-table-pagination md-limit="query.limit" md-limit-options="[5, 10, 15]" md-page="query.page"
+                                         md-total="{{desserts.count}}" md-on-paginate="getDesserts"
+                                         md-page-select></md-table-pagination>
+
+                </md-table-container>
+            </md-content>
+        </md-whiteframe>
+    </section>
+</div>
 </div>

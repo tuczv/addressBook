@@ -1,0 +1,79 @@
+<md-dialog aria-label="Dane kontaktowe"  ng-cloak flex="70">
+    <form>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" ng-click="cancelEditModal()">
+                    <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
+                </md-button>
+                <h2>Dane kontaktowe</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="removeContact(contact.id)">
+                    <ng-md-icon icon="delete" style="fill: pink"></ng-md-icon>
+                </md-button>
+                <md-button class="md-icon-button" ng-click="editContact(contact.id)">
+                    <ng-md-icon icon="save" style="fill: white"></ng-md-icon>
+                </md-button>
+            </div>
+            <span flex></span>
+
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-content layout-padding>
+                <div>
+                    <form>
+                        <div layout-gt-xs="row">
+                            <md-datepicker ng-model="user.submissionDate" md-placeholder="Enter date">
+                            </md-datepicker>
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Imię</label>
+                                <input type="text" name="name" ng-model="contact.name">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Nazwisko</label>
+                                <input type="text" name="lastName" ng-model="contact.lastName">
+                            </md-input-container>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>Email</label>
+                            <input type="text" name="email" ng-model="contact.email">
+                        </md-input-container>
+                        <md-input-container md-no-float class="md-block">
+                            <input ng-model="user.address2" placeholder="Address 2">
+                        </md-input-container>
+                        <div layout-gt-sm="row">
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Telefon</label>
+                                <input type="text" name="phone" ng-model="contact.phone">
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Grupa</label>
+                                <md-select ng-model="contact.group">
+                                    <md-option ng-repeat="group in groups" value="{{group.name}}">
+                                        {{group.name}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Postal Code</label>
+                                <input name="postalCode" ng-model="user.postalCode" placeholder="12345"
+                                       required ng-pattern="/^[0-9]{5}$/" md-maxlength="5">
+                                <div ng-messages="userForm.postalCode.$error" role="alert" multiple>
+                                    <div ng-message="required" class="my-message">You must supply a postal code.</div>
+                                    <div ng-message="pattern" class="my-message">That doesn't look like a valid postal
+                                        code.
+                                    </div>
+                                    <div ng-message="md-maxlength" class="my-message">
+                                        Don't use the long version silly...we don't need to be that specific...
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </form>
+                </div>
+            </md-content>
+        </md-dialog-content>
+    </form>
+</md-dialog>

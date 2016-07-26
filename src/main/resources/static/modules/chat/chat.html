@@ -1,0 +1,29 @@
+<!-- Chat.html-->
+<section layout="column" layout-align="center center">
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Czat</h1>
+    </md-toolbar>
+    <md-content  layout-align="center start" md-scroll-y>
+
+        <div class="row">
+            <div id="exportPDF">
+                <md-list-item class="contact-item md-2-line selected" ng-repeat="message in messages">
+                    <div class="md-list-item-text compact">
+                        <ng-md-icon icon="tag_faces" style="fill: pink"></ng-md-icon>
+                        <p style="text-align: right;">
+                            <small><strong>{{message.author}}</strong>, {{message.date}}</small>
+                        </p>
+                        <div class="message-content">{{message.text}}</div>
+                    </div>
+                </md-list-item>
+            </div>
+        </div>
+    </md-content>
+    <md-input-container>
+        <span flex>
+            <div class="left" flex="70"><input data-ng-model="message.text"></div>
+            <div class="right" flex="20"><md-button class="md-raised md-primary" ng-click="sendTo()">Wyślij</md-button></div>
+        </span>
+    </md-input-container>
+</section>
+

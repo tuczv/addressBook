@@ -1,6 +1,6 @@
 var ApplicationConfiguration = (function(){
 	var applicationModuleName = "addressbook";
-	var applicationModuleVendorDependencies = ['ui.router','ui.bootstrap', 'ngCookies'];
+	var applicationModuleVendorDependencies = ['ui.router', 'ngCookies', 'ngMaterial', 'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages'];
 	var registerModule = function(moduleName,dependencies){
 		angular.module(moduleName, dependencies || []);
 	    angular.module(applicationModuleName).requires.push(moduleName);

@@ -1,7 +1,8 @@
 //noinspection JSAnnotator
-angular.module('common').controller('headerController',['$scope','$state','Authentication','userService',
-    function($scope,$state,Authentication,userService){
+angular.module('common').controller('headerController',['$scope','$state','Authentication','userService', '$timeout', '$mdSidenav', '$log',
+    function($scope,$state,Authentication,userService, $timeout, $mdSidenav, $log){
 		$scope.user = Authentication.currentUser;
+
 		console.log($scope.user);
 		$scope.logout = function(){
 			userService.logout().then(function(response){
@@ -19,5 +20,8 @@ angular.module('common').controller('headerController',['$scope','$state','Authe
 				$state.go('login');
 			}
 		});
+
+		$scope.showMobileMainHeader = true;
+
 	}
 ]);
