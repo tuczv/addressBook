@@ -1,80 +1,7 @@
-<!--<div class="row">-->
-<!--<div class="col-lg-8 col-md-9 col-xs-12 col-sm-12">-->
-<!--<p></p>-->
-<!--<p>Contact List:</p>-->
-<!--<form name="contactForm" >-->
-<!--<div>-->
-<!--<label>Name</label>-->
-<!--<input type="name" class="form-control" placeholder="name" ng-model="contact.name">-->
 
-<!--<label>LastName</label>-->
-<!--<input type="lastname" class="form-control" placeholder="lastname" ng-model="contact.lastName">-->
-
-<!--<label>Email</label>-->
-<!--<input type="email" class="form-control" placeholder="email" ng-model="contact.email">-->
-
-<!--<label>Phone</label>-->
-<!--<input type="phone" class="form-control" placeholder="phone" ng-model="contact.phone">-->
-
-<!--<label>Group</label>-->
-<!--<select class="form-control" name="group" required ng-model="contact.group" ng-options="group.name as group.name for group in groups ">-->
-<!--</select>-->
-<!--<button type="submit" ng-click="saveContact()">Create</button>-->
-
-<!--</div>-->
-<!--</form>-->
-
-<!--<form class="form-inline">-->
-<!--<div class="form-group">-->
-<!--<label>Szukaj</label>-->
-<!--<input type="text" data-ng-model="search" class="form-control" placeholder="Szukaj">-->
-<!--</div>-->
-<!--</form>-->
-
-<!--<div class="bs-component">-->
-<!--<table class="table table-condensed table-bordered table-striped">-->
-<!--<thead>-->
-<!--<p>Ilość kontaktów:  {{contacts.content.length}}</p>-->
-<!--<tr>-->
-<!--<th>-->
-<!--Name-->
-<!--</th>-->
-<!--<th>LastName</th>-->
-<!--<th>Email</th>-->
-<!--<th>Phone</th>-->
-<!--<th>Group</th>-->
-<!--<th></th>-->
-<!--</tr>-->
-<!--</thead>-->
-
-<!--<tbody>-->
-<!--<tr ng-repeat="contact in contacts.content  | filter: paginate | filter: search ">-->
-<!--<td>{{contact.name}}</td>-->
-<!--<td>{{contact.lastName}}</td>-->
-<!--<td>{{contact.email}}</td>-->
-<!--<td>{{contact.phone}}</td>-->
-<!--<td>{{contact.group}}</td>-->
-<!--<td>-->
-<!--<button class="btn btn-danger" ng-click="removeContact(contact.id)">-->
-<!--Delete-->
-<!--</button>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</tbody>-->
-<!--</table>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="text-center">-->
-<!--<uib-pagination-->
-<!--total-items="totalItems" ng-model="currentPage"-->
-<!--max-size="5" boundary-links="true"-->
-<!--items-per-page="numPerPage" class="pagination-sm">-->
-<!--</uib-pagination>-->
-<!--</div>-->
-<!--</div>-->
 <div layout="row" layout-margin>
-<div flex="20" layout="column" class="boxWithHeight">
-    <section>
+<div flex="20" layout="column" >
+
         <md-whiteframe class="md-whiteframe-4dp" flex>
             <md-toolbar class="md-table-toolbar menu-toolbar">
                 <div class="md-toolbar-tools">
@@ -84,17 +11,16 @@
                     <span>{{user.username}} {{user.name}}</span>
                 </div>
             </md-toolbar>
+            <md-content layout-align="center center">
+                <md-list ng-repeat="group in groups">
+                    <md-list-item>{{group.name}}</md-list-item>
+                </md-list>
+            </md-content>
         </md-whiteframe>
-        <br>
-        <md-content layout-align="center center">
-            <md-list ng-repeat="group in groups">
-                <md-list-item>{{group.name}}</md-list-item>
-            </md-list>
-        </md-content>
-    </section>
+
+
 </div>
-<div flex layout="column" class="boxWithHeight" layout-fill>
-    <section>
+<div flex layout="column"  layout-margin>
         <md-whiteframe class="md-whiteframe-4dp" flex>
             <md-toolbar class="md-table-toolbar md-default">
                 <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
@@ -162,6 +88,5 @@
                 </md-table-container>
             </md-content>
         </md-whiteframe>
-    </section>
 </div>
 </div>

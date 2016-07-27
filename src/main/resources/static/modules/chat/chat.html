@@ -1,29 +1,50 @@
 <!-- Chat.html-->
-<section layout="column" layout-align="center center">
-    <md-toolbar class="md-theme-light">
-        <h1 class="md-toolbar-tools">Czat</h1>
-    </md-toolbar>
-    <md-content  layout-align="center start" md-scroll-y>
 
-        <div class="row">
-            <div id="exportPDF">
-                <md-list-item class="contact-item md-2-line selected" ng-repeat="message in messages">
-                    <div class="md-list-item-text compact">
-                        <ng-md-icon icon="tag_faces" style="fill: pink"></ng-md-icon>
-                        <p style="text-align: right;">
-                            <small><strong>{{message.author}}</strong>, {{message.date}}</small>
-                        </p>
-                        <div class="message-content">{{message.text}}</div>
-                    </div>
-                </md-list-item>
-            </div>
-        </div>
-    </md-content>
-    <md-input-container>
-        <span flex>
-            <div class="left" flex="70"><input data-ng-model="message.text"></div>
-            <div class="right" flex="20"><md-button class="md-raised md-primary" ng-click="sendTo()">Wyślij</md-button></div>
-        </span>
-    </md-input-container>
-</section>
+<div class="chat" layout="column">
+    <md-whiteframe class="md-whiteframe-4dp">
+        <md-toolbar class="md-accent">
+            <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+                 <span layout="row" layout-align="left center">
+                    <md-button ui-sref="contact" class="md-icon-button" aria-label="">
+                        <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
+                    </md-button>
+                </span>
+                <span layout="row" layout-align="center center">Wiadomości</span>
+                <span flex></span>
+                <span layout="row" layout-align="left center">
+                    <md-button ng-click="exportPDF()" class="md-icon-button" aria-label="">
+                        <ng-md-icon icon="print" style="fill: white"></ng-md-icon>
+                    </md-button>
+                </span>
+                <span flex="5"></span>
+                <span layout="row" layout-align="center center">
+                    {{users.length}}<ng-md-icon icon="people" style="fill: white"></ng-md-icon>
+
+                </span>
+            </h2>
+        </md-toolbar>
+
+        <md-content class="md-padding" id="exportPDF">
+            <md-list  layout-fill>
+            <md-list-item   ng-repeat="message in messages" class="contact-item md-2-line selected">
+                <!--<img ng-src="{{ messageCtrl.author.imageUrl }}" class="md-avatar message-avatar"/>-->
+                <div class="md-list-item-text compact">
+                    <p style="text-align: right;"><small><strong>{{message.author}}</strong> {{message.date}}</small></p>
+                    <div class="message-content">{{message.text}}</div>
+                </div>
+            </md-list-item>
+            </md-list>
+        </md-content>
+
+        <md-content layout-padding layout="column">
+            <md-input-container class="md-accent">
+                <label>Napisz wiadomość</label>
+                <input flex="90" ng-model="message.text" md-maxlength="350"/> <ng-md-icon ng-click="sendTo()" icon="message" style="fill: blue"></ng-md-icon>
+            </md-input-container>
+        </md-content>
+
+    </md-whiteframe>
+
+</div>
+
 
