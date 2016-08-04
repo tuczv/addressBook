@@ -1,5 +1,5 @@
 <md-dialog aria-label="Nowy kontakt"  ng-cloak flex="40">
-    <form>
+    <form name="createForm" ng-submit="saveContact()">
         <md-toolbar>
             <div class="md-toolbar-tools">
                 <h2>Nowy kontakt</h2>
@@ -13,11 +13,23 @@
         <md-dialog-content>
             <md-content class="md-no-momentum">
                 <section layout="column" layout-margin="">
-                <md-input-container class="md-icon-float md-block">
+                <md-input-container md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)" class="md-icon-float md-block">
                     <!-- Use floating label instead of placeholder -->
-                    <label>Imię</label>
+                    <label>Imię(wymagane)</label>
                     <md-icon md-svg-src="assets/icons/ic_person.svg"  class="name"></md-icon>
-                    <input ng-model="contact.name" type="text">
+                    <input 
+                    	ng-model="contact.name" 
+                    	name="name"
+                    	id="name"
+                    	required>
+                    <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+          				<div ng-message="required">Wpisz imię</div>
+        			</div>	
+                </md-input-container>
+                  <md-input-container class="md-block">
+                    <!-- Use floating placeholder instead of label -->
+                    <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
+                    <input ng-model="contact.email" type="email" placeholder="Email (wymagane)" ng-required="true">
                 </md-input-container>
                 <md-input-container class="md-icon-float md-block">
                     <!-- Use floating label instead of placeholder -->
@@ -29,15 +41,13 @@
                     <md-icon md-svg-src="assets/icons/ic_phone_black_24px.svg"></md-icon>
                     <input ng-model="contact.phone" type="text" placeholder="Phone Number">
                 </md-input-container>
-                <md-input-container class="md-block">
-                    <!-- Use floating placeholder instead of label -->
-                    <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
-                    <input ng-model="contact.email" type="email" placeholder="Email (required)" ng-required="true">
-                </md-input-container>
+              
                 <md-input-container class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <md-icon md-svg-src="assets/icons/ic_group_black_24px.svg" class="group"></md-icon>
-                    <input ng-model="contact.group" type="text" placeholder="Group">
+                    <md-select  placeholder="Grupa" ng-model="contact.group">
+                    	<md-option ng-repeat="group in groups" value="{{group.name}}">{{group.name}}</md-option>
+                    </md-select>
                 </md-input-container>
                 </section>
             </md-content>
@@ -47,7 +57,7 @@
             <span flex></span>
             <md-button ng-click="cancelAddModal()" class="md-raised md-primary">Cofnij</md-button>
 
-            <md-button ng-click="saveContact()" class="md-accent md-raised md-hue-1">Wyślij</md-button>
+            <md-button type="submit"  ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Wyślij</md-button>
 
         </md-dialog-actions>
     </form>

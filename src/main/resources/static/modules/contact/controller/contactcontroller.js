@@ -1,19 +1,15 @@
 //noinspection JSAnnotator
 angular
     .module('contact')
-    .controller('contactController', ['$scope', '$http', 'Authentication', '$mdMedia', '$mdDialog', '$stateParams', '$state',
-        '$timeout', '$mdSidenav', '$log',
-        function ($scope, $http, Authentication, $mdMedia, $mdDialog, $stateParams, $state,  $timeout, $mdSidenav, $log) {
+    .controller('contactController', ['$rootScope', '$scope', '$http', 'Authentication', '$mdMedia', '$mdDialog', '$stateParams', '$state', 
+        '$timeout', '$log', '$mdToast', '$mdSidenav',
+        function ($rootScope, $scope, $http, Authentication, $mdMedia, $mdDialog, $stateParams, $state,  $timeout, $log, $mdToast, $mdSidenav) {
 
             $scope.contacts = [];
             $scope.groups = [];
             $scope.user = Authentication.currentUser;
             $scope.showMobileMainHeader = true;
-
-            $scope.openRightMenu = function() {
-                $mdSidenav('right').toggle();
-            };
-
+            
             //fetch contacts
             function getGroups() {
                 $http.get('/api/groups')
@@ -39,6 +35,7 @@ angular
                 lastName: $scope.lastName,
                 email: $scope.email,
                 phone: $scope.phone,
+                address: $scope.address,
                 groupId: $scope.groups.id
             };
 
@@ -73,7 +70,7 @@ angular
                     });
             };
 
-            function dialogController ($scope, $mdDialog, contact) {
+            function dialogController ($scope, $mdDialog, contact, $mdToast) {
 
                 $scope.contact = contact;
                 $scope.groups = [];
@@ -102,6 +99,13 @@ angular
                         .success(function () {
                             console.log('success updating contact');
                             $mdDialog.hide();
+                            $state.reload();
+                            $mdToast.show(
+                                    $mdToast.simple()
+                                        .content("Kontakt został edytowany")
+                                        .position('top right')
+                                        .hideDelay(1000)
+                                );
                         })
                         .error(function () {
                             console.log('Error editing contact');
@@ -119,6 +123,13 @@ angular
                             console.log('success delete');
                             $mdDialog.hide();
                             $state.reload();
+                            $mdToast.show(
+                                    $mdToast.simple()
+                                        .content("Kontakt został usunięty")
+                                        .position('top right')
+                                        .hideDelay(1000)
+                                );
+                            
                         })
                         .error(function () {
                             alert('error deleting contact');
@@ -142,7 +153,14 @@ angular
                     .success(function () {
                         console.log('success');
                         $state.reload();
-                        $mdDialog.hide();
+                        $mdDialog.hide();                       
+                        $mdToast.show(
+                                $mdToast.simple()
+                                    .content("Kontakt dodany do listy")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+
 
                     })
                     .error(function () {
@@ -167,7 +185,24 @@ angular
             $scope.cancelAddModal = function () {
                 $mdDialog.cancel();
             };
-
+            
+//pagination
+            $scope.onOrderChange = function() {};
+            
+            $scope.onPageChange = function() {};
+//left menu sections
+            
+            $scope.sidenavMenu = {
+            		sections:[{
+            			name: 'Grupy',
+            			expand: true,
+            			ations: [{
+            				
+            			}]	
+            			
+            		}]
+            };
+   
         }
     ]);
 

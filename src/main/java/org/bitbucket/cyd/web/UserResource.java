@@ -2,7 +2,6 @@ package org.bitbucket.cyd.web;
 
 import org.bitbucket.cyd.domain.User;
 import org.bitbucket.cyd.repository.UserRepository;
-import org.bitbucket.cyd.web.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +36,14 @@ public class UserResource {
         if(userRepository.findByUsername(user.getUsername())== null){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
+            logger.info("Success register new user");
             return new ResponseEntity<User>(HttpStatus.OK);
         }
         return new ResponseEntity<User>(HttpStatus.CONFLICT);
     }
 
     @RequestMapping(value="/users/me",method = RequestMethod.GET)
-    public ResponseEntity<UserDTO> me(){
+    public ResponseEntity<User> me(){
         String username;
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(principal instanceof UserDetails)
@@ -52,8 +52,9 @@ public class UserResource {
             username = principal.toString();
 
         User user = userRepository.findByUsername(username);
-        UserDTO userDTO = new UserDTO(user);
-        return new ResponseEntity<UserDTO>(userDTO,HttpStatus.OK);
+        logger.info("Success login");
+//        UserDTO userDTO = new UserDTO(user);
+        return new ResponseEntity<User>(user,HttpStatus.OK);
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)

@@ -13,15 +13,17 @@ public class Contact {
     private String email;
     private String phone;
     private String group;
+    private String address;
 
     public Contact() {}
 
-    public Contact(String name, String lastName, String email, String phone, String group) {
+    public Contact(String name, String lastName, String email, String phone, String group, String address) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phone =  phone;
         this.group = group;
+        this.address = address;
     }
 
     @JsonProperty("name")
@@ -77,5 +79,14 @@ public class Contact {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @JsonProperty("address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

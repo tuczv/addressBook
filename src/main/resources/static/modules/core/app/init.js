@@ -148,6 +148,7 @@ angular.module(ApplicationConfiguration.applicationModuleName).run(['$rootScope'
                 }
             });
         });
+        $rootScope.tableFilter = {order: '-name', limit: 10, page: 1};
     }
 ]);
 

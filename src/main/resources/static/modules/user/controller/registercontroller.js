@@ -1,18 +1,30 @@
 //noinspection JSAnnotator
-angular.module('user').controller('registerController',['$scope','$state','userService',
-    function($scope,$state,userService){
+angular.module('user')
+	.controller('registerController',['$scope','$state','userService', 
+    function($scope, $state, userService){
+		
 		$scope.user = {};
-		$scope.error = {};
 		
 		$scope.registerUser = function(){
+
 			userService.register($scope.user)
 			.then(function(response){
-				$state.go('contact');
+				$state.go('login');
 			},function(err){
 				console.log(err);
-				$scope.error.hasError = true;
-				$scope.error.message = "Something wnet wrong. Please Try again Later!"
+				
 			});
-		}
+
+		};
+		
+		$scope.reset = function() {
+			$scope.user = {
+			        email: "",
+			        username: "",
+			        password: ""
+			      }
+		};
+		
+		$scope.reset();
 	}
 ]);
