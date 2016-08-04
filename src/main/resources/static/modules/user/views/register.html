@@ -12,9 +12,9 @@
 			<span layout="row" layout-align="center center">Rejestracja</span>
 		</md-toolbar>
 		
-		<form name="registerForm" novalidate>
+
 		<md-content class="md-padding" layout="column">
-		
+			<form name="registerForm" novalidate>
 			<md-input-container md-is-error="registerForm.email.$invalid && (registerForm.$submitted || registerForm.email.$dirty)">
 				<label>Email</label>
 				<md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
@@ -54,7 +54,7 @@
 				<label>Password</label>
 				<md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
 		
-				<input
+				<input flex
 					ng-model="user.password"
 					id="password"
 				 	name="password" 
@@ -67,16 +67,15 @@
           			<div ng-message="minlength">Zbyt krótkie hasło, 6 znaków minimalnie</div>
         		</div>
 			</md-input-container>
-			
-		</md-content>
-		<div layout="row" layout-align="center center">
+			<div layout="row" layout-align="center center">
 				<md-button type="submit" ng-click="reset()" class="md-primary">
 					RESET
 				</md-button>
 				<md-button ng-disabled="registerForm.$invalid" ng-click="registerUser()" class="md-raised md-primary">
 					Zarejestruj się
 				</md-button>
-		</div>
+			</div>
 		</form>
+		</md-content>
 	</div>
 </div>

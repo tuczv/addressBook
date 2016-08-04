@@ -1,0 +1,39 @@
+<md-dialog aria-label="Utwórz grupę"  ng-cloak flex="40">
+    <form name="createForm" ng-submit="saveGroup()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Utwórz grupę</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancelAddModal()">
+                    <ng-md-icon icon="close" style="fill: white"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-content class="md-no-momentum">
+                <section layout="column" layout-margin="">
+                    <md-input-container md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)" class="md-icon-float md-block">
+                        <!-- Use floating label instead of placeholder -->
+                        <label>Nazwa</label>
+                        <md-icon md-svg-src="assets/icons/ic_person.svg"  class="name"></md-icon>
+                        <input
+                                ng-model="group.name"
+                                name="name"
+                                id="name"
+                                required>
+                        <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+                            <div ng-message="required">Wpisz nazwę</div>
+                        </div>
+                    </md-input-container>
+                </section>
+            </md-content>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button type="submit"  ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Wyślij</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>

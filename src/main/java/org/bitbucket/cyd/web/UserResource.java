@@ -52,7 +52,7 @@ public class UserResource {
             username = principal.toString();
 
         User user = userRepository.findByUsername(username);
-        logger.info("Success login");
+
 //        UserDTO userDTO = new UserDTO(user);
         return new ResponseEntity<User>(user,HttpStatus.OK);
     }

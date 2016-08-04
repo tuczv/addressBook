@@ -193,16 +193,63 @@ angular
 //left menu sections
             
             $scope.sidenavMenu = {
-            		sections:[{
-            			name: 'Grupy',
-            			expand: true,
-            			ations: [{
-            				
-            			}]	
-            			
-            		}]
+            		sections:[
+            		    {
+                            name: 'Grupy',
+                            expand: true
+
+                        }]
             };
-   
+
+            $scope.goToChat = function () {
+                $state.go('chat');
+            };
+
+            $scope.goToContact = function () {
+                $state.go('contact');
+            };
+
+            $scope.showAddGroup = function ($event) {
+                $mdDialog.show({
+                    controller:  'contactController',
+                    templateUrl: 'modules/contact/views/dialog-group.html',
+                    targetEvent: $event,
+                    parent: angular.element(document.body)
+                })
+                    .then(function (result) {
+
+                    });
+            };
+
+            $scope.group= {
+
+            };
+
+            $scope.saveGroup = function () {
+
+                $http({
+                    method: 'POST',
+                    url: '/api/groups/' + $scope.group.id,
+                    data: $scope.group
+
+                })
+                    .success(function () {
+                        console.log('success');
+                        $state.reload();
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Grupa została utworzona")
+                                .position('top right')
+                                .hideDelay(1000)
+                        );
+
+
+                    })
+                    .error(function () {
+                        alert("error creating new group");
+                    });
+            };
         }
     ]);
 
