@@ -1,4 +1,4 @@
-<html>
+<html ng-app="addressbook">
 <head>
     <!-- META -->
     <meta charset="utf-8">
@@ -11,14 +11,12 @@
     <link rel="stylesheet" href="assets/css/style.css">
     
 </head>
-<body layout="column" layout-fill>
+
+<body>
 
 <md-content flex class="page-content">
-    <div ui-view="header"></div>
-
-    <div ui-view="main" ></div>
+    <div ui-view layout="row" layout-fill></div>
 </md-content>
-
 
 
 <script src="bower_components/angular/angular.js"></script>
@@ -36,24 +34,17 @@
 <script src="bower_components/angular-messages/angular-messages.min.js"></script>
 <script src="bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
 
-<script src="modules/core/app/config.js"></script>
 <script src="modules/core/app/init.js"></script>
-<script src="modules/core/core.module.js"></script>
-<script src="modules/contact/contact.module.js"></script>
-<script src="modules/common/common.module.js"></script>
-<script src="modules/user/user.module.js"></script>
-<script src="modules/group/group.module.js"></script>
-<script src="modules/chat/chat.module.js"></script>
-<!--<script src="modules/chat/chat.module.js"></script>-->
 <script src="modules/core/service/auth.interceptor.js"></script>
 <script src="modules/user/service/userservice.js"></script>
 <script src="modules/user/service/authenticateservice.js"></script>
 <script src="modules/user/controller/logincontroller.js"></script>
 <script src="modules/user/controller/registercontroller.js"></script>
+<script src="modules/home/home.js"></script>
 <script src="modules/contact/controller/contactcontroller.js"></script>
 <script src="modules/common/controller/headercontroller.js"></script>
-<script src="modules/group/controller/groupcontroller.js"></script>
 <script src="modules/chat/chatController.js"></script>
+<script src="modules/menu/menuController.js"></script>
 <!--<script src="modules/common/controller/chatController.js"></script>-->
 
 </body>

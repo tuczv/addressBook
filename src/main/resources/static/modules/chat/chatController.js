@@ -1,6 +1,6 @@
 //noinspection JSAnnotator
 angular
-    .module('chat')
+    .module('addressbook')
 
     .controller('chatController', ['$scope', '$http', 'Authentication', '$timeout', '$log', '$state', '$stateParams',
         function ($scope, $http, Authentication, $timeout, $log, $state, $stateParams) {

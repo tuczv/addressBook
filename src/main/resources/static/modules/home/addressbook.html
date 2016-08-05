@@ -1,0 +1,85 @@
+
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+    <md-toolbar class="md-table-toolbar  md-raised" layout-align="end end">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button" aria-label="Profile" ng-click="goToProfile()">
+                <md-tooltip>Profil</md-tooltip>
+                <ng-md-icon icon="face" style="fill: white"></ng-md-icon>
+            </md-button>
+            {{user.username}}
+            {{user.email}}
+            <span flex></span>
+            <md-button class="md-icon-button" aria-label="Profile" ng-click="goToProfile()">
+                <md-tooltip>Profil</md-tooltip>
+                <ng-md-icon icon="more_vert" style="fill: white"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-content role="navigation">
+        <md-list ng-repeat="section in sidenavMenu.sections">
+
+            <md-list-item ng-click="goToContact()">
+                <span class="md-body-1">Wszystkie kontakty</span>
+            </md-list-item>
+            <md-divider></md-divider>
+
+            <md-list-item ng-click="goToChat()">
+                <span class="md-body-1">Czat</span>
+            </md-list-item>
+            <md-divider></md-divider>
+
+            <md-list-item ng-click="section.expand = !section.expand">
+                <span class="md-body-1">{{section.name}}</span>
+                <span flex></span>
+                <ng-md-icon icon="chevron_right" style="fill: gray"></ng-md-icon>
+            </md-list-item>
+
+            <md-list-item ng-show="section.expand" ng-repeat="group in groups" ng-click="toast(action.link)">
+                <ng-md-icon icon="group" style="fill: gray"> </ng-md-icon>
+                <span class="md-body-1" layout-align="center center">{{group.name}}</span>
+            </md-list-item>
+            <md-divider></md-divider>
+
+            <md-list-item ng-click="showAddGroup($event)">
+                <span class="md-body-1" layout-align="center center">Dodaj grupę</span>
+                <span flex></span>
+            </md-list-item>
+            <md-divider></md-divider>
+
+            <md-list-item >
+                <span class="md-body-1">Ustawienia</span>
+                <span flex></span>
+            </md-list-item>
+            <md-divider></md-divider>
+
+    </md-content>
+</md-sidenav>
+
+<div layout="column" flex>
+    <md-toolbar class="mobile">
+        <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+            <md-button class="md-icon-button" aria-label="Icon">
+                <md-tooltip>AddressBook</md-tooltip>
+                <ng-md-icon ui-sref="home.contacts" icon="dashboard" style="fill: white"></ng-md-icon>
+            </md-button>
+            <h2 >
+                <span>Księga Adresowa</span>
+            </h2>
+            <span flex></span>
+            <!--<ng-md-icon icon="person" style="fill: white"></ng-md-icon>-->
+            <!--<span>{{user.name}}</span>-->
+            <ng-md-icon ui-sref="home.chat" icon="chat" style="fill: white"></ng-md-icon>
+
+            <md-button type="button" ng-click="logout()" class="md-icon-button logout">
+                <md-tooltip>Log out</md-tooltip>
+                <ng-md-icon icon="logout" style="fill: white"></ng-md-icon>
+            </md-button>
+
+        </div>
+    </md-toolbar>
+
+    <md-content flex class="md-padding page-content">
+        <div ui-view></div>
+    </md-content>
+</div>

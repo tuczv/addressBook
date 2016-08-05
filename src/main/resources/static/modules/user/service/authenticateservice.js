@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-angular.module('user').factory('Authentication',['$http','$q',
+angular.module('addressbook').factory('Authentication',['$http','$q',
     function($http,$q){
 		var self = {
 			currentUser:null,

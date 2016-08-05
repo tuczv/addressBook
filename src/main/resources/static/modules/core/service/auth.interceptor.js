@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-angular.module('core').factory('authInterceptor',['$q','$injector',
+angular.module('addressbook').factory('authInterceptor',['$q','$injector',
     function($q,$injector){
 		return{
 			responseError: function(rejection){

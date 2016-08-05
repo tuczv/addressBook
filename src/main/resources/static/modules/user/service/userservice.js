@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-angular.module('user').factory('userService',['$http',
+angular.module('addressbook').factory('userService',['$http',
     function($http){
 		return{
 			loginUser:function(user){

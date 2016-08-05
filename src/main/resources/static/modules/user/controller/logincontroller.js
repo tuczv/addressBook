@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-angular.module('user').controller('loginController',['$scope','$state','userService', '$mdToast',
+angular.module('addressbook').controller('loginController',['$scope','$state','userService', '$mdToast',
     function($scope, $state, userService, $mdToast){
 
 		$scope.user = {};
@@ -15,8 +15,8 @@ angular.module('user').controller('loginController',['$scope','$state','userServ
                             .position('top right')
                             .hideDelay(1000)
                     );
+				$state.go('home');
 
-				$state.go('contact');
 			},function(err){
 				
 				$scope.error.hasError = true;

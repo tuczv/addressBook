@@ -1,5 +1,5 @@
 //noinspection JSAnnotator
-angular.module('user')
+angular.module('addressbook')
 	.controller('registerController',['$scope','$state','userService', 
     function($scope, $state, userService){
 		
