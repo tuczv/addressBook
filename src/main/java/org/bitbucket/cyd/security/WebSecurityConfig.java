@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -77,6 +78,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .authorizeRequests()
                 .antMatchers("/**", "/api/users/register", "/api/users/me", "/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**")
                 .permitAll()
+                .antMatchers(HttpMethod.POST,"/api/contacts").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated();
         http.addFilterAfter(new CSRFHeaderFilter(), CsrfFilter.class);

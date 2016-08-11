@@ -32,6 +32,7 @@ angular
             }
 
             $scope.contact = {
+                user: $scope.user,
                 name: $scope.name,
                 lastName: $scope.lastName,
                 email: $scope.email,

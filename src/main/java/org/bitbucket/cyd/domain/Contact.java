@@ -2,6 +2,7 @@ package org.bitbucket.cyd.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "contacts")
@@ -14,7 +15,8 @@ public class Contact {
     private String phone;
     private String group;
     private String address;
-
+    @DBRef
+    private User user;
     public Contact() {}
 
     public Contact(String name, String lastName, String email, String phone, String group, String address) {
@@ -88,5 +90,13 @@ public class Contact {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
