@@ -1,0 +1,29 @@
+<md-card>
+    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+    <md-card-title>
+        <md-card-title-text>
+            <!--<span class="md-headline">Profil</span>-->
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-content>
+        <md-input-container class="md-icon-float md-block">
+            <!-- Use floating label instead of placeholder -->
+            <label>Nazwa</label>
+            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
+            <input  ng-model="user.username" type="text" disabled>
+        </md-input-container>
+        <md-input-container md-no-float class="md-block">
+            <label>Email</label>
+            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
+            <input  ng-model="user.email" type="email" placeholder="Email" disabled>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Hasło</label>
+            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
+            <input  ng-model="user.password" type="password" placeholder="Password" disabled>
+        </md-input-container>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised md-warn" ng-click="back()">Wróć</md-button>
+    </md-card-actions>
+</md-card>

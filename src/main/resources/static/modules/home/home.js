@@ -1,11 +1,19 @@
 angular
     .module('addressbook')
-    .controller('mainController', [ '$scope', '$http', 'Authentication', '$mdMedia', '$mdDialog', '$stateParams', '$state',
+    .controller('mainController', [ '$scope', '$http', 'Authentication', 'groupService', '$mdMedia', '$mdDialog', '$stateParams', '$state',
         '$timeout', '$log', '$mdToast', '$mdSidenav', 'userService',
-        function($scope, $http, Authentication, $mdMedia, $mdDialog, $stateParams, $state,
+        function($scope, $http, Authentication, groupService, $mdMedia, $mdDialog, $stateParams, $state,
                    $timeout, $log, $mdToast, $mdSidenav, userService) {
 
             $scope.showMobileMainHeader = true;
+
+            $scope.getGroups = function () {
+                groupService.getAll()
+                    .then(function (data) {
+                        $scope.groups = data;
+
+                    });
+            };
 
             $scope.user = Authentication.currentUser;
 
@@ -31,17 +39,39 @@ angular
                 sections:[
                     {
                         name: 'Grupy',
-                        expand: true
+                        expand: false
 
                     }]
             };
 
             $scope.goToChat = function () {
                 $state.go('home.chat');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Czat")
+                        .position('top right')
+                        .hideDelay(1000)
+                );
             };
 
             $scope.goToContact = function () {
                 $state.go('home.contacts');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Kontakty")
+                        .position('top right')
+                        .hideDelay(1000)
+                );
+            };
+
+            $scope.goUsers = function () {
+                $state.go('home.users');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Użytkownicy")
+                        .position('top right')
+                        .hideDelay(1000)
+                );
             };
 
             function getGroups() {
@@ -58,7 +88,7 @@ angular
 
             $scope.showAddGroup = function ($event) {
                 $mdDialog.show({
-                    controller:  'contactController',
+                    controller:  'mainController',
                     templateUrl: 'modules/contact/views/dialog-group.html',
                     targetEvent: $event,
                     parent: angular.element(document.body)
@@ -66,6 +96,10 @@ angular
                     .then(function (result) {
 
                     });
+            };
+
+            $scope.cancelAddModal = function () {
+                $mdDialog.cancel();
             };
 
             $scope.group= {
@@ -97,9 +131,20 @@ angular
             };
 
             $scope.goToProfile = function () {
+                $state.go('home.profile');
                 $mdToast.show(
                     $mdToast.simple()
                         .content("Twój profil")
+                        .position('top right')
+                        .hideDelay(1000)
+                );
+            };
+
+            $scope.goToInbox = function () {
+                $state.go('home.inbox');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Poczta")
                         .position('top right')
                         .hideDelay(1000)
                 );

@@ -12,17 +12,13 @@ angular
 
             
             //fetch groups
-            function getGroups() {
-                $http.get('/api/groups')
-                    .success(function (data) {
-                        $scope.groups = data;
-                    })
-                    .error(function () {
-                        alert('error fetching groups');
-                    });
-            }
-
-            getGroups();
+           function getGroups() {
+               $http.get('/api/groups')
+                   .success(function (data) {
+                       $scope.groups = data;
+                   });
+           }
+           getGroups();
 
             function getContact(contactId) {
                 $http.get('/api/contacts/' + contactId)
@@ -40,8 +36,6 @@ angular
                 address: $scope.address,
                 groupId: $scope.groups.id
             };
-
-            console.log($scope.contact);
 
             function getContacts() {
                 $http.get('/api/contacts')

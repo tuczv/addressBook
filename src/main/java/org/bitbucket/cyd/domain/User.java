@@ -24,16 +24,18 @@ public class User {
     @Size(min = 6, max = 10)
     private String password;
 
+    private String news;
 
     public User() {
         super();
     }
 
-    public User(String username, String email, String password) {
+    public User(String username, String email, String password, String news) {
         super();
         this.username = username;
         this.email = email;
         this.password = password;
+        this.news = news;
     }
 
     public String getId() {
@@ -66,5 +68,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNews() {
+        return news;
+    }
+
+    public void setNews(String news) {
+        this.news = news;
     }
 }

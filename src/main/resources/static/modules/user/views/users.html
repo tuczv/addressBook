@@ -1,0 +1,46 @@
+<div layout="column" layout>
+    <md-whiteframe class="md-whiteframe-4dp">
+        <md-toolbar class="md-warn md-hue-3">
+            <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+                <span layout="row" layout-align="center center">Użytkownicy</span>
+
+            </h2>
+
+        </md-toolbar>
+
+        <md-divider></md-divider>
+
+        <md-content>
+            <md-table-container>
+                <table md-table id="table">
+                    <thead md-head md-order="$root.tableFilter.order"
+                           md-on-reorder="users">
+                    <tr md-row>
+                        <th md-column md-order-by="name">Nazwa</th>
+                        <th md-column md-order-by="lastName">Email</th>
+                        <th md-column md-order-by="email">Hasło</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody md-body>
+                    <tr md-row
+                        ng-repeat="u in users"
+                        ng-click="clickEdit(u, $event)">
+                        <td md-cell>{{u.username}}</td>
+                        <td md-cell>{{u.email}}</td>
+                        <td md-cell>{{u.password}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </md-table-container>
+            <!--<md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
+                                 md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
+                                 md-total="{{users.length}}" md-on-paginate="onPageChange"
+                                 md-boundary-links>
+            </md-table-pagination>-->
+        </md-content>
+    </md-whiteframe>
+
+</div>

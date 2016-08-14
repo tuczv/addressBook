@@ -38,10 +38,35 @@ angular
                         'requiresLogin': true
                     }
                 })
+                .state('home.users', {
+                    'url': '/users',
+                    'templateUrl': '/modules/user/views/users.html',
+                    'controller': 'adminController',
+                    'data': {
+                        'requiresLogin': true
+                    }
+                })
                 .state('home.contacts', {
                     'url': '/contacts',
                     'templateUrl': '/modules/contact/views/contacts.html',
                     'controller': 'contactController',
+                    'data': {
+                        'requiresLogin': true
+                    }
+                })
+                .state('home.inbox', {
+                    'url': '/inbox',
+                    'templateUrl': '/modules/inbox/inbox.html',
+                    'controller': 'inboxController',
+                    'data': {
+                        'requiresLogin': true
+                    }
+                })
+
+                .state('home.profile', {
+                    'url': '/profile',
+                    'templateUrl': '/modules/profile/profile.html',
+                    'controller': 'profileController',
                     'data': {
                         'requiresLogin': true
                     }

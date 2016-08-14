@@ -5,6 +5,26 @@ body {
 
 }
 
+.md-subheader {
+    background-color: #ECECEC;
+}
+
+md-sidenav  .md-sidenav-list {
+    min-width: 250px !important;
+    width: 50vw !important;
+    max-width: 250px !important;
+}
+
+md-card {
+    padding: 30px;
+}
+
+.list-container {
+    margin:0 auto;
+    width:50%;
+}
+
+
 .loginContent {
     max-width:  90%;
     width: 500px

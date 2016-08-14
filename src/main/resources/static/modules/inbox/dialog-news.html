@@ -1,0 +1,47 @@
+<md-dialog aria-label="Nowy message"  ng-cloak flex="40">
+    <form name="createForm" ng-submit="createNews()">
+        <!--<md-toolbar class="md-primary  md-whiteframe-z1">
+            <div class="md-toolbar-tools ">
+                <h2>Tworzyć</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancelAddModal()">
+                    <ng-md-icon icon="close" style="fill: white"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>-->
+        <md-subheader><b>Tworzyć</b></md-subheader>
+        <md-dialog-content>
+            <md-content class="md-no-momentum">
+                <section layout="column" layout-margin="">
+                    <md-input-container md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)" class="md-icon-float md-block">
+                        <!-- Use floating label instead of placeholder -->
+                        <label>Imię(wymagane)</label>
+                        <input
+                                ng-model="contact.name"
+                                name="name"
+                                id="name"
+                                required>
+                        <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+                            <div ng-message="required">Wpisz imię</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <!-- Use floating placeholder instead of label -->
+                        <input ng-model="contact.email" type="email" placeholder="Email (wymagane)" ng-required="true">
+                    </md-input-container>
+                    <md-input-container class="md-icon-float md-block">
+                        <!-- Use floating label instead of placeholder -->
+                        <label>Nazwisko</label>
+                        <input ng-model="contact.lastName" type="text">
+                    </md-input-container>
+                </section>
+            </md-content>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancelAddModal()" class="md-raised md-primary">Cofnij</md-button>
+            <md-button type="submit"  ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Wyślij</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

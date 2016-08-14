@@ -6,7 +6,6 @@
                 <md-tooltip>Profil</md-tooltip>
                 <ng-md-icon icon="face" style="fill: white"></ng-md-icon>
             </md-button>
-            {{user.username}}
             {{user.email}}
             <span flex></span>
             <md-button class="md-icon-button" aria-label="Profile" ng-click="goToProfile()">
@@ -19,8 +18,18 @@
     <md-content role="navigation">
         <md-list ng-repeat="section in sidenavMenu.sections">
 
+            <md-list-item ng-click="goUsers()">
+                <span class="md-body-1">Użytkownicy</span>
+            </md-list-item>
+            <md-divider></md-divider>
+
             <md-list-item ng-click="goToContact()">
-                <span class="md-body-1">Wszystkie kontakty</span>
+                <span class="md-body-1">Kontakty</span>
+            </md-list-item>
+            <md-divider></md-divider>
+
+            <md-list-item ng-click="goToInbox()">
+                <span class="md-body-1">Poczta</span>
             </md-list-item>
             <md-divider></md-divider>
 
