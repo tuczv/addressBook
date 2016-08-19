@@ -14,5 +14,4 @@ public class SpringbootAngularjsAddressbookApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

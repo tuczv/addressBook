@@ -8,13 +8,16 @@ public class Message {
     private String author;
     private String text;
     private String date;
+    private String subject;
+
 
     public Message() {}
 
-    public Message(String text, String date, String author) {
+    public Message(String text, String date, String author, String subject) {
         this.text = text;
         this.date = date;
         this.author = author;
+        this.subject = subject;
     }
 
     public String getAuthor() {
@@ -40,4 +43,13 @@ public class Message {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
 }

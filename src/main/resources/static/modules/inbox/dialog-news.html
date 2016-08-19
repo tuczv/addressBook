@@ -1,47 +1,42 @@
-<md-dialog aria-label="Nowy message"  ng-cloak flex="40">
-    <form name="createForm" ng-submit="createNews()">
-        <!--<md-toolbar class="md-primary  md-whiteframe-z1">
-            <div class="md-toolbar-tools ">
-                <h2>Tworzyć</h2>
-                <span flex></span>
-                <md-button class="md-icon-button" ng-click="cancelAddModal()">
-                    <ng-md-icon icon="close" style="fill: white"></ng-md-icon>
-                </md-button>
+<md-dialog aria-label="Form" ng-cloak flex="40">
+    <md-content class="md-padding">
+        <form name="userForm">
+            <div  layout-sm="column">
+                <!--<md-chips ng-model="email.userTo" md-autocomplete-snap md-require-match>'+
+                    <md-autocomplete
+                            md-autofocus="true"
+                            md-no-cache="true"
+                            md-min-length="0"
+                            md-selected-item="selected"
+                            md-search-text="searchText"
+                            md-items="userTo in users"
+                            placeholder="To...">
+                    <md-item-template>{{userTo.username}}</md-item-template>
+                    </md-autocomplete>
+                    <md-chip-template><span><em>{{$chip.username}}</em></span></md-chip-template>
+                </md-chips>-->
+                <md-input-container flex>
+                    <label>Do</label>
+                    <input ng-model="email.userTo">
+                </md-input-container>
             </div>
-        </md-toolbar>-->
-        <md-subheader><b>Tworzyć</b></md-subheader>
-        <md-dialog-content>
-            <md-content class="md-no-momentum">
-                <section layout="column" layout-margin="">
-                    <md-input-container md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)" class="md-icon-float md-block">
-                        <!-- Use floating label instead of placeholder -->
-                        <label>Imię(wymagane)</label>
-                        <input
-                                ng-model="contact.name"
-                                name="name"
-                                id="name"
-                                required>
-                        <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
-                            <div ng-message="required">Wpisz imię</div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <!-- Use floating placeholder instead of label -->
-                        <input ng-model="contact.email" type="email" placeholder="Email (wymagane)" ng-required="true">
-                    </md-input-container>
-                    <md-input-container class="md-icon-float md-block">
-                        <!-- Use floating label instead of placeholder -->
-                        <label>Nazwisko</label>
-                        <input ng-model="contact.lastName" type="text">
-                    </md-input-container>
-                </section>
-            </md-content>
-        </md-dialog-content>
+            <div layout layout-sm="column">
+                <md-input-container flex>
+                    <label>Temat</label>
+                    <input ng-model="email.subject">
+                </md-input-container>
+            </div>
 
-        <md-dialog-actions layout="row">
-            <span flex></span>
-            <md-button ng-click="cancelAddModal()" class="md-raised md-primary">Cofnij</md-button>
-            <md-button type="submit"  ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Wyślij</md-button>
-        </md-dialog-actions>
-    </form>
+            <md-input-container class="md-block">
+                <label>Wiadomość</label>
+                <textarea ng-model="email.body" md-maxlength="150" rows="3" md-select-on-focus></textarea>
+            </md-input-container>
+
+        </form>
+    </md-content>
+    <div class="md-actions" layout="row">
+        <span flex></span>
+        <md-button ng-click="cancelAddModal()"> Wstecz </md-button>
+        <md-button ng-click="createNews()" class="md-primary"> Zapisz </md-button>
+    </div>
 </md-dialog>

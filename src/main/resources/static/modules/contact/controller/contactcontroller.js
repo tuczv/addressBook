@@ -15,7 +15,7 @@ angular
            function getGroups() {
                $http.get('/api/groups')
                    .success(function (data) {
-                       $scope.groups = data;
+                       $scope.groups = data;    
                    });
            }
            getGroups();

@@ -24,11 +24,18 @@ public class ChatResource {
     @Autowired
     private MessageRepository messageRepository;
 
+
     @RequestMapping(value = "/messages", method = RequestMethod.GET)
     @SubscribeMapping("/chat")
     public List<Message> allMessages() {
         return messageRepository.findAll();
     }
+ /*   public List<Message> allMessages(String username) {
+        User user = userRepository.findByUsername(username);
+        List<Message> messages = newsService.sendMessageToUser(user);
+
+        return messages;
+    }*/
 
     @RequestMapping(value = "/messages", method = RequestMethod.POST)
     @MessageMapping("/chat")
