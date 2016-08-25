@@ -15,7 +15,7 @@
 
 		<md-content class="md-padding" layout="column">
 			<form name="registerForm" novalidate>
-			<md-input-container md-is-error="registerForm.email.$invalid && (registerForm.$submitted || registerForm.email.$dirty)">
+			<md-input-container md-is-error="registerForm.email.$invalid && (registerForm.$submitted || registerForm.email.$dirty)" flex>
 				<label>Email</label>
 				<md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
 				
@@ -32,7 +32,7 @@
        			 	</div>
 			</md-input-container>
 			
-			<md-input-container md-is-error="registerForm.username.$invalid && (registerForm.$submitted || registerForm.username.$dirty)">
+			<md-input-container md-is-error="registerForm.username.$invalid && (registerForm.$submitted || registerForm.username.$dirty)" flex>
 				<label>Username</label>
 				<md-icon md-svg-src="assets/icons/ic_person.svg"></md-icon>
 				
@@ -50,7 +50,7 @@
         		</div>
 			</md-input-container>
 			
-			<md-input-container md-is-error="registerForm.password.$invalid && (registerForm.$submitted || registerForm.password.$dirty)">
+			<md-input-container md-is-error="registerForm.password.$invalid && (registerForm.$submitted || registerForm.password.$dirty)" flex>
 				<label>Password</label>
 				<md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
 		

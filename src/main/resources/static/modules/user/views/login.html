@@ -10,7 +10,7 @@
 
 		<md-content class="md-padding" layout="column">
 			<form name="loginForm" ng-submit="loginUser()" novalidate>
-			<md-input-container md-is-error="loginForm.username.$invalid && (loginForm.$submitted || loginForm.username.$dirty)">
+			<md-input-container md-is-error="loginForm.username.$invalid && (loginForm.$submitted || loginForm.username.$dirty)" flex>
 				<label>Username</label>
 				<md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
 				<input 
@@ -26,7 +26,7 @@
         		</div>
 			</md-input-container>
 			
-			<md-input-container md-is-error="loginForm.password.$invalid && (loginForm.$submitted || loginForm.password.$dirty)">
+			<md-input-container md-is-error="loginForm.password.$invalid && (loginForm.$submitted || loginForm.password.$dirty)" flex>
 				<label>Password</label>
 				<md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
 				<input flex

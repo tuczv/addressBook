@@ -6,6 +6,7 @@ angular
                    $timeout, $log, $mdToast, $mdSidenav, userService) {
 
             $scope.showMobileMainHeader = true;
+            $scope.avatar = 'assets/icons/avatar.png';
 
             $scope.getGroups = function () {
                 groupService.getAll()
@@ -38,6 +39,7 @@ angular
             $scope.sidenavMenu = {
                 sections:[
                     {
+                        icon: 'action:ic_shopping_cart_24px',
                         name: 'Grupy',
                         expand: false
 
@@ -144,7 +146,7 @@ angular
                 $state.go('home.inbox');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Poczta")
+                        .content("Wysłane wiadomości")
                         .position('top right')
                         .hideDelay(1000)
                 );

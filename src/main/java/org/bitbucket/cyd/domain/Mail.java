@@ -12,17 +12,18 @@ public class Mail {
     private String userTo;
     private String subject;
     private String body;
-
+    private String date;
     private User userFrom;
 
     public Mail() {
         System.out.println("Default constructor");
     }
 
-    public Mail(String userTo, String subject, String body, User userFrom) {
+    public Mail(String userTo, String subject, String body, String date, User userFrom) {
         this.userTo = userTo;
         this.subject = subject;
         this.body = body;
+        this.date = date;
         this.userFrom = userFrom;
     }
 
@@ -65,5 +66,13 @@ public class Mail {
 
     public void setUserFrom(User userFrom) {
         this.userFrom = userFrom;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

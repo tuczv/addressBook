@@ -3,10 +3,10 @@ angular.module('addressbook').factory('Authentication',['$http','$q',
     function($http,$q){
 		var self = {
 			currentUser:null,
-			me:function(){
+			login:function(){
 				if(!self.isAuthenticated()){
 					var deferred = $q.defer();
-					return $http.get("/api/users/me")
+					return $http.get("/api/users/login")
 					.then(function(response){
 						self.currentUser = response.data;
 						deferred.resolve(self.currentUser);

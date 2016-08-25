@@ -30,7 +30,7 @@ angular.module('addressbook').controller('loginController',['$scope','$state','u
                                 .position('top right')
                                 .hideDelay(2000)
                         );
-					$scope.error.message = "Podany login lub hasło jest błędne "
+					$scope.error.message = "Podany login lub hasło jest błędne"
 				}
 			});
 		}

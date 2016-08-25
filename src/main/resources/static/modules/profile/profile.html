@@ -1,5 +1,15 @@
 <md-card>
-    <img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">
+    <!--<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">-->
+    <md-toolbar class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button">
+                <ng-md-icon icon="account_balance" style="fill: black"></ng-md-icon>
+            </md-button>
+            <span>Dane profilowe</span>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+
     <md-card-title>
         <md-card-title-text>
             <!--<span class="md-headline">Profil</span>-->
@@ -8,20 +18,28 @@
     <md-card-content>
         <md-input-container class="md-icon-float md-block">
             <!-- Use floating label instead of placeholder -->
-            <label>Nazwa</label>
-            <md-icon md-svg-src="img/icons/ic_person_24px.svg" class="name"></md-icon>
-            <input  ng-model="user.username" type="text" disabled>
+            <md-icon md-svg-src="assets/icons/ic_person.svg" class="name"></md-icon>
+            <div class="info-line">
+                <div class="title"><b>Nazwa</b></div>
+                <div class="info">{{user.username}}</div>
+            </div>
         </md-input-container>
+        <md-divider></md-divider>
         <md-input-container md-no-float class="md-block">
-            <label>Email</label>
-            <md-icon md-svg-src="img/icons/ic_phone_24px.svg"></md-icon>
-            <input  ng-model="user.email" type="email" placeholder="Email" disabled>
+            <md-icon md-svg-src="assets/icons/ic_phone_black_24px.svg"></md-icon>
+            <div class="info-line">
+                <div class="title"><b>Email</b></div>
+                <div class="info">{{user.email}}</div>
+            </div>
         </md-input-container>
-        <md-input-container class="md-block">
-            <label>Hasło</label>
-            <md-icon md-svg-src="img/icons/ic_email_24px.svg" class="email"></md-icon>
-            <input  ng-model="user.password" type="password" placeholder="Password" disabled>
-        </md-input-container>
+        <md-divider></md-divider>
+     <!--   <md-input-container class="md-block">
+            <md-icon md-svg-src="assets/icons/ic_lock_black_24px.svg" class="email"></md-icon>
+            <div class="info-line">
+                <div class="title"><b>Hasło</b></div>
+                <div class="info">{{user.password}}</div>
+            </div>
+        </md-input-container>-->
     </md-card-content>
     <md-card-actions layout="row" layout-align="end center">
         <md-button class="md-raised md-warn" ng-click="back()">Wróć</md-button>

@@ -2,6 +2,7 @@ package org.bitbucket.cyd.web;
 
 import org.bitbucket.cyd.domain.User;
 import org.bitbucket.cyd.repository.UserRepository;
+import org.bitbucket.cyd.security.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,29 +33,21 @@ public class UserResource {
     }
 
     @RequestMapping(value="/users/register",method = RequestMethod.POST)
-    public ResponseEntity<User> registerUser(@RequestBody User user){
+    public User registerUser(@RequestBody User user){
         if(userRepository.findByUsername(user.getUsername())== null){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             userRepository.save(user);
-            logger.info("Success register new user");
-            return new ResponseEntity<User>(HttpStatus.OK);
+            logger.info("Register new user");
+            return new User();
         }
-        return new ResponseEntity<User>(HttpStatus.CONFLICT);
+        return new User();
     }
 
-    @RequestMapping(value="/users/me",method = RequestMethod.GET)
-    public ResponseEntity<User> me(){
-        String username;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if(principal instanceof UserDetails)
-            username = ((UserDetails)principal).getUsername();
-        else
-            username = principal.toString();
-
+    @RequestMapping(value="/users/login",method = RequestMethod.GET)
+    public User login(){
+        String username = SecurityUtils.getCurrentLoginUser();
         User user = userRepository.findByUsername(username);
-
-//        UserDTO userDTO = new UserDTO(user);
-        return new ResponseEntity<User>(user,HttpStatus.OK);
+        return user;
     }
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)

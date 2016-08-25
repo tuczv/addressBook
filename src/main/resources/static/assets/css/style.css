@@ -9,13 +9,17 @@ body {
     background-color: #ECECEC;
 }
 
+/*
 md-sidenav  .md-sidenav-list {
     min-width: 250px !important;
     width: 50vw !important;
     max-width: 250px !important;
 }
+*/
 
-
+md-icon svg {
+    fill: gray;
+}
 
 .list-container {
     margin:0 auto;
@@ -104,3 +108,10 @@ md-sidenav  .md-sidenav-list {
 .inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
   .inputdemoIcons md-input-container.md-input-invalid > md-icon.username {
     color: red; }
+
+.full-heigth {
+    height: -moz-calc(100% - 64px);
+    height: -webkit-calc(100% - 64px);
+    height: calc(100% - 64px);
+}
+

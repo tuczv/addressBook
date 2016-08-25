@@ -7,11 +7,11 @@ angular.module('addressbook').factory('userService',['$http',
 					method:'POST',
 					url:'/login',
 					headers:{'Content-Type':'application/x-www-form-urlencoded'},
-					transformRequest : function(obj){
-						var str = [];
-						for(var p in obj)
-							str.push(encodeURIComponent(p)+"="+encodeURIComponent(obj[p]));
-						return str.join("&");
+					transformRequest : function(objects){
+						var array = [];
+						for(var pointer in objects)
+							array.push(encodeURIComponent(pointer)+"="+encodeURIComponent(objects[pointer]));
+						return array.join("&");
 					},
 					data:{username:user.username,password:user.password,submit:'Login'}
 				}).then(function(response){

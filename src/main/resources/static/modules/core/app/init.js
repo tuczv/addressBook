@@ -7,11 +7,25 @@ angular
             $httpProvider.interceptors.push('authInterceptor');
             $urlRouterProvider.otherwise('/contacts');
 
-            $mdThemingProvider
+            var accentPalette = $mdThemingProvider.extendPalette('teal', {
+                'contrastDefaultColor': 'light'
+            });
+
+            $mdThemingProvider.definePalette('teal-custom', accentPalette);
+            $mdThemingProvider.theme('default')
+                .primaryPalette('light-blue', {
+                    'default': '900',
+                    'hue-2': 'A700'
+                })
+                .accentPalette('teal-custom', {
+                    'default': 'A700'
+                });
+
+           /* $mdThemingProvider
                 .theme('default')
                 .primaryPalette('blue', {
                     'default': '700'
-                });
+                });*/
 
             $stateProvider
                 .state('register', {
@@ -87,7 +101,7 @@ angular
     .run(['$rootScope', '$state', 'Authentication',
         function ($rootScope, $state, Authentication) {
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-                Authentication.me().then(function (response) {
+                Authentication.login().then(function (response) {
 
                     console.log(toState);
 

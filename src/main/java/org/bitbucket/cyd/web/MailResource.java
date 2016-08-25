@@ -1,5 +1,6 @@
 package org.bitbucket.cyd.web;
 
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.bitbucket.cyd.domain.Mail;
 import org.bitbucket.cyd.domain.User;
 import org.bitbucket.cyd.repository.MailRepository;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -35,6 +37,7 @@ public class MailResource {
 
     @RequestMapping(value = "/emails", method = RequestMethod.POST)
     public @ResponseBody void sendEmail(@RequestBody Mail mail) {
+        mail.setDate(DateFormatUtils.format(new Date(System.currentTimeMillis()), "EEE M/d/yyyy h:mm a"));
         mailRepository.save(mail);
     }
 }

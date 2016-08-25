@@ -4,7 +4,7 @@ angular
         function ($scope, $mdMedia, $mdDialog, $stateParams, $http, $mdToast, $state, Authentication) {
 
             $scope.showMobileMainHeader = true;
-
+            $scope.showReadEmail = false;
            /* var imagePath = 'assets/icons/contacts.svg';*/
 
             $scope.loggedUser = Authentication.currentUser;
@@ -26,6 +26,7 @@ angular
             /**/
             $scope.selected = null;
             $scope.selectItem = function(item) {
+                $scope.showReadEmail = true;
                 $scope.selected = angular.isNumber(item) ? $scope.items[item] : item;
             };
 
@@ -80,7 +81,7 @@ angular
                         $mdToast.show(
                             $mdToast.simple()
                                 .content("Wiadmość została wysłana")
-                                .position('top right')
+                                .position('bottom right')
                                 .hideDelay(1000)
                         );
 
