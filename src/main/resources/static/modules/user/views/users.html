@@ -18,18 +18,22 @@
                     <tr md-row>
                         <th md-column md-order-by="name">Nazwa</th>
                         <th md-column md-order-by="lastName">Email</th>
-                        <th md-column md-order-by="email">Hasło</th>
-
+                        <th md-column>Hasło</th>
+                        <th md-column></th>
                     </tr>
                     </thead>
 
                     <tbody md-body>
                     <tr md-row
-                        ng-repeat="u in users"
-                        ng-click="clickEdit(u, $event)">
+                        ng-repeat="u in users">
                         <td md-cell>{{u.username}}</td>
                         <td md-cell>{{u.email}}</td>
                         <td md-cell>{{u.password}}</td>
+                        <td md-cell>
+                            <md-button>
+                                <ng-md-icon ng-click="deleteUser(u.id)" icon="done" style="fill: gray"></ng-md-icon>
+                            </md-button>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

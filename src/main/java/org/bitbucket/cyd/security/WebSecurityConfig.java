@@ -9,6 +9,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -63,24 +64,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return authenticationProvider;
     }
 
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring()
-////                .antMatchers(HttpMethod.OPTIONS, "/**")
-//                .antMatchers("/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**");
-//
-//    }
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .antMatchers("/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**");
+
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
                 .authorizeRequests()
-                .antMatchers("/**", "/api/users/register", "/api/users/me", "/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**")
-                .permitAll()
-                .antMatchers(HttpMethod.POST,"/api/contacts").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated();
+//                .antMatchers("/**", "/login", "/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**") .permitAll()
+                .antMatchers("/admin/users/").hasAuthority(AuthorityConstant.ADMIN);
+
         http.addFilterAfter(new CSRFHeaderFilter(), CsrfFilter.class);
         http.csrf().csrfTokenRepository(csrfTokenRepository());
 

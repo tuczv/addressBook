@@ -1,0 +1,10 @@
+.header-bottom {
+  position: relative;
+  z-index: 2;
+
+  .title {
+    font-size: 20px;
+    min-width: 160px;
+    text-align: center;
+  }
+}

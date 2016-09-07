@@ -1,0 +1,40 @@
+<md-dialog aria-label="Nowy kontakt" ng-cloak flex="40">
+    <form name="createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Wydarzenie</h2>
+                <span flex></span>
+
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-content class="md-no-momentum">
+                <section layout="column" layout-margin="">
+                    <md-input-container
+                            md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)"
+                            class="md-icon-float md-block">
+                        <!-- Use floating label instead of placeholder -->
+                        <label>Nazwa</label>
+                        <md-icon md-svg-src="assets/icons/ic_person.svg" class="name"></md-icon>
+                        <input
+                                ng-model="event"
+                                name="name"
+                                id="name"
+                                required>
+                        <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+                            <div ng-message="required">Wpisz nazwę</div>
+                        </div>
+
+                    </md-input-container>
+                </section>
+            </md-content>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancelAddModal()" class="md-raised md-primary">Cofnij</md-button>
+            <md-button type="submit" ng-click="saveEvent(data)"  ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Zapisz</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

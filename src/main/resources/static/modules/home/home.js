@@ -147,9 +147,19 @@ angular
                 $mdToast.show(
                     $mdToast.simple()
                         .content("Wysłane wiadomości")
-                        .position('top right')
+                        .position('bottom right')
                         .hideDelay(1000)
                 );
             };
+
+            $scope.goToCalendar = function () {
+                $state.go('home.calendar');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Kalendarz")
+                        .position('bottom right')
+                        .hideDelay(1000)
+                );
+            }
         }
     ]);

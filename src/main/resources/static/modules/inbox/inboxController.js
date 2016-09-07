@@ -7,8 +7,6 @@ angular
             $scope.showReadEmail = false;
            /* var imagePath = 'assets/icons/contacts.svg';*/
 
-            $scope.loggedUser = Authentication.currentUser;
-
             $scope.selected = [];
             $scope.users = [];
             $scope.user = {};

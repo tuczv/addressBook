@@ -1,6 +1,6 @@
 angular
     .module('addressbook', ['ui.router', 'ngMaterial', 'ngCookies',
-        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages'])
+        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ui.calendar'])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider) {
 
@@ -76,11 +76,18 @@ angular
                         'requiresLogin': true
                     }
                 })
-
                 .state('home.profile', {
                     'url': '/profile',
                     'templateUrl': '/modules/profile/profile.html',
                     'controller': 'profileController',
+                    'data': {
+                        'requiresLogin': true
+                    }
+                })
+                .state('home.calendar', {
+                    'url': '/calendar',
+                    'templateUrl': '/modules/calendar/calendar.html',
+                    'controller': 'calendarController',
                     'data': {
                         'requiresLogin': true
                     }

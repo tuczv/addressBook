@@ -13,7 +13,7 @@ angular.module('addressbook').factory('userService',['$http',
 							array.push(encodeURIComponent(pointer)+"="+encodeURIComponent(objects[pointer]));
 						return array.join("&");
 					},
-					data:{username:user.username,password:user.password,submit:'Login'}
+					data:{username:user.username,password:user.password, submit:'Login'}
 				}).then(function(response){
 					return response;
 				});

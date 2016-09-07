@@ -1,13 +1,16 @@
 package org.bitbucket.cyd.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Document(collection = "users")
 public class User {
@@ -22,20 +25,11 @@ public class User {
     @NotEmpty
     private String email;
 
-    @NotEmpty
     @Size(min = 6, max = 10)
     private String password;
 
-    public User() {
-        super();
-    }
-
-    public User(String username, String email, String password) {
-        super();
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
+    @JsonIgnore
+    private Set<Authority> authorities = new HashSet<>();
 
     public String getId() {
         return id;
@@ -69,4 +63,11 @@ public class User {
         this.password = password;
     }
 
+    public Set<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Set<Authority> authorities) {
+        this.authorities = authorities;
+    }
 }

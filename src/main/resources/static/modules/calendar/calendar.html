@@ -1,0 +1,29 @@
+
+<div id="calendar" layout="column">
+
+    <md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;" flex>
+        <div class="md-toolbar-tools">
+            <span>Kalendarz</span>
+        </div>
+    </md-toolbar>
+
+    <div class="header-bottom" layout="row" layout-align="center center">
+        <md-button class="md-icon-button arrow" ng-click="calendar.prev()" aria-label="Previous">
+            <ng-md-icon icon="chevron_left" style="fill: black"></ng-md-icon>
+        </md-button>
+
+        <div class="title">
+            {{calendarView.title}}
+        </div>
+
+        <md-button class="md-icon-button arrow" ng-click="calendar.next()" aria-label="Next">
+            <ng-md-icon icon="chevron_right" style="fill: black"></ng-md-icon>
+        </md-button>
+    </div>
+
+    <!-- CONTENT -->
+    <md-content layout="column" class="md-hue-1 md-whiteframe-z2" ui-calendar="uiConfig.calendar" ng-model="vm.events" calendar="main">
+    </md-content>
+    <!-- / CONTENT -->
+
+</div>
