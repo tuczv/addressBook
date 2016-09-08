@@ -8,7 +8,7 @@ angular
             $scope.user = Authentication.currentUser;
 
             function getUsers() {
-                $http.get('api/users')
+                $http.get('admin/users')
                     .success(function (data) {
                         $scope.users = data;
                     })

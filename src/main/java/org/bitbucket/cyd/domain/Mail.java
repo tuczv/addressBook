@@ -13,18 +13,17 @@ public class Mail {
     private String subject;
     private String body;
     private String date;
+    @DBRef
     private User userFrom;
 
     public Mail() {
-        System.out.println("Default constructor");
     }
 
-    public Mail(String userTo, String subject, String body, String date, User userFrom) {
+    public Mail(String userTo, String subject, String body, String date) {
         this.userTo = userTo;
         this.subject = subject;
         this.body = body;
         this.date = date;
-        this.userFrom = userFrom;
     }
 
     public String getId() {

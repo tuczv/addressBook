@@ -16,9 +16,9 @@
                             class="md-icon-float md-block">
                         <!-- Use floating label instead of placeholder -->
                         <label>Nazwa</label>
-                        <md-icon md-svg-src="assets/icons/ic_person.svg" class="name"></md-icon>
+
                         <input
-                                ng-model="event"
+                                ng-model="event.title"
                                 name="name"
                                 id="name"
                                 required>
@@ -27,14 +27,31 @@
                         </div>
 
                     </md-input-container>
+
+
+                    <div layout="row" class="date-row">
+                        <md-datepicker ng-model="event.start" md-placeholder="Start Date"></md-datepicker>
+
+                        <!--<md-input-container flex md-no-float>-->
+                            <!--<input ng-model="vm.calendarEvent.startTime" placeholder="Start Time">-->
+                        <!--</md-input-container>-->
+                    </div>
+
+                    <div layout="row" class="date-row">
+                        <md-datepicker ng-model="event.end" md-placeholder="End Date"></md-datepicker>
+
+                        <!--<md-input-container flex md-no-float>-->
+                            <!--<input ng-model="vm.calendarEvent.endTime" placeholder="End Time">-->
+                        <!--</md-input-container>-->
+                    </div>
                 </section>
             </md-content>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button ng-click="cancelAddModal()" class="md-raised md-primary">Cofnij</md-button>
-            <md-button type="submit" ng-click="saveEvent(data)"  ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Zapisz</md-button>
+            <md-button ng-click="cancelDialog()" class="md-raised md-primary">Cofnij</md-button>
+            <md-button ng-click="saveEvent()" ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Zapisz</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

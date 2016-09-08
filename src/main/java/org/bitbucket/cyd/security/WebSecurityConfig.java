@@ -80,6 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //                .antMatchers("/**", "/login", "/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**") .permitAll()
                 .antMatchers("/admin/users/").hasAuthority(AuthorityConstant.ADMIN);
 
+
         http.addFilterAfter(new CSRFHeaderFilter(), CsrfFilter.class);
         http.csrf().csrfTokenRepository(csrfTokenRepository());
 

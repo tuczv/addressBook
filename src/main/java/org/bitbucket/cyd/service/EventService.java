@@ -1,6 +1,6 @@
 package org.bitbucket.cyd.service;
 
-import org.bitbucket.cyd.domain.Mail;
+import org.bitbucket.cyd.domain.CalendarEvent;
 import org.bitbucket.cyd.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -11,13 +11,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class MailService {
+public class EventService {
 
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public List<Mail> getMailsByUser(User userFrom) {
-        Query query = new Query(Criteria.where("userFrom.id").is(userFrom));
-        return mongoTemplate.find(query, Mail.class);
+    public List<CalendarEvent> getEventsByUser(User user) {
+        Query query = new Query(Criteria.where("user.id").is(user));
+        return mongoTemplate.find(query, CalendarEvent.class);
     }
 }

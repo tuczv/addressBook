@@ -5,22 +5,9 @@ angular
 
             $scope.showMobileMainHeader = true;
             $scope.showReadEmail = false;
-           /* var imagePath = 'assets/icons/contacts.svg';*/
+            $scope.logged = Authentication.currentUser;
 
             $scope.selected = [];
-            $scope.users = [];
-            $scope.user = {};
-
-            function getUsers() {
-                $http.get('/api/users/')
-                    .success(function (data) {
-                        $scope.users = data;
-                    });
-            }
-
-            getUsers();
-
-
             /**/
             $scope.selected = null;
             $scope.selectItem = function(item) {
@@ -34,7 +21,6 @@ angular
                     controller:  'inboxController',
                     templateUrl: 'modules/inbox/dialog-news.html',
                     targetEvent: $event,
-                    parent: angular.element(document.body),
                     focusOnOpen: false
 
                 })
@@ -50,21 +36,23 @@ angular
                 userTo: $scope.userTo,
                 subject: $scope.subject,
                 body: $scope.body,
-                userFrom:$scope.loggedUser
+                userFrom: $scope.logged
             };
 
             /* Emails*/
-            function getMessages() {
+            function getEmails() {
                 $http.get('/api/emails')
-                    .success(function (response) {
-                        $scope.emails = response;
+                    .success(function (data) {
+                        $scope.emails = data;
+                        console.log(data);
                     })
                     .error(function () {
-                        alert('problem fetching email history');
-                    })
+                        alert("error getting data");
+                    });
             }
 
-            getMessages();
+            getEmails();
+
 
             $scope.createNews = function () {
                 $http({

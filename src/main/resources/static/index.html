@@ -9,7 +9,11 @@
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
+    <link rel="stylesheet" href="bower_components/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/angular-ui-calendar/fullcalendar/dist/fullcalendar.css">
+
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700italic,700,900,900italic'
+          rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -18,15 +22,16 @@
     <div ui-view layout="row" layout-fill></div>
 </md-content>
 
-
+<script src="bower_components/angular-ui-calendar/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/angular-material/angular-material.min.js"></script>
 <script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-aria/angular-aria.min.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
-<script src="bower_components/stomp/sockjs.min.js"></script>
+<script src="bower_components/stomp/sockjs-1.1.1.min.js"></script>
 <script src="bower_components/stomp/stomp.min.js"></script>
 <script src="bower_components/html2canvas/build/html2canvas.min.js"></script>
 <script src="bower_components/pdfmake/build/pdfmake.min.js"></script>
@@ -35,11 +40,11 @@
 <script src="bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
 <!--<script src="bower_components/material-calendar/angular-material-calendar.min.js"></script>-->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/moment/min/moment.min.js"></script>
-<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-<script src="bower_components/fullcalendar/dist/gcal.js"></script>
-<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="bower_components/angular-ui-calendar/moment/min/moment.min.js"></script>
+<script src="bower_components/angular-ui-calendar/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="bower_components/angular-ui-calendar/fullcalendar/dist/gcal.js"></script>
+<script src="bower_components/angular-ui-calendar/calendar.js"></script>
+<script src="bower_components/angular-ui-calendar/fullcalendar/dist/lang-all.js"></script>
 
 <script src="modules/core/app/init.js"></script>
 <script src="modules/core/service/auth.interceptor.js"></script>

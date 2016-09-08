@@ -29,9 +29,8 @@ public class MailResource {
 
     @RequestMapping(value = "/emails", method = RequestMethod.GET)
     public List<Mail> getEmails() {
-
-        String username = SecurityUtils.getCurrentLoginUser();
-        List<Mail> mailList = mailService.getMailsByUser(userRepository.findByUsername(username));
+        User user = userRepository.findByUsername(SecurityUtils.getCurrentLoginUser());
+        List<Mail> mailList = mailService.getMailsByUser(user);
         return mailList;
     }
 
