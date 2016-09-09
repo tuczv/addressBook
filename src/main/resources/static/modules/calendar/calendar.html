@@ -1,26 +1,13 @@
-
-<md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;" flex>
-    <div class="md-toolbar-tools">
-        <span>Kalendarz</span>
-    </div>
-</md-toolbar>
-
-<div class="header-bottom" layout="row" layout-align="center center">
-    <md-button class="md-icon-button arrow" ng-click="calendar.prev()" aria-label="Previous">
-        <ng-md-icon icon="chevron_left" style="fill: black"></ng-md-icon>
-    </md-button>
-
-    <div class="title">
-        {{calendarView.title}}
-    </div>
-
-    <md-button class="md-icon-button arrow" ng-click="calendar.next()" aria-label="Next">
-        <ng-md-icon icon="chevron_right" style="fill: black"></ng-md-icon>
-    </md-button>
-</div>
-
-<!-- CONTENT -->
-<div class="content">
-    <div id="calendarView" ui-calendar="uiConfig.calendar" ng-model="events" calendar="main"></div>
-</div>
-<!-- / CONTENT -->
+<calendar-md flex layout layout-fill
+             calendar-direction="direction"
+             on-prev-month="prevMonth"
+             on-next-month="nextMonth"
+             on-day-click="dayClick"
+             title-format="'MMMM y'"
+             ng-model='selectedDate'
+             day-format="'d'"
+             day-label-format="'EEE'"
+             day-label-tooltip-format="'EEEE'"
+             day-tooltip-format="'fullDate'"
+             week-starts-on="firstDayOfWeek"
+             day-content="setDayContent"></calendar-md>

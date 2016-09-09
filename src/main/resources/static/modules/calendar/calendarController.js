@@ -1,57 +1,47 @@
 angular
     .module('addressbook')
-    .controller('calendarController', ['$scope', '$http', '$mdDialog', '$q',
-        function ($scope, $http, $mdDialog, $q) {
+    .controller('calendarController', ['$scope', '$filter', '$http', '$q', '$mdDialog',
+        function ($scope, $filter, $http, $q, $mdDialog) {
 
             var date = new Date();
             var d = date.getDate();
             var m = date.getMonth();
             var y = date.getFullYear();
 
-            $scope.events = [];
 
-            function getEvents() {
-                $http.get('/api/events')
+            $http.get('/api/events')
                     .success(function (data) {
                         $scope.events = data;
                         console.log(data);
 
                     });
-            }
 
-            getEvents();
-
-            $scope.uiConfig = {
-                calendar: {
-                    editable: true,
-                    header: '',
-                    handleWindowResize: false,
-                    aspectRatio       : 1,
-                    lang: "pl",
-                    viewRender: function (view) {
-                        $scope.calendarView = view;
-                        $scope.calendar = $scope.calendarView.calendar;
-                        $scope.currentMonthShort = $scope.calendar.getDate().format('MMM');
-                    },
-                    columnFormat      : {
-                        month: 'ddd',
-                        week : 'ddd D',
-                        day  : 'ddd M'
-                    },
-                    eventClick: clickEvent,
-                    selectable: true,
-                    selectHelper: true,
-                    select: select
-                }
+            $scope.selectedDate = null;
+            $scope.firstDayOfWeek = 0;
+            $scope.setDirection = function(direction) {
+                $scope.direction = direction;
+            };
+            $scope.dayClick = function(date) {
+                showNewEventDialog();
             };
 
-            function clickEvent(event, e) {
-                showFormEventDialog(event, e);
-            }
+            $scope.prevMonth = function(data) {
+                $scope.msg = "You clicked (prev) month " + data.month + ", " + data.year;
+            };
 
-            function select(start, end, e) {
-                showNewEventDialog('add', false, start, end, e);
-            }
+            $scope.nextMonth = function(data) {
+                $scope.msg = "You clicked (next) month " + data.month + ", " + data.year;
+            };
+
+
+            var date = new Date();
+
+            $scope.setDayContent = function(date) {
+                // You would inject any HTML you wanted for
+                // that particular date here.
+                return "<p></p>";
+            };
+
 
             function showFormEventDialog(calendarEvent, e) {
                 $mdDialog.show({
@@ -90,25 +80,6 @@ angular
                 });
             }
 
-            $scope.next = next;
-            $scope.prev = prev;
-            $scope.addEvent = addEvent;
-
-            function next() {
-                calendarView.calendar.next();
-            }
-
-            function prev() {
-                calendarView.calendar.prev();
-            }
-
-            function addEvent(e)
-            {
-                var start = new Date(),
-                    end = new Date();
-
-                showNewEventDialog('add', false, start, end, e);
-            }
         }
     ])
 
@@ -127,7 +98,7 @@ angular
             };
 
             $scope.saveEvent = saveEvent;
-            
+
             function saveEvent() {
                 $http({
                     method: 'POST',

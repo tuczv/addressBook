@@ -13,6 +13,7 @@ public class CalendarEvent {
     private String title;
     private Date start;
     private Date end;
+
     @DBRef
     private User user;
 
@@ -47,6 +48,7 @@ public class CalendarEvent {
     public void setEnd(Date end) {
         this.end = end;
     }
+
 
     public User getUser() {
         return user;
