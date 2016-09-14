@@ -1,24 +1,24 @@
 //noinspection JSAnnotator
 angular
     .module('addressbook')
-    .controller('contactController', [ '$scope', '$http', 'Authentication', '$mdMedia', '$mdDialog', '$stateParams', '$state',
-        '$timeout', '$log', '$mdToast', '$mdSidenav',
-        function ( $scope, $http, Authentication, $mdMedia, $mdDialog, $stateParams, $state,
-                  $timeout, $log, $mdToast, $mdSidenav) {
+    .controller('contactController', ['$scope', '$http', 'Authentication', '$mdDialog',  '$stateParams', '$state',
+        '$timeout', '$log', '$mdToast',
+        function ($scope, $http, Authentication, $mdDialog,  $stateParams, $state, $timeout, $log, $mdToast)  {
 
             $scope.contacts = [];
             $scope.groups = [];
             $scope.user = Authentication.currentUser;
 
-            
+
             //fetch groups
-           function getGroups() {
-               $http.get('/api/groups')
-                   .success(function (data) {
-                       $scope.groups = data;    
-                   });
-           }
-           getGroups();
+            function getGroups() {
+                $http.get('/api/groups')
+                    .success(function (data) {
+                        $scope.groups = data;
+                    });
+            }
+
+            getGroups();
 
             function getContact(contactId) {
                 $http.get('/api/contacts/' + contactId)
@@ -54,11 +54,11 @@ angular
             $scope.clickEdit = function (contact, $event) {
 
                 $mdDialog.show({
-                    controller:  dialogController,
+                    controller: dialogController,
                     templateUrl: 'modules/contact/views/edit-contact.html',
                     targetEvent: $event,
-                    locals : {
-                        contact : contact
+                    locals: {
+                        contact: contact
                     }
                 })
                     .then(function (result) {
@@ -66,7 +66,9 @@ angular
                     });
             };
 
-            function dialogController ($scope, $mdDialog, contact, $mdToast) {
+
+
+            function dialogController($scope, $mdDialog, contact, $mdToast) {
 
                 $scope.contact = contact;
                 $scope.groups = [];
@@ -80,16 +82,17 @@ angular
                             alert('error fetching groups');
                         });
                 }
+
                 getGroups();
 
                 $scope.editContact = function (contact) {
 
                     $http({
-                        method : "PUT",
-                        url : "api/contacts/" + $scope.contact.id,
-                        data : angular.toJson($scope.contact),
-                        headers : {
-                            'Content-Type' : 'application/json'
+                        method: "PUT",
+                        url: "api/contacts/" + $scope.contact.id,
+                        data: angular.toJson($scope.contact),
+                        headers: {
+                            'Content-Type': 'application/json'
                         }
                     })
                         .success(function () {
@@ -97,11 +100,11 @@ angular
                             $mdDialog.hide();
                             $state.reload();
                             $mdToast.show(
-                                    $mdToast.simple()
-                                        .content("Kontakt został edytowany")
-                                        .position('top right')
-                                        .hideDelay(1000)
-                                );
+                                $mdToast.simple()
+                                    .content("Kontakt został edytowany")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
                         })
                         .error(function () {
                             console.log('Error editing contact');
@@ -120,12 +123,12 @@ angular
                             $mdDialog.hide();
                             $state.reload();
                             $mdToast.show(
-                                    $mdToast.simple()
-                                        .content("Kontakt został usunięty")
-                                        .position('top right')
-                                        .hideDelay(1000)
-                                );
-                            
+                                $mdToast.simple()
+                                    .content("Kontakt został usunięty")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+
                         })
                         .error(function () {
                             alert('error deleting contact');
@@ -134,6 +137,10 @@ angular
 
                 $scope.cancelEditModal = function () {
                     $mdDialog.cancel();
+                };
+
+                $scope.openMenu = function ($mdOpenMenu, $event) {
+                    $mdOpenMenu($event);
                 };
             }
 
@@ -149,13 +156,13 @@ angular
                     .success(function () {
                         console.log('success');
                         $state.reload();
-                        $mdDialog.hide();                       
+                        $mdDialog.hide();
                         $mdToast.show(
-                                $mdToast.simple()
-                                    .content("Kontakt dodany do listy")
-                                    .position('top right')
-                                    .hideDelay(1000)
-                            );
+                            $mdToast.simple()
+                                .content("Kontakt dodany do listy")
+                                .position('top right')
+                                .hideDelay(1000)
+                        );
 
 
                     })
@@ -181,11 +188,14 @@ angular
             $scope.cancelAddModal = function () {
                 $mdDialog.cancel();
             };
-            
+
 //pagination
-            $scope.onOrderChange = function() {};
-            
-            $scope.onPageChange = function() {};
+            $scope.onOrderChange = function () {
+            };
+
+            $scope.onPageChange = function () {
+            };
+
         }
     ]);
 

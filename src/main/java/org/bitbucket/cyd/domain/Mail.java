@@ -4,14 +4,24 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Document(collection = "mails")
 public class Mail {
 
     @Id private String id;
+
+    @NotNull
     private String userTo;
+
+    @NotNull
+    @Size(min = 3, max = 25)
     private String subject;
+
+    @Size(max = 200)
     private String body;
+
     private String date;
     @DBRef
     private User userFrom;

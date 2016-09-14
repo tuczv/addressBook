@@ -1,84 +1,97 @@
-
 <div layout="column" layout>
-		<md-whiteframe class="md-whiteframe-z2">
-			<md-toolbar class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;">
-				<div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
-					<md-button class="md-icon-button" aria-label="Icon"> 
-						<md-tooltip>Icon</md-tooltip>
-						<ng-md-icon icon="my_library_books" style="fill: black"></ng-md-icon>
-					</md-button>
-					<span>Kontakty</span> 
-					<span flex></span>
-				
-					<md-button class="md-icon-button" aria-label="Search" data-ng-click="clickAdd($event)"> 
-						<md-tooltip>Add Contact</md-tooltip> 
-						<ng-md-icon icon="add" style="fill: gray"></ng-md-icon> 
-					</md-button>
-			
-					<md-button class="md-icon-button" aria-label="Search" data-ng-click="showMobileMainHeader = false"> 
-						<md-tooltip>Find</md-tooltip>
-						<ng-md-icon icon="search" style="fill: gray"></ng-md-icon> 
-					</md-button>
-				</div>
-			
-				<div class="md-toolbar-tools" data-ng-hide="showMobileMainHeader">
-					<md-button class="md-icon-button" aria-label="Back" data-ng-click="showMobileMainHeader = true"> 
-						<md-tooltip>Back</md-tooltip>
-						<ng-md-icon icon="keyboard_backspace" style="fill: gray"></ng-md-icon>
-					</md-button>
-					<md-input-container md-no-float class="md-accent" style="padding-bottom:0px;"> 
-						<input
-							ng-model="searchInput" 
-							placeholder="Search here"
-							style="color: dimgray;"> 
-					</md-input-container>
-			
-					<span flex></span>
-					<md-button class="md-icon-button" aria-label="Search"> 
-						<md-tooltip>Search</md-tooltip>
-						<ng-md-icon icon="search" style="fill: gray"></ng-md-icon> 
-					</md-button>
-				</div>		
-			</md-toolbar> 
-		<md-divider></md-divider> 
-		
-		<md-content> 
-			<md-table-container>
-			<table md-table id="table">
-				<thead md-head md-order="$root.tableFilter.order"
-					md-on-reorder="contacts">
-					<tr md-row>
-						<th md-column md-order-by="name">Imię</th>
-						<th md-column md-order-by="lastName">Nazwisko</th>
-						<th md-column md-order-by="email">Poczta</th>
-						<th md-column md-numeric="phone">Telefon</th>
-						<th md-column md-order-by="group">Grupa</th>
-					</tr>
-				</thead>
-				
-				<tbody md-body>
-					<tr md-row
-						ng-repeat="contact in contacts 
+    <md-whiteframe class="md-whiteframe-z2">
+
+        <md-toolbar ng-show="!showSearch" class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button" aria-label="Contacts">
+                    <ng-md-icon icon="my_library_books" style="fill: black"></ng-md-icon>
+                </md-button>
+                <h3>
+                    Kontakty
+                </h3>
+                <span flex></span>
+
+                <md-menu>
+                    <md-button class="md-icon-button" aria-label="Select Group" ng-click="$mdOpenMenu()">
+                        <ng-md-icon icon="sort"></ng-md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item ng-repeat="group in groups">
+                            <md-button class="md-button" ng-click="">{{group.name}}</md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                    </md-menu-content>
+                </md-menu>
+
+                <md-button aria-label="Search" ng-click="showSearch = !showSearch"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <md-tooltip>Szukaj</md-tooltip>
+                    <ng-md-icon icon="search"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="showSearch" style="background:white">
+            <div class="md-toolbar-tools">
+                <md-button ng-click="showSearch = !showSearch" aria-label="Back"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <ng-md-icon icon="arrow_back"></ng-md-icon>
+                </md-button>
+                <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
+                    <label>&nbsp;</label>
+                    <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj kontakt">
+                </md-input-container>
+                <md-button aria-label="Search" ng-click="showSearch = !showSearch"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <ng-md-icon icon="search"></ng-md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+
+
+        <md-content>
+            <md-table-container>
+                <table md-table id="table">
+                    <thead md-head md-order="$root.tableFilter.order"
+                           md-on-reorder="contacts">
+                    <tr md-row>
+                        <th md-column md-order-by="name">Imię</th>
+                        <th md-column md-order-by="lastName">Nazwisko</th>
+                        <th md-column md-order-by="email">Poczta</th>
+                        <th md-column md-numeric="phone">Telefon</th>
+                        <th md-column md-order-by="group">Grupa</th>
+                    </tr>
+                    </thead>
+
+                    <tbody md-body>
+                    <tr md-row
+                        ng-repeat="contact in contacts
                             		| orderBy: $root.tableFilter.order
                             		| filter:searchInput
                             		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
-						ng-click="clickEdit(contact, $event)">
-						<td md-cell>{{contact.name}}</td>
-						<td md-cell>{{contact.lastName}}</td>
-						<td md-cell>{{contact.email}}</td>
-						<td md-cell>{{contact.phone}}</td>
-						<td md-cell>{{contact.group}}</td>
-					</tr>
-				</tbody>
-			</table>
+                        ng-click="clickEdit(contact, $event)">
+                        <td md-cell>{{contact.name}}</td>
+                        <td md-cell>{{contact.lastName}}</td>
+                        <td md-cell>{{contact.email}}</td>
+                        <td md-cell>{{contact.phone}}</td>
+                        <td md-cell>{{contact.group}}</td>
+                    </tr>
+                    </tbody>
+                </table>
 
-		</md-table-container> 
-		<md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
-			md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
-			md-total="{{contacts.length}}" md-on-paginate="onPageChange"
-			md-boundary-links> 
-		</md-table-pagination> 
-	</md-content> 
-	</md-whiteframe>
+            </md-table-container>
+            <md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
+                                 md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
+                                 md-total="{{contacts.length}}" md-on-paginate="onPageChange"
+                                 md-boundary-links>
+            </md-table-pagination>
+        </md-content>
 
+        <md-button class="md-fab md-fab-bottom-right md-warn" aria-label="Nowy message"
+                   ng-click="clickAdd($event)">
+            <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+        </md-button>
+
+    </md-whiteframe>
 </div>

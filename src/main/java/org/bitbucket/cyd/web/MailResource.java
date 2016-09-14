@@ -39,4 +39,9 @@ public class MailResource {
         mail.setDate(DateFormatUtils.format(new Date(System.currentTimeMillis()), "EEE M/d/yyyy h:mm a"));
         mailRepository.save(mail);
     }
+
+    @RequestMapping(value = "/emails/{id}", method = RequestMethod.DELETE)
+    public void deleteEmail(@PathVariable("id") String id) {
+        mailRepository.delete(id);
+    }
 }

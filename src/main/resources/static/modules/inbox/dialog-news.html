@@ -1,42 +1,52 @@
-<md-dialog aria-label="Form" ng-cloak flex="40">
-    <md-content class="md-padding">
-        <form name="userForm">
-            <div layout-sm="column">
-                <!--<md-chips ng-model="email.userTo" md-autocomplete-snap md-require-match>'+
-                    <md-autocomplete
-                            md-autofocus="true"
-                            md-no-cache="true"
-                            md-min-length="0"
-                            md-selected-item="selected"
-                            md-search-text="searchText"
-                            md-items="userTo in users"
-                            placeholder="To...">
-                    <md-item-template>{{userTo.username}}</md-item-template>
-                    </md-autocomplete>
-                    <md-chip-template><span><em>{{$chip.username}}</em></span></md-chip-template>
-                </md-chips>-->
-                <md-input-container flex>
+<md-dialog aria-label="Nowa wiadomość" ng-cloak flex="40">
+    <md-dialog-content class="md-padding">
+        <form name="createForm" ng-submit="createNews()">
+            <div layout layout-sm="column">
+                <md-input-container>
+                    <label>Od</label>
+                    <input ng-model="email.userFrom.username" disabled>
+                </md-input-container>
+
+                <md-input-container flex md-is-error="createForm.userTo.$invalid && (createForm.$submitted || createForm.userTo.$dirty)">
                     <label>Do</label>
-                    <input ng-model="email.userTo">
+                    <md-select ng-model="email.userTo"
+                               name="userTo"
+                               id="userTo">
+                        <md-option ng-repeat="user in users">{{user.username}}</md-option>
+                    </md-select>
+                    <div ng-messages="createForm.userTo.$error" ng-if="createForm.userTo.$touched">
+                        <div ng-message="required">Podaj co najmniej jednego odbiorcę</div>
+                    </div>
                 </md-input-container>
             </div>
+
             <div layout layout-sm="column">
-                <md-input-container flex>
+                <md-input-container flex md-is-error="createForm.subject.$invalid && (createForm.$submitted || createForm.subject.$dirty)">
                     <label>Temat</label>
-                    <input ng-model="email.subject">
+                    <input ng-model="email.subject"
+                           md-minlength="3"
+                           md-maxlength="25"
+                           name="subject"
+                           id="subject"
+                           required>
+                    <div ng-messages="createForm.subject.$error" ng-if="createForm.subject.$touched">
+                        <div ng-message="required">Temat wiadomości jest obowiązkowy</div>
+                    </div>
                 </md-input-container>
             </div>
 
             <md-input-container class="md-block">
                 <label>Wiadomość</label>
-                <textarea ng-model="email.body" md-maxlength="150" rows="3" md-select-on-focus></textarea>
+                <textarea ng-model="email.body" md-maxlength="200" rows="3" md-select-on-focus></textarea>
             </md-input-container>
 
-        </form>
-    </md-content>
-    <div class="md-dialog-actions" layout="row">
+    </md-dialog-content>
+
+    <md-dialog-action layout="row">
         <span flex></span>
-        <md-button ng-click="cancelAddModal()"> Wstecz </md-button>
-        <md-button ng-click="createNews()" class="md-primary"> Zapisz </md-button>
-    </div>
+        <md-button ng-click="cancelAddModal()"> Wstecz</md-button>
+        <md-button type="submit" ng-disabled="createForm.$invalid" class="md-primary"> Wyślij</md-button>
+    </md-dialog-action >
+    </form>
 </md-dialog>
+

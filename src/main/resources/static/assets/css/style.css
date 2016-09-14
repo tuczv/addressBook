@@ -114,3 +114,7 @@ md-icon svg {
     height: -webkit-calc(100% - 64px);
     height: calc(100% - 64px);
 }
+
+.calendarLeft{
+    margin-left: 470px;
+}

@@ -1,6 +1,6 @@
 angular
     .module('addressbook', ['ui.router', 'ngMaterial', 'ngCookies',
-        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'materialCalendar'])
+        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ui.bootstrap', 'ui.calendar'])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider) {
 
@@ -28,14 +28,14 @@ angular
                 });*/
 
             $stateProvider
-                .state('register', {
-                    'url': '/register',
-                    'templateUrl': '/modules/user/views/register.html',
+             /*   .state('register', {
+                    'url': '/login',
+                    'templateUrl': '/modules/user/views/login.html',
                     'controller': 'registerController',
                     'data': {
                         'requiresLogin': false
                     }
-                })
+                })*/
                 .state('login', {
                     'url': '/login',
                     'templateUrl': '/modules/user/views/login.html',

@@ -1,4 +1,4 @@
-//noinspection JSAnnotator
+	//noinspection JSAnnotator
 angular.module('addressbook').controller('loginController',['$scope','$state','userService', '$mdToast',
     function($scope, $state, userService, $mdToast){
 
@@ -33,6 +33,40 @@ angular.module('addressbook').controller('loginController',['$scope','$state','u
 					$scope.error.message = "Podany login lub hasło jest błędne"
 				}
 			});
+		};
+
+		$scope.registerUser = function(){
+
+			userService.register($scope.user)
+				.then(function(response){
+					$mdToast.show(
+						$mdToast.simple()
+							.content("Nowy użytkownik został utworzony")
+							.position('top right')
+							.hideDelay(1000)
+					);
+
+					$scope.user = {
+						email: "",
+						username: "",
+						password: ""
+					};
+
+				},function(err){
+					console.log(err);
+
+				});
+
+		};
+
+		function reset() {
+			$scope.user = {
+				email: "",
+				username: "",
+				password: ""
+			}
 		}
+
+		$scope.reset = reset;
 	}
 ]);

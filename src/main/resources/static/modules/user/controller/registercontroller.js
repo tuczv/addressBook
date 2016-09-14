@@ -3,7 +3,7 @@ angular.module('addressbook')
 	.controller('registerController',['$scope','$state','userService', 
     function($scope, $state, userService){
 		
-		$scope.user = {};
+/*		$scope.user = {};
 		
 		$scope.registerUser = function(){
 
@@ -25,6 +25,6 @@ angular.module('addressbook')
 			      }
 		};
 		
-		$scope.reset();
+		$scope.reset();*/
 	}
 ]);
