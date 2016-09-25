@@ -1,0 +1,32 @@
+{
+  "name": "addressBook",
+  "homepage": "https://github.com/cyd88/addressBook",
+  "description": "Spring Angular 1.5 Material App",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "latest",
+    "angular-material":"",
+    "angular-material-data-table":"",
+    "angular-material-icons":"",
+    "angular-bootstrap":"",
+    "bootstrap":"",
+    "angular-ui-router":"",
+    "angular-ui-calendar":"",
+    "angular-animate":"",
+    "angular-aria":"",
+    "angular-cookies":"",
+    "angular-messages":"",
+    "angular-sanitize":"",
+    "angular-toastr":"",
+    "stomp-websocket":"",
+    "sockjs":""
+  }
+}
