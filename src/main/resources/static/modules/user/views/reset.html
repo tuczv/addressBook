@@ -1,0 +1,37 @@
+
+<!--  -->
+<div layout="column" layout-align="center center" layout-fill>
+    <div class="loginContent md-whiteframe-z1" layout="column">
+
+        <md-toolbar class="md-toolbar-tools">
+            <span layout="row" layout-align="center center">Nie pamiętam hasła</span>
+            <span flex></span>
+            <md-button ng-click="closeReset()">
+                <ng-md-icon icon="cancel" style="fill: #ffffff"></ng-md-icon>
+            </md-button>
+        </md-toolbar>
+
+        <md-content layout="column">
+            <form layout="column" name="resetForm" layout-align="">
+                <br>
+                <md-input-container style="width: 400px; margin-left: 25px;"
+                                    md-is-error="loginForm.username.$invalid && (loginForm.$submitted || loginForm.username.$dirty)">
+                    <label>Email</label>
+                    <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
+                    <input name="username"
+                           id="username"
+                           ng-model="user.username"
+                           ng-minlength="3"
+                           ng-maxlength="10"
+                           required>
+                    <div ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched">
+                        <div ng-message="required">Wpisz imię</div>
+                        <div ng-message="minlength">Zbyt ktrótkie, 3 znaki minimalnie</div>
+                    </div>
+                </md-input-container>
+            </form>
+            <md-button class="md-primary">Wyślij</md-button>
+        </md-content>
+
+    </div>
+</div>

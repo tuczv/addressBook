@@ -68,5 +68,13 @@ angular.module('addressbook').controller('loginController',['$scope','$state','u
 		}
 
 		$scope.reset = reset;
+
+		$scope.showReset = function () {
+			$state.go('reset');
+		};
+
+		$scope.closeReset = function () {
+			$state.go('login');
+		};
 	}
 ]);

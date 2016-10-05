@@ -44,6 +44,14 @@ angular
                         'requiresLogin': false
                     }
                 })
+                .state('reset', {
+                    'url': '/reset',
+                    'templateUrl': '/modules/user/views/reset.html',
+                    'controller': 'loginController',
+                    'data': {
+                        'requiresLogin': false
+                    }
+                })
                 .state('home', {
                     'url': '',
                     'templateUrl': '/modules/home/addressbook.html',
