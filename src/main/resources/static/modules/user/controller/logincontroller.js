@@ -54,7 +54,12 @@ angular.module('addressbook').controller('loginController',['$scope','$state','u
 
 				},function(err){
 					console.log(err);
-
+					$mdToast.show(
+						$mdToast.simple()
+							.content("Użytkownik o takiej nazwie lub email istnieje w bazie!")
+							.position('top right')
+							.hideDelay(1000)
+					);
 				});
 
 		};
