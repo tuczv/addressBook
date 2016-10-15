@@ -13,15 +13,30 @@
 
                 <md-menu>
                     <md-button class="md-icon-button" aria-label="Select Group" ng-click="$mdOpenMenu()">
-                        <ng-md-icon icon="sort"></ng-md-icon>
+                        <md-tooltip>Sortuj</md-tooltip>
+                        <ng-md-icon icon="group"></ng-md-icon>
                     </md-button>
                     <md-menu-content width="4">
+                        <md-button class="md-button" ng-click="filters.group = ''">RESET</md-button>
+                        <md-divider></md-divider>
                         <md-menu-item ng-repeat="group in groups">
-                            <md-button class="md-button" ng-click="">{{group.name}}</md-button>
+                            <md-button class="md-button" ng-click="filters.group = group.name">{{group.name}}</md-button>
                         </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
                     </md-menu-content>
                 </md-menu>
+
+                <md-menu>
+                    <md-button class="md-icon-button" aria-label="Select Group" ng-click="$mdOpenMenu()">
+                        <md-tooltip>Export kontaktów do:</md-tooltip>
+                        <ng-md-icon icon="import_export"></ng-md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-menu-item>
+                            <md-button class="md-button" ng-csv="contacts" filename="test.csv">CSV</md-button>
+                        </md-menu-item>
+                    </md-menu-content>
+                </md-menu>
+
 
                 <md-button aria-label="Search" ng-click="showSearch = !showSearch"
                            class="md-icon-button md-primary md-button md-ink-ripple">
@@ -35,7 +50,7 @@
             <div class="md-toolbar-tools">
                 <md-button ng-click="showSearch = !showSearch" aria-label="Back"
                            class="md-icon-button md-primary md-button md-ink-ripple">
-                    <ng-md-icon icon="arrow_back"></ng-md-icon>
+                    <ng-md-icon icon="arrow_back" ng-click="resetFilter()"></ng-md-icon>
                 </md-button>
                 <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
                     <label>&nbsp;</label>
@@ -67,8 +82,9 @@
                     <tbody md-body>
                     <tr md-row
                         ng-repeat="contact in contacts
+                                    | filter: filters
                             		| orderBy: $root.tableFilter.order
-                            		| filter:searchInput
+                            		| filter: searchInput
                             		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
                         ng-click="clickEdit(contact, $event)">
                         <td md-cell>{{contact.name}}</td>
@@ -79,7 +95,6 @@
                     </tr>
                     </tbody>
                 </table>
-
             </md-table-container>
             <md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
                                  md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"

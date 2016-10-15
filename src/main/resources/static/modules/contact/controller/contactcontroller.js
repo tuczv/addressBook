@@ -66,6 +66,10 @@ angular
                     });
             };
 
+            $scope.filters = {};
+            $scope.resetFilter = function () {
+                $scope.searchInput = null;
+            };
 
 
             function dialogController($scope, $mdDialog, contact, $mdToast) {
@@ -73,17 +77,15 @@ angular
                 $scope.contact = contact;
                 $scope.groups = [];
 
-                function getGroups() {
-                    $http.get('/api/groups')
-                        .success(function (data) {
-                            $scope.groups = data;
-                        })
-                        .error(function () {
-                            alert('error fetching groups');
-                        });
-                }
 
-                getGroups();
+                $http.get('/api/groups')
+                    .success(function (data) {
+                        $scope.groups = data;
+                    })
+                    .error(function () {
+                        alert('error fetching groups');
+                    });
+
 
                 $scope.editContact = function (contact) {
 

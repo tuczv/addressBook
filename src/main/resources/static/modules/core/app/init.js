@@ -1,6 +1,6 @@
 angular
     .module('addressbook', ['ui.router', 'ngMaterial', 'ngCookies',
-        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ui.bootstrap', 'ui.calendar'])
+        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ngCsv', 'ui.bootstrap', 'ui.calendar'])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider) {
 

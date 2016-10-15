@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 @Document(collection = "groups")
 public class Group {
+
     @Id private String id;
     private String name;
     private ArrayList<Contact> contacts =  new ArrayList<>();
