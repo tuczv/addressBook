@@ -17,22 +17,24 @@
                         <ng-md-icon icon="group"></ng-md-icon>
                     </md-button>
                     <md-menu-content width="4">
-                        <md-button class="md-button" ng-click="filters.group = ''">RESET</md-button>
-                        <md-divider></md-divider>
                         <md-menu-item ng-repeat="group in groups">
                             <md-button class="md-button" ng-click="filters.group = group.name">{{group.name}}</md-button>
                         </md-menu-item>
+                        <md-button class="md-button" ng-click="filters.group = undefined">RESET</md-button>
                     </md-menu-content>
                 </md-menu>
 
                 <md-menu>
-                    <md-button class="md-icon-button" aria-label="Select Group" ng-click="$mdOpenMenu()">
+                    <md-button class="md-icon-button" aria-label="Select" ng-click="$mdOpenMenu()">
                         <md-tooltip>Export kontaktów do:</md-tooltip>
                         <ng-md-icon icon="import_export"></ng-md-icon>
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item>
-                            <md-button class="md-button" ng-csv="contacts" filename="test.csv">CSV</md-button>
+                            <md-button ng-click="exportData()">Eksport</md-button>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button>Upload CSV</md-button>
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
@@ -67,6 +69,7 @@
 
         <md-content>
             <md-table-container>
+
                 <table md-table id="table">
                     <thead md-head md-order="$root.tableFilter.order"
                            md-on-reorder="contacts">
@@ -95,6 +98,7 @@
                     </tr>
                     </tbody>
                 </table>
+
             </md-table-container>
             <md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
                                  md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"

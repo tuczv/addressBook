@@ -71,6 +71,9 @@ angular
                 $scope.searchInput = null;
             };
 
+            $scope.exportData = function () {
+                alasql("SELECT * INTO CSV('kontakty.csv', {headers:true}) FROM ?",[$scope.contacts]);
+            };
 
             function dialogController($scope, $mdDialog, contact, $mdToast) {
 
@@ -200,4 +203,3 @@ angular
 
         }
     ]);
-

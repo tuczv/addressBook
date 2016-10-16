@@ -1,9 +1,9 @@
 angular
     .module('addressbook')
     .controller('mainController', [ '$scope', '$http', 'Authentication', 'groupService', '$mdMedia', '$mdDialog', '$stateParams', '$state',
-        '$timeout', '$log', '$mdToast', '$mdSidenav', 'userService',
+        '$timeout', '$log', '$mdToast', '$mdSidenav', 'userService', '$mdBottomSheet',
         function($scope, $http, Authentication, groupService, $mdMedia, $mdDialog, $stateParams, $state,
-                   $timeout, $log, $mdToast, $mdSidenav, userService) {
+                   $timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet) {
 
             $scope.showMobileMainHeader = true;
             $scope.avatar = 'assets/icons/avatar.png';
@@ -160,6 +160,16 @@ angular
                         .position('bottom right')
                         .hideDelay(1000)
                 );
-            }
+            };
+
+            $scope.bottomSettings = function () {
+                $scope.alert = '';
+                $mdBottomSheet.show({
+                    templateUrl: '/modules/home/settings.html',
+                    controller: 'mainController'
+                }).then(function(clickedItem) {
+                    $scope.alert = clickedItem['name'] + ' clicked!';
+                });
+            };
         }
     ]);
