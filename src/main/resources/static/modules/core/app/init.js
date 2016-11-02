@@ -1,6 +1,6 @@
 angular
     .module('addressbook', ['ui.router', 'ngMaterial', 'ngCookies',
-        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ngCsvImport', 'ui.bootstrap', 'ui.calendar'])
+        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ui.bootstrap', 'ui.calendar', 'ngLetterAvatar'])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider) {
 
@@ -21,27 +21,28 @@ angular
                     'default': 'A700'
                 });
 
-           /* $mdThemingProvider
-                .theme('default')
-                .primaryPalette('blue', {
-                    'default': '700'
-                });*/
+            /* $mdThemingProvider
+             .theme('default')
+             .primaryPalette('blue', {
+             'default': '700'
+             });*/
 
             $stateProvider
-             /*   .state('register', {
-                    'url': '/login',
-                    'templateUrl': '/modules/user/views/login.html',
-                    'controller': 'registerController',
-                    'data': {
-                        'requiresLogin': false
-                    }
-                })*/
+            /*   .state('register', {
+             'url': '/login',
+             'templateUrl': '/modules/user/views/login.html',
+             'controller': 'registerController',
+             'data': {
+             'requiresLogin': false
+             }
+             })*/
                 .state('login', {
                     'url': '/login',
                     'templateUrl': '/modules/user/views/login.html',
                     'controller': 'loginController',
                     'data': {
                         'requiresLogin': false
+
                     }
                 })
                 .state('reset', {
@@ -50,6 +51,7 @@ angular
                     'controller': 'loginController',
                     'data': {
                         'requiresLogin': false
+
                     }
                 })
                 .state('home', {
@@ -58,6 +60,7 @@ angular
                     'controller': 'mainController',
                     'data': {
                         'requiresLogin': true
+
                     }
                 })
                 .state('home.users', {
@@ -65,7 +68,8 @@ angular
                     'templateUrl': '/modules/user/views/users.html',
                     'controller': 'adminController',
                     'data': {
-                        'requiresLogin': true
+                        'requiresLogin': true,
+                        'access': ['ROLE_ADMIN']
                     }
                 })
                 .state('home.contacts', {
@@ -74,6 +78,7 @@ angular
                     'controller': 'contactController',
                     'data': {
                         'requiresLogin': true
+
                     }
                 })
                 .state('home.inbox', {
@@ -82,20 +87,31 @@ angular
                     'controller': 'inboxController',
                     'data': {
                         'requiresLogin': true
+
                     }
                 })
-                .state('home.profile', {
+            /*    .state('home.profile', {
                     'url': '/profile',
                     'templateUrl': '/modules/profile/profile.html',
                     'controller': 'profileController',
                     'data': {
                         'requiresLogin': true
+
                     }
-                })
+                })*/
                 .state('home.calendar', {
                     'url': '/calendar',
                     'templateUrl': '/modules/calendar/calendar.html',
                     'controller': 'calendarController',
+                    'data': {
+                        'requiresLogin': true
+
+                    }
+                })
+                .state('home.groups', {
+                    'url': '/groups',
+                    'templateUrl': '/modules/group/groups.html',
+                    'controller': 'groupController',
                     'data': {
                         'requiresLogin': true
                     }
@@ -106,6 +122,7 @@ angular
                     'controller': 'chatController',
                     'data': {
                         'requiresLogin': true
+
                     }
                 });
         }
@@ -113,32 +130,36 @@ angular
 
 angular
     .module('addressbook')
-    .run(['$rootScope', '$state', 'Authentication',
-        function ($rootScope, $state, Authentication) {
+    .run(['$rootScope', '$state', 'Authentication', 'Security',
+        function ($rootScope, $state, Authentication, Security) {
+
+            Security.initialize();
+
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
-                Authentication.login().then(function (response) {
 
-                    console.log(toState);
+                Authentication.login()
+                    .then(function () {
 
-                    var requiresLogin = toState.data.requiresLogin;
-                    var isAuthenticated = Authentication.isAuthenticated();
+                        var isAuthenticated = Authentication.isAuthenticated();
+                        var requiresLogin = toState.data.requiresLogin;
 
-                    console.log(requiresLogin);
-                    console.log(isAuthenticated);
+                        if (requiresLogin && !isAuthenticated) {
+                            event.preventDefault();
+                            $state.go('login');
+                        }
 
-                    if (requiresLogin && !isAuthenticated) {
-                        event.preventDefault();
-                        $state.go('login');
-                    }
+                        if (!requiresLogin && isAuthenticated) {
+                            console.log("called");
+                            event.preventDefault();
+                            $state.go('home');
+                        }
 
-                    if (!requiresLogin && isAuthenticated) {
-                        console.log("called");
-                        event.preventDefault();
-                        $state.go('home');
-                    }
-                });
+                    });
+
             });
+
+
             $rootScope.tableFilter = {order: '-name', limit: 10, page: 1};
-    }
-]);
+        }
+    ]);
 

@@ -1,19 +1,16 @@
 angular
     .module('addressbook')
-    .controller('mainController', [ '$scope', '$http', 'Authentication', 'groupService', '$mdMedia', '$mdDialog', '$stateParams', '$state',
+    .controller('mainController', [ '$scope', '$http', 'Authentication', 'Security', 'Group', '$mdMedia', '$mdDialog', '$stateParams', '$state',
         '$timeout', '$log', '$mdToast', '$mdSidenav', 'userService', '$mdBottomSheet',
-        function($scope, $http, Authentication, groupService, $mdMedia, $mdDialog, $stateParams, $state,
+        function($scope, $http, Authentication, Security, Group, $mdMedia, $mdDialog, $stateParams, $state,
                    $timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet) {
 
             $scope.showMobileMainHeader = true;
             $scope.avatar = 'assets/icons/avatar.png';
+            $scope.Security = Security;
 
             $scope.getGroups = function () {
-                groupService.getAll()
-                    .then(function (data) {
-                        $scope.groups = data;
-
-                    });
+                Group.getAll();
             };
 
             $scope.user = Authentication.currentUser;
@@ -77,60 +74,21 @@ angular
             };
 
             function getGroups() {
-                $http.get('/api/groups')
-                    .success(function (data) {
-                        $scope.groups = data;
-                    })
-                    .error(function () {
-                        alert('error fetching groups');
-                    });
+               return Group.getAll();
             }
 
             getGroups();
 
-            $scope.showAddGroup = function ($event) {
-                $mdDialog.show({
-                    controller:  'mainController',
-                    templateUrl: 'modules/contact/views/dialog-group.html',
-                    targetEvent: $event,
-                    parent: angular.element(document.body)
-                })
-                    .then(function (result) {
-
-                    });
+            $scope.goToGroups = function () {
+                $state.go('home.groups');
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Grupy kontaktów")
+                        .position('top right')
+                        .hideDelay(1000)
+                );
             };
 
-            $scope.cancelAddModal = function () {
-                $mdDialog.cancel();
-            };
-
-            $scope.group= {
-
-            };
-
-            $scope.saveGroup = function () {
-
-                $http({
-                    method: 'POST',
-                    url: '/api/groups/' + $scope.group.id,
-                    data: $scope.group
-
-                })
-                    .success(function () {
-                        console.log('success');
-                        $state.reload();
-                        $mdDialog.hide();
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content("Grupa została utworzona")
-                                .position('top right')
-                                .hideDelay(1000)
-                        );
-                    })
-                    .error(function () {
-                        alert("error creating new group");
-                    });
-            };
 
             $scope.goToProfile = function () {
                 $state.go('home.profile');

@@ -16,23 +16,39 @@
                     <thead md-head md-order="$root.tableFilter.order"
                            md-on-reorder="users">
                     <tr md-row>
+                        <th md-column></th>
+                        <th md-column></th>
                         <th md-column md-order-by="name">Nazwa</th>
                         <th md-column md-order-by="lastName">Email</th>
-                        <th md-column>Hasło</th>
+                        <!--<th md-column>Hasło</th>-->
+                        <th md-column>Dostęp</th>
                         <th md-column></th>
                     </tr>
                     </thead>
 
                     <tbody md-body>
                     <tr md-row
-                        ng-repeat="u in users">
-                        <td md-cell>{{u.username}}</td>
-                        <td md-cell>{{u.email}}</td>
-                        <td md-cell>{{u.password}}</td>
+                        ng-repeat="user in users">
+                        <td md-cell><md-checkbox></md-checkbox></td>
+                        <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{user.username}} shape="round"></ng-letter-avatar></td>
+                        <td md-cell>{{user.username}}</td>
+                        <td md-cell>{{user.email}}</td>
+                        <!--<td md-cell>{{user.password}}</td>-->
+                        <td md-cell>{{user.authorities}}</td>
                         <td md-cell>
-                            <md-button>
-                                <ng-md-icon ng-click="deleteUser(u.id)" icon="done" style="fill: gray"></ng-md-icon>
-                            </md-button>
+                            <md-menu>
+                                <md-button class="md-icon-button"  ng-click="$mdOpenMenu()">
+                                    <ng-md-icon icon="more_vert"></ng-md-icon>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button ng-click="clickUpdateUser(user, $event)">Edytuj</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="deleteUser(user.id)">Usuń</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
                         </td>
                     </tr>
                     </tbody>
@@ -45,6 +61,10 @@
                                  md-boundary-links>
             </md-table-pagination>-->
         </md-content>
+        <md-button class="md-fab md-fab-bottom-right md-warn"
+                   ng-click="clickAddUser($event)">
+            <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+        </md-button>
     </md-whiteframe>
 
 </div>

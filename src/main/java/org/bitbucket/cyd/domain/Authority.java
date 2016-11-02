@@ -1,5 +1,6 @@
 package org.bitbucket.cyd.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -8,20 +9,35 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Authority {
+@Document(collection = "authority")
+public class Authority implements GrantedAuthority{
 
     @Id
-    private String role;
+    private String authority;
 
-    public Authority(String role) {
-        this.role = role;
+    @DBRef
+    @JsonIgnore
+    private Set<User> users = new HashSet<>();
+
+    public Authority() {}
+
+    public Authority(String authority) {
+        this.authority = authority;
     }
 
-    public String getRole() {
-        return role;
+    public String getAuthority() {
+        return authority;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setAuthority(String authority) {
+        this.authority = authority;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 }

@@ -1,24 +1,21 @@
 //noinspection JSAnnotator
 angular
     .module('addressbook')
-    .controller('contactController', ['$scope', '$http', 'Authentication', '$mdDialog',  '$stateParams', '$state',
+    .controller('contactController', ['$scope', '$http', 'Authentication', 'Group', '$mdDialog',  '$stateParams', '$state',
         '$timeout', '$log', '$mdToast',
-        function ($scope, $http, Authentication, $mdDialog,  $stateParams, $state, $timeout, $log, $mdToast)  {
+        function ($scope, $http, Authentication, Group, $mdDialog,  $stateParams, $state, $timeout, $log, $mdToast)  {
 
-            $scope.contacts = [];
             $scope.groups = [];
+            $scope.contacts = [];
             $scope.user = Authentication.currentUser;
-
 
             //fetch groups
             function getGroups() {
-                $http.get('/api/groups')
-                    .success(function (data) {
-                        $scope.groups = data;
+                return Group.getAll()
+                    .then(function (response) {
+                       $scope.groups = response.data;
                     });
             }
-
-            getGroups();
 
             function getContact(contactId) {
                 $http.get('/api/contacts/' + contactId)
@@ -75,19 +72,17 @@ angular
                 alasql("SELECT * INTO CSV('kontakty.csv', {headers:true}) FROM ?",[$scope.contacts]);
             };
 
-            function dialogController($scope, $mdDialog, contact, $mdToast) {
+            function dialogController($scope, $mdDialog, contact, $mdToast, Group) {
 
                 $scope.contact = contact;
                 $scope.groups = [];
-
-
-                $http.get('/api/groups')
-                    .success(function (data) {
-                        $scope.groups = data;
-                    })
-                    .error(function () {
-                        alert('error fetching groups');
-                    });
+                //fetch groups
+                function getGroups() {
+                    return Group.getAll()
+                        .then(function (response) {
+                            $scope.groups = response.data;
+                        });
+                }
 
 
                 $scope.editContact = function (contact) {
@@ -147,6 +142,8 @@ angular
                 $scope.openMenu = function ($mdOpenMenu, $event) {
                     $mdOpenMenu($event);
                 };
+
+                return getGroups();
             }
 
 
@@ -201,5 +198,6 @@ angular
             $scope.onPageChange = function () {
             };
 
+            return getGroups();
         }
     ]);

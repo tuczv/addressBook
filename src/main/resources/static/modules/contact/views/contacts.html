@@ -20,7 +20,7 @@
                         <md-menu-item ng-repeat="group in groups">
                             <md-button class="md-button" ng-click="filters.group = group.name">{{group.name}}</md-button>
                         </md-menu-item>
-                        <md-button class="md-button" ng-click="filters.group = undefined">RESET</md-button>
+                        <md-button class="md-button" ng-click="filters.group = undefined">Wyczyść</md-button>
                     </md-menu-content>
                 </md-menu>
 
@@ -74,6 +74,8 @@
                     <thead md-head md-order="$root.tableFilter.order"
                            md-on-reorder="contacts">
                     <tr md-row>
+                        <th md-column></th>
+                        <th md-column></th>
                         <th md-column md-order-by="name">Imię</th>
                         <th md-column md-order-by="lastName">Nazwisko</th>
                         <th md-column md-order-by="email">Poczta</th>
@@ -90,6 +92,9 @@
                             		| filter: searchInput
                             		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
                         ng-click="clickEdit(contact, $event)">
+
+                        <td md-cell> <md-checkbox class="md-secondary"></md-checkbox></td>
+                        <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#1E90FF" height="30" width="30"  data={{contact.name}} shape="round"></ng-letter-avatar></td>
                         <td md-cell>{{contact.name}}</td>
                         <td md-cell>{{contact.lastName}}</td>
                         <td md-cell>{{contact.email}}</td>

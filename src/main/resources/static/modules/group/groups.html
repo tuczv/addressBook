@@ -1,0 +1,72 @@
+
+<div layout="row">
+    <div flex="20">
+    </div>
+    <div flex="70">
+        <md-whiteframe class="md-whiteframe-z2">
+            <md-toolbar class="md-warn md-hue-3">
+                <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+                    <span layout="row" layout-align="center center">Grupy kontaktów</span>
+
+                </h2>
+
+            </md-toolbar>
+
+            <md-divider></md-divider>
+
+            <md-content>
+                <md-table-container>
+                    <table md-table id="table">
+                        <thead md-head md-order="$root.tableFilter.order"
+                               md-on-reorder="groups">
+                        <tr md-row>
+                            <th md-column></th>
+                            <th md-column></th>
+                            <th md-column md-order-by="name">Nazwa</th>
+                            <th md-column></th>
+                        </tr>
+                        </thead>
+
+                        <tbody md-body>
+                        <tr md-row
+                            ng-repeat="group in groups">
+                            <td md-cell><md-checkbox></md-checkbox></td>
+                            <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{user.username}} shape="round"></ng-letter-avatar></td>
+                            <td md-cell>{{group.name}}</td>
+                            <td md-cell>
+                                <md-menu>
+                                    <md-button class="md-icon-button"  ng-click="$mdOpenMenu()">
+                                        <ng-md-icon icon="more_vert"></ng-md-icon>
+                                    </md-button>
+                                    <md-menu-content width="4">
+                                        <md-menu-item>
+                                            <md-button ng-click="clickUpdateUser(user, $event)">Edytuj</md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="deleteUser(user.id)">Usuń</md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                </md-table-container>
+                <!--<md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
+                                     md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
+                                     md-total="{{users.length}}" md-on-paginate="onPageChange"
+                                     md-boundary-links>
+                </md-table-pagination>-->
+            </md-content>
+            <md-button class="md-fab md-fab-bottom-right md-warn"
+                       ng-click="showAddGroup($event)">
+                <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+            </md-button>
+        </md-whiteframe>
+
+    </div>
+    <div flex="20">
+    </div>
+</div>
+

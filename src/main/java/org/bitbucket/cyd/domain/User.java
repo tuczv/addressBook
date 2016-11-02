@@ -28,8 +28,26 @@ public class User {
     @Size(min = 6, max = 10)
     private String password;
 
-    @JsonIgnore
+    @DBRef
     private Set<Authority> authorities = new HashSet<>();
+
+    public User() {}
+
+    public User(User user) {
+        super();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.email = user.getEmail();
+        this.authorities = user.getAuthorities();
+    }
+
+    public User(String username, String password, String email, Set<Authority> authorities) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.authorities = authorities;
+    }
+
 
     public String getId() {
         return id;

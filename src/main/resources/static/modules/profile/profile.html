@@ -11,37 +11,18 @@
     </md-toolbar>
 
     <md-card-title>
+        <md-card-title-media>
+            <div class="md-media-sm card-media" layout>
+                <ng-md-icon icon="person" style="fill: gray" size="32"></ng-md-icon>
+            </div>
+        </md-card-title-media>
         <md-card-title-text>
-            <!--<span class="md-headline">Profil</span>-->
+            <span class="md-body1"><b>{{user.username}}</b></span>
+            <span class="md-caption">{{user.email}}</span>
         </md-card-title-text>
     </md-card-title>
-    <md-card-content>
-        <md-input-container class="md-icon-float md-block">
-            <!-- Use floating label instead of placeholder -->
-            <md-icon md-svg-src="assets/icons/ic_person.svg" class="name"></md-icon>
-            <div class="info-line">
-                <div class="title"><b>Nazwa</b></div>
-                <div class="info">{{user.username}}</div>
-            </div>
-        </md-input-container>
-        <md-divider></md-divider>
-        <md-input-container md-no-float class="md-block">
-            <md-icon md-svg-src="assets/icons/ic_phone_black_24px.svg"></md-icon>
-            <div class="info-line">
-                <div class="title"><b>Email</b></div>
-                <div class="info">{{user.email}}</div>
-            </div>
-        </md-input-container>
-        <md-divider></md-divider>
-     <!--   <md-input-container class="md-block">
-            <md-icon md-svg-src="assets/icons/ic_lock_black_24px.svg" class="email"></md-icon>
-            <div class="info-line">
-                <div class="title"><b>Hasło</b></div>
-                <div class="info">{{user.password}}</div>
-            </div>
-        </md-input-container>-->
-    </md-card-content>
+
     <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-raised md-warn" ng-click="back()">Wróć</md-button>
+        <!--<md-button class="md-raised md-warn" ng-click="back()">Wróć</md-button>-->
     </md-card-actions>
 </md-card>

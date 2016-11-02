@@ -26,10 +26,15 @@ md-icon svg {
     width:50%;
 }
 
+.logo {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+}
 
 .loginContent {
     max-width:  90%;
-    width: 500px
+    width: 400px
 }
 
 .loginError {

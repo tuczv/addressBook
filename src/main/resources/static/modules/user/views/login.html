@@ -2,8 +2,12 @@
 <div layout="column" layout-align="center center" layout-fill>
     <div class="loginContent md-whiteframe-z1" layout="column">
 
-        <md-toolbar class="md-toolbar-tools">
-            <!--<span layout="row" layout-align="center center">Logowanie</span>-->
+        <md-toolbar>
+            <div layout="column" layout-padding layout-align="center center">
+                <div>
+                    <ng-md-icon class="logo" icon="home"  style="fill: white" size="48"></ng-md-icon>
+                </div>
+            </div>
         </md-toolbar>
 
 
@@ -105,7 +109,7 @@
                             <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
 
                             <input
-                                    ng-model="user.email"
+                                    ng-model="sameUser.email"
                                     id="email"
                                     name="email"
                                     type="email"
@@ -123,7 +127,7 @@
 
                             <input
                                     name="username"
-                                    ng-model="user.username"
+                                    ng-model="sameUser.username"
                                     id="usernameR"
                                     ng-minlength="3"
                                     ng-maxlength="10"
@@ -140,7 +144,7 @@
                             <md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
 
                             <input
-                                   ng-model="user.password"
+                                   ng-model="sameUser.password"
                                    id="passwordR"
                                    name="password"
                                    type="password"
