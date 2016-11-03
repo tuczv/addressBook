@@ -12,18 +12,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class Contactservice {
+public class GroupService {
 
     @Autowired
     MongoTemplate mongoTemplate;
 
-    public List<Contact> getContactsByUser(User user) {
+    public List<Group> getGroupsByUser(User user) {
         Query query = new Query(Criteria.where("user.id").is(user));
-        return mongoTemplate.find(query, Contact.class);
+        return mongoTemplate.find(query, Group.class);
     }
 
-    public List<Contact> getContactsByGroup(Group group) {
-        Query query = new Query(Criteria.where("group.id").is(group));
-        return mongoTemplate.find(query, Contact.class);
-    }
 }

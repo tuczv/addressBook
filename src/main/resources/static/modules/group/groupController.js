@@ -1,8 +1,10 @@
 angular
     .module('addressbook')
-    .controller('groupController', ['$scope', '$state', '$mdDialog', '$mdToast', 'Group',
-        function ($scope, $state, $mdDialog, $mdToast, Group) {
+    .controller('groupController', ['$scope', '$http', '$state', 'Authentication', '$mdDialog', '$mdToast', 'Group',
+        function ($scope, $http, $state, Authentication, $mdDialog, $mdToast, Group) {
 
+            $scope.user = Authentication.currentUser;
+            console.log($scope.user);
             $scope.groups = [];
 
             function fetchGroups() {
@@ -29,12 +31,14 @@ angular
                 $mdDialog.cancel();
             };
 
-            $scope.group= {
-
+            $scope.group = {
+                id: $scope.id,
+                user: $scope.user,
+                name: $scope.name
             };
 
             $scope.saveGroup = function() {
-                 return Group.createGroup($scope.group)
+               /*  return Group.createGroup($scope.id)
                      .then(function (response) {
                          $state.reload();
                          $mdToast.show(
@@ -48,10 +52,39 @@ angular
                      }, function (err) {
 
 
-                     });
+                     });*/
+                $http({
+                    method: 'POST',
+                    url: '/api/groups/' + $scope.group.id,
+                    data: $scope.group
+                })
+                    .success(function () {
+                        console.log('success');
+                        $state.reload();
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Grupa dodana")
+                                .position('top right')
+                                .hideDelay(1000)
+                        );
+
+
+                    })
+                    .error(function () {
+                        alert("error creating group");
+                    });
 
             };
 
+            $scope.deleteGroup = function(id) {
+                return Group.deleteGroup(id)
+                    .then(function () {
+                        $state.reload();
+                    });
+            };
+
             return fetchGroups();
+
 
         }]);

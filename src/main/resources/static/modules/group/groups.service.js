@@ -12,12 +12,9 @@ angular
                 },
 
                 createGroup: function (group) {
-                    return $http({
-                        method:'POST',
-                        url:'/api/groups',
-                        data:{name:group.name}
-                    }).then(function(response){
-                        return response;
+                    return $http.post('/api/groups/'+ group)
+                        .then(function(response){
+                            return response;
                     });
                 },
 
@@ -25,8 +22,11 @@ angular
 
                 },
 
-                deleteGroup: function () {
-
+                deleteGroup: function (id) {
+                    return $http.delete('/api/groups/' + id)
+                        .then(function (response) {
+                            return response;
+                        });
                 }
             };
 

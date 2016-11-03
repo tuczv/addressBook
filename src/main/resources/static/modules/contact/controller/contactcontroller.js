@@ -1,9 +1,9 @@
 //noinspection JSAnnotator
 angular
     .module('addressbook')
-    .controller('contactController', ['$scope', '$http', 'Authentication', 'Group', '$mdDialog',  '$stateParams', '$state',
+    .controller('contactController', ['$scope', '$http', 'Authentication', 'Group', '$mdDialog', '$stateParams', '$state',
         '$timeout', '$log', '$mdToast',
-        function ($scope, $http, Authentication, Group, $mdDialog,  $stateParams, $state, $timeout, $log, $mdToast)  {
+        function ($scope, $http, Authentication, Group, $mdDialog, $stateParams, $state, $timeout, $log, $mdToast) {
 
             $scope.groups = [];
             $scope.contacts = [];
@@ -13,7 +13,7 @@ angular
             function getGroups() {
                 return Group.getAll()
                     .then(function (response) {
-                       $scope.groups = response.data;
+                        $scope.groups = response.data;
                     });
             }
 
@@ -24,6 +24,11 @@ angular
                     });
             }
 
+            $scope.group = {
+                id: $scope.id,
+                name: $scope.name
+            };
+
             $scope.contact = {
                 user: $scope.user,
                 name: $scope.name,
@@ -31,7 +36,8 @@ angular
                 email: $scope.email,
                 phone: $scope.phone,
                 address: $scope.address,
-                groupId: $scope.groups.id
+                group: $scope.group
+
             };
 
             function getContacts() {
@@ -69,8 +75,63 @@ angular
             };
 
             $scope.exportData = function () {
-                alasql("SELECT * INTO CSV('kontakty.csv', {headers:true}) FROM ?",[$scope.contacts]);
+                alasql("SELECT * INTO CSV('kontakty.csv', {headers:true}) FROM ?", [$scope.contacts]);
             };
+
+
+            // add contact
+            $scope.saveContact = function (id) {
+
+                $http({
+                    method: 'POST',
+                    url: '/api/contacts/' + id,
+                    data: $scope.contact
+                })
+                    .success(function () {
+                        console.log('success');
+                        $state.reload();
+                        $mdDialog.hide();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Kontakt dodany do listy")
+                                .position('top right')
+                                .hideDelay(1000)
+                        );
+
+
+                    })
+                    .error(function () {
+                        alert("error creating contact");
+                    });
+            };
+
+            $scope.clickAdd = function ($event) {
+
+                var confirm = $mdDialog.confirm({
+                    controller: 'contactController',
+                    templateUrl: 'modules/contact/views/dialog-contact.html',
+                    targetEvent: $event,
+                    parent: angular.element(document.body)
+                });
+
+                $mdDialog.show(confirm).then(function () {
+                    console.log("here");
+                });
+            };
+
+            $scope.cancelAddModal = function () {
+                $mdDialog.cancel();
+            };
+
+//pagination
+            $scope.onOrderChange = function () {
+            };
+
+            $scope.onPageChange = function () {
+            };
+
+            return getGroups();
+
 
             function dialogController($scope, $mdDialog, contact, $mdToast, Group) {
 
@@ -145,59 +206,5 @@ angular
 
                 return getGroups();
             }
-
-
-            // add contact
-            $scope.saveContact = function () {
-
-                $http({
-                    method: 'POST',
-                    url: '/api/contacts/' + $scope.contact.groupId,
-                    data: $scope.contact
-                })
-                    .success(function () {
-                        console.log('success');
-                        $state.reload();
-                        $mdDialog.hide();
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content("Kontakt dodany do listy")
-                                .position('top right')
-                                .hideDelay(1000)
-                        );
-
-
-                    })
-                    .error(function () {
-                        alert("error creating contact");
-                    });
-            };
-
-            $scope.clickAdd = function ($event) {
-
-                var confirm = $mdDialog.confirm({
-                    controller: 'contactController',
-                    templateUrl: 'modules/contact/views/dialog-contact.html',
-                    targetEvent: $event,
-                    parent: angular.element(document.body)
-                });
-
-                $mdDialog.show(confirm).then(function () {
-                    console.log("here");
-                });
-            };
-
-            $scope.cancelAddModal = function () {
-                $mdDialog.cancel();
-            };
-
-//pagination
-            $scope.onOrderChange = function () {
-            };
-
-            $scope.onPageChange = function () {
-            };
-
-            return getGroups();
         }
     ]);
