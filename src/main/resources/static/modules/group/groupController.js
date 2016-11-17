@@ -4,8 +4,32 @@ angular
         function ($scope, $http, $state, Authentication, $mdDialog, $mdToast, Group) {
 
             $scope.user = Authentication.currentUser;
-            console.log($scope.user);
+            $scope.group = {
+                id: $scope.id,
+                name: $scope.name,
+                user: $scope.user
+            };
             $scope.groups = [];
+
+            $scope.options = {
+                showSearch: false,
+                rowSelection: true,
+                multiSelect: true
+            };
+
+            $scope.filters = {};
+
+            $scope.resetFilter = function () {
+                $scope.searchInput = null;
+                $state.reload('home.groups');
+            };
+
+            function getGroup(groupId) {
+                $http.get('/api/groups/' + groupId)
+                    .success(function (data) {
+                        $scope.group = data;
+                    });
+            }
 
             function fetchGroups() {
                 return Group.getAll()
@@ -27,15 +51,26 @@ angular
                     });
             };
 
+            $scope.showEditGroup = function(group, $event) {
+                 $mdDialog.show({
+                    controller:  dialogGroupController,
+                    templateUrl: 'modules/group/dialog-edit-group.html',
+                    targetEvent: $event,
+                    locals: {
+                        group: group
+                    },
+                     parent: angular.element(document.body)
+
+                 })
+                    .then(function(result) {
+
+                    });
+            };
+
             $scope.cancelAddModal = function () {
                 $mdDialog.cancel();
             };
 
-            $scope.group = {
-                id: $scope.id,
-                user: $scope.user,
-                name: $scope.name
-            };
 
             $scope.saveGroup = function() {
                /*  return Group.createGroup($scope.id)
@@ -69,10 +104,18 @@ angular
                                 .hideDelay(1000)
                         );
 
-
                     })
-                    .error(function () {
-                        alert("error creating group");
+                    .error(function (error) {
+                        if (error.status == 500) {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content("Grupa o takiej nazwie istnieje w bazie!")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+                        }
+                        else
+                            alert("error creating group");
                     });
 
             };
@@ -84,6 +127,51 @@ angular
                     });
             };
 
+            function dialogGroupController($scope, $mdDialog, group, $mdToast, Group) {
+
+                $scope.group = group;
+                $scope.groups = [];
+
+                 function getGroups() {
+                    return Group.getAll()
+                        .then(function (response) {
+                            $scope.groups = response.data;
+                        });
+                }
+
+                $scope.editGroup = function (group) {
+                
+                    $http({
+                        method: "PUT",
+                        url: "api/groups/" + $scope.group.id,
+                        data: angular.toJson($scope.group),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .success(function () {
+                            console.log('success updating group');
+                            $mdDialog.hide();
+                            $state.reload();
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content("Nazwa grupy zmieniona")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+                        })
+                        .error(function () {
+                            console.log('Error editing group');
+                        });
+                };
+
+                $scope.cancelAddModal = function () {
+                    $mdDialog.cancel();
+                };
+                        
+                return getGroups();
+            }
+                    
             return fetchGroups();
 
 

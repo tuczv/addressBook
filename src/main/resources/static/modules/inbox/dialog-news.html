@@ -11,8 +11,9 @@
                     <label>Do</label>
                     <md-select ng-model="email.userTo"
                                name="userTo"
-                               id="userTo">
-                        <md-option ng-repeat="user in users">{{user.username}}</md-option>
+                               id="userTo"
+                               required>
+                        <md-option ng-repeat="user in users" required>{{user.username}}</md-option>
                     </md-select>
                     <div ng-messages="createForm.userTo.$error" ng-if="createForm.userTo.$touched">
                         <div ng-message="required">Podaj co najmniej jednego odbiorcę</div>

@@ -7,25 +7,24 @@ angular
             $httpProvider.interceptors.push('authInterceptor');
             $urlRouterProvider.otherwise('/contacts');
 
-            var accentPalette = $mdThemingProvider.extendPalette('teal', {
-                'contrastDefaultColor': 'light'
-            });
 
-            $mdThemingProvider.definePalette('teal-custom', accentPalette);
-            $mdThemingProvider.theme('default')
-                .primaryPalette('light-blue', {
-                    'default': '900',
-                    'hue-2': 'A700'
-                })
-                .accentPalette('teal-custom', {
-                    'default': 'A700'
-                });
+           $mdThemingProvider
+                .theme('default')
+                .primaryPalette('grey', {'default':'900'})
+                .accentPalette('blue-grey', {'default':'900'});
 
-            /* $mdThemingProvider
-             .theme('default')
-             .primaryPalette('blue', {
-             'default': '700'
-             });*/
+            $mdThemingProvider.theme('teal') 
+                .primaryPalette('teal')
+                .accentPalette('teal')
+                .warnPalette('teal');
+
+            $mdThemingProvider.theme('lime')
+                .primaryPalette('lime')
+                .accentPalette('orange')
+                .warnPalette('blue');      
+
+            $mdThemingProvider.alwaysWatchTheme(true);
+
 
             $stateProvider
             /*   .state('register', {
@@ -106,7 +105,8 @@ angular
                     'data': {
                         'requiresLogin': true
 
-                    }
+                    },
+                    'bodyClass': 'calendar'
                 })
                 .state('home.groups', {
                     'url': '/groups',
@@ -132,6 +132,12 @@ angular
     .module('addressbook')
     .run(['$rootScope', '$state', 'Authentication', 'Security',
         function ($rootScope, $state, Authentication, Security) {
+
+            $rootScope.theme = 'default';
+
+            $rootScope.setTheme = function(value){
+                $rootScope.theme = value;
+            };
 
             Security.initialize();
 

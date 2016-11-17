@@ -1,7 +1,7 @@
 <div layout="column" layout>
     <md-whiteframe class="md-whiteframe-z2">
 
-        <md-toolbar ng-show="!showSearch" class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
+        <md-toolbar ng-show="!options.showSearch" ng-hide="options.rowSelection && selected.length"class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Contacts">
                     <ng-md-icon icon="my_library_books" style="fill: black"></ng-md-icon>
@@ -12,7 +12,7 @@
                 <span flex></span>
 
                 <md-menu>
-                    <md-button class="md-icon-button" aria-label="Select Group" ng-click="$mdOpenMenu()">
+                    <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
                         <md-tooltip>Sortuj</md-tooltip>
                         <ng-md-icon icon="group"></ng-md-icon>
                     </md-button>
@@ -40,7 +40,7 @@
                 </md-menu>
 
 
-                <md-button aria-label="Search" ng-click="showSearch = !showSearch"
+                <md-button ng-click="options.showSearch = !options.showSearch"
                            class="md-icon-button md-primary md-button md-ink-ripple">
                     <md-tooltip>Szukaj</md-tooltip>
                     <ng-md-icon icon="search"></ng-md-icon>
@@ -48,9 +48,9 @@
             </div>
         </md-toolbar>
 
-        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="showSearch" style="background:white">
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.showSearch" style="background:white">
             <div class="md-toolbar-tools">
-                <md-button ng-click="showSearch = !showSearch" aria-label="Back"
+                <md-button ng-click="options.showSearch = !options.showSearch" aria-label="Back"
                            class="md-icon-button md-primary md-button md-ink-ripple">
                     <ng-md-icon icon="arrow_back" ng-click="resetFilter()"></ng-md-icon>
                 </md-button>
@@ -58,7 +58,7 @@
                     <label>&nbsp;</label>
                     <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj kontakt">
                 </md-input-container>
-                <md-button aria-label="Search" ng-click="showSearch = !showSearch"
+                <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
                            class="md-icon-button md-primary md-button md-ink-ripple">
                     <ng-md-icon icon="search"></ng-md-icon>
                 </md-button>
@@ -66,15 +66,25 @@
 
         </md-toolbar>
 
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.rowSelection && selected.length" style="background:white">
+          <div class="md-toolbar-tools">
+            <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
+          
+          <span flex></span>
+          <!--<md-button class="md-icon-button" ng-click="deleteSelected()">
+            <ng-md-icon icon="delete"></ng-md-icon>
+          </md-button>-->
+          </div>  
+        </md-toolbar>
+
 
         <md-content>
             <md-table-container>
 
-                <table md-table id="table">
+                <table md-table id="table" md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise"> <!--md-on-close: expression; multiple:boolean; placeholder: string;-->
                     <thead md-head md-order="$root.tableFilter.order"
                            md-on-reorder="contacts">
                     <tr md-row>
-                        <th md-column></th>
                         <th md-column></th>
                         <th md-column md-order-by="name">Imię</th>
                         <th md-column md-order-by="lastName">Nazwisko</th>
@@ -86,14 +96,15 @@
 
                     <tbody md-body>
                     <tr md-row
+                        md-select="contact"
+                        md-on-select="selectItem"
                         ng-repeat="contact in contacts
                                     | filter: filters
                             		| orderBy: $root.tableFilter.order
-                            		| filter: searchInput
+                            		| filter:  searchInput
                             		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
                         ng-click="clickEdit(contact, $event)">
 
-                        <td md-cell> <md-checkbox class="md-secondary"></md-checkbox></td>
                         <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#1E90FF" height="30" width="30"  data={{contact.name}} shape="round"></ng-letter-avatar></td>
                         <td md-cell>{{contact.name}}</td>
                         <td md-cell>{{contact.lastName}}</td>

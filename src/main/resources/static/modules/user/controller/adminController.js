@@ -4,6 +4,24 @@ angular
         function ($scope, $http, $state, $mdDialog, $mdToast) {
 
             $scope.users = [];
+            $scope.selected = [];
+
+            $scope.options = {
+                showSearch: false,
+                rowSelection: true,
+                multiSelect: true
+            };
+
+            $scope.selectItem = function (item) {
+                console.log(item.name, 'selected');
+            };
+
+            $scope.filters = {};
+
+            $scope.resetFilter = function () {
+                $scope.searchInput = null;
+                $state.reload('home.users');
+            };
 
             function getUsers() {
                 $http.get('/admin/users/')
@@ -85,8 +103,17 @@ angular
 
 
                     })
-                    .error(function () {
-                        alert("error creating user");
+                    .error(function (error) {
+                        if (error.status == 500) {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content("Użytkownik o takiej nazwie lub email istnieje w bazie!")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+                        }
+                        else
+                            alert("error creating user");
                     });
             };
 
@@ -114,6 +141,10 @@ angular
             $scope.cancelCreate = function () {
                 $mdDialog.hide();
             };
+
+            $scope.onOrderChange = function () {};
+
+            $scope.onPageChange = function () {};
 
             function adminDialogController($scope, $mdDialog, user, $mdToast) {
 

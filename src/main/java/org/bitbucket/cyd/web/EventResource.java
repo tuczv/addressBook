@@ -34,4 +34,19 @@ public class EventResource {
     public @ResponseBody void newEvent(@RequestBody CalendarEvent event) {
         eventsRepository.save(event);
     }
+
+    @RequestMapping(value = "/events/{id}", method = RequestMethod.PUT)
+    public CalendarEvent edit(@PathVariable("id") String id, @RequestBody CalendarEvent calendarEvent) {
+        CalendarEvent event = eventsRepository.getEventById(id);
+        event.setTitle(calendarEvent.getTitle());
+        event.setStart(calendarEvent.getStart());
+        event.setEnd(calendarEvent.getEnd());
+        event.setLocation(calendarEvent.getLocation());
+        return  eventsRepository.save(event);
+    }
+
+    @RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)
+    public void remove(@PathVariable("id") String id) {
+        eventsRepository.delete(id);
+    }
 }

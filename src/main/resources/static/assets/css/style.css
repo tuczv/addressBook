@@ -57,9 +57,9 @@ md-icon svg {
     max-width: 250px !important;
 }
 
-.page-content {
+/*.page-content {
     background-color: #ECECEC;
-}
+}*/
 
 .chat {
     margin-top: 20px;
@@ -120,6 +120,12 @@ md-icon svg {
     height: calc(100% - 64px);
 }
 
-.calendarLeft{
+.calendarLeft {
     margin-left: 470px;
+}
+
+.toggle-details {
+    padding-top: 16px;
+    cursor: pointer;
+    font-weight: 500;
 }

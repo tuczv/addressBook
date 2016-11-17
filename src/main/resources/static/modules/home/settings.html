@@ -1,4 +1,29 @@
 <md-bottom-sheet class="md-list md-has-header">
-    <md-subheader ng-cloak>Ustawienia</md-subheader>
-    SETTINGS
+
+    <md-subheader ng-cloak>USTAWIENIA</md-subheader>
+    <md-content>
+    <md-list ng-cloak>
+        <md-menu>
+            <md-button
+                    ng-click="$mdOpenMenu()">
+                <md-icon md-svg-src="assets/icons/photo.svg"></md-icon>
+                <span class="md-inline-list-icon-label">Wybierz theme</span>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button class="md-raised" md-colors="{background: 'default'}" ng-click="setTheme('default')">Default</md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                    <md-button class="md-raised" md-colors="{background: 'teal'}" ng-click="setTheme('teal')">Teal</md-button>
+                </md-menu-item>
+                
+                <md-menu-item>
+                    <md-button class="md-raised" md-colors="{background: 'lime'}" ng-click="setTheme('lime')">Lime</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-list>
+    </md-content>
+
 </md-bottom-sheet>

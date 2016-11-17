@@ -13,6 +13,7 @@ public class CalendarEvent {
     private String title;
     private Date start;
     private Date end;
+    private String location;
 
     @DBRef
     private User user;
@@ -49,6 +50,13 @@ public class CalendarEvent {
         this.end = end;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public User getUser() {
         return user;

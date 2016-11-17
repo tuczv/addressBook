@@ -5,9 +5,20 @@ angular
         '$timeout', '$log', '$mdToast',
         function ($scope, $http, Authentication, Group, $mdDialog, $stateParams, $state, $timeout, $log, $mdToast) {
 
+            $scope.user = Authentication.currentUser;
             $scope.groups = [];
             $scope.contacts = [];
-            $scope.user = Authentication.currentUser;
+            $scope.selected = [];
+
+            $scope.options = {
+                showSearch: false,
+                rowSelection: true,
+                multiSelect: true
+            };
+
+            $scope.selectItem = function (item) {
+                console.log(item.name, 'selected');
+            };
 
             //fetch groups
             function getGroups() {
@@ -36,8 +47,7 @@ angular
                 email: $scope.email,
                 phone: $scope.phone,
                 address: $scope.address,
-                group: $scope.group
-
+                groupId: $scope.groups.id
             };
 
             function getContacts() {
@@ -70,6 +80,7 @@ angular
             };
 
             $scope.filters = {};
+
             $scope.resetFilter = function () {
                 $scope.searchInput = null;
             };
@@ -80,11 +91,11 @@ angular
 
 
             // add contact
-            $scope.saveContact = function (id) {
+            $scope.saveContact = function () {
 
                 $http({
                     method: 'POST',
-                    url: '/api/contacts/' + id,
+                    url: '/api/contacts/' + $scope.contact.groupId,
                     data: $scope.contact
                 })
                     .success(function () {
@@ -100,10 +111,27 @@ angular
 
 
                     })
-                    .error(function () {
-                        alert("error creating contact");
+                    .error(function (error) {
+                        if (error.status == 500) {
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content("Kontakt o takiej nazwie lub email istnieje w bazie!")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+                        }
+                        else
+                            alert("error creating contact");
                     });
             };
+
+           /* $scope.deleteSelected = function (item) {
+                    var index = $scope.data.indexOf(item);
+
+                    if(index !== -1) {
+                        $scope.data.splice(index, 1);
+                    }
+            };*/
 
             $scope.clickAdd = function ($event) {
 

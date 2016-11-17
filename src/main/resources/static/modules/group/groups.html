@@ -4,11 +4,36 @@
     </div>
     <div class="md-whiteframe-z2" flex="70">
         <md-whiteframe>
-            <md-toolbar class="md-warn md-hue-3">
-                <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
-                    <span layout="row" layout-align="center center">Grupy kontaktów</span>
+            <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch">
+                <div class="md-toolbar-tools">
+                    <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+                        <span layout="row" layout-align="center center">Grupy kontaktów</span>
 
-                </h2>
+                    </h2>
+                    <span flex></span>
+                    <md-button ng-click="options.showSearch = !options.showSearch"
+                               class="md-icon-button md-primary md-button md-ink-ripple">
+                        <md-tooltip>Szukaj</md-tooltip>
+                        <ng-md-icon icon="search"></ng-md-icon>
+                    </md-button>
+                </div>
+            </md-toolbar>
+
+            <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.showSearch" style="background:white">
+                <div class="md-toolbar-tools">
+                    <md-button ng-click="options.showSearch = !options.showSearch" aria-label="Back"
+                               class="md-icon-button md-primary md-button md-ink-ripple">
+                        <ng-md-icon icon="arrow_back" ng-click="resetFilter()"></ng-md-icon>
+                    </md-button>
+                    <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
+                        <label>&nbsp;</label>
+                        <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj grupy">
+                    </md-input-container>
+                    <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
+                               class="md-icon-button md-primary md-button md-ink-ripple">
+                        <ng-md-icon icon="search"></ng-md-icon>
+                    </md-button>
+                </div>
 
             </md-toolbar>
 
@@ -21,7 +46,6 @@
                                md-on-reorder="groups">
                         <tr md-row>
                             <th md-column></th>
-                            <th md-column></th>
                             <th md-column md-order-by="name">Nazwa</th>
                             <th md-column></th>
                         </tr>
@@ -29,9 +53,11 @@
 
                         <tbody md-body>
                         <tr md-row
-                            ng-repeat="group in groups">
-                            <td md-cell><md-checkbox></md-checkbox></td>
-                            <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{user.username}} shape="round"></ng-letter-avatar></td>
+                            ng-repeat="group in groups
+                                    | filter: filters
+                            		| orderBy: $root.tableFilter.order
+                            		| filter:  searchInput">
+                            <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{group.name}} shape="round"></ng-letter-avatar></td>
                             <td md-cell>{{group.name}}</td>
                             <td md-cell>
                                 <md-menu>
@@ -40,7 +66,7 @@
                                     </md-button>
                                     <md-menu-content width="4">
                                         <md-menu-item>
-                                            <md-button ng-click="clickUpdateUser(user, $event)">Edytuj</md-button>
+                                            <md-button ng-click="showEditGroup(group, $event)">Edytuj</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
                                             <md-button ng-click="deleteGroup(group.id)">Usuń</md-button>

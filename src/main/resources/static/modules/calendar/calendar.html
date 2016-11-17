@@ -1,8 +1,7 @@
-
 <div flex>
 
     <!-- ADD EVENT BUTTON -->
-    <md-button class="md-fab md-fab-top-left md-warn" ng-click="addEvent($event)"
+    <md-button class="md-fab md-fab-top-left md-warn" ng-click="showNewEventDialog($event)"
                aria-label="Add event">
         <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
@@ -67,10 +66,9 @@
 
     <!-- CONTENT -->
     <div class="content">
-        <md-content id="calendarView" ui-calendar="uiConfig.calendar" ng-model="events" calendar="main" layout-fill>
+        <md-content id="calendarView" ng-model="eventSources"  ui-calendar="uiConfig.calendar" calendar="main" layout-fill>
 
         </md-content>
     </div>
     <!-- / CONTENT -->
 </div>
-

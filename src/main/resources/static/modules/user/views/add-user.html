@@ -26,7 +26,7 @@
                                 <input
                                         name="name"
                                         id="name"
-                                        ng-model="create.username"
+                                        ng-model="sameUser.username"
                                         required>
                                 <div ng-messages="editForm.name.$error" ng-if="editForm.name.$touched">
                                     <div ng-message="required">Wpisz imię</div>
@@ -41,7 +41,7 @@
                                         type="email"
                                         id="email"
                                         name="email"
-                                        ng-model="create.email"
+                                        ng-model="sameUser.email"
                                         required>
                                 <div ng-messages="editForm.email.$error" ng-if="editForm.email.$touched">
                                     <div ng-message="required">Wpisz email</div>
@@ -56,7 +56,7 @@
                                         type="password"
                                         id="password"
                                         name="password"
-                                        ng-model="create.password"
+                                        ng-model="sameUser.password"
                                         required>
                                 <div ng-messages="editForm.password.$error" ng-if="editForm.password.$touched">
                                     <div ng-message="required">Wpisz password</div>

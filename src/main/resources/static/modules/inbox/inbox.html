@@ -4,38 +4,36 @@
     </div>
 </md-toolbar>
 
-<div layout="row">
+<div layout="row" style="height:100%">
+  <div flex="50">
+    <md-content style="height: 100%;" flex>
+        <md-subheader class="md-primary"><b>Wysłane wiadomości</b></md-subheader>
+        <md-list>
+            <md-list-item class="md-3-line md-hue-1 md-whiteframe-z2" ng-repeat="email in emails | filter:search" 
+            role="link"
+            ng-click="selectItem(email)" 
+            ng-class="{'selected' : email === selected }">
 
-    <div flex="50" layout-margin>
+                <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
+                <p class="md-body-2"><b>{{email.userTo}}</b></p>
+                <p class="md-body-2" style="margin-left: 20px;">{{email.subject}}</p>
+                <!--<p class="md-body-2">{{email.date}}</p>-->
+                <span flex></span>
+                <md-icon class="md-secondary" md-svg-src="assets/icons/ic_done_black_24px.svg"
+                         ng-click="deleteEmail(email.id)">
+                    <md-tooltip>Usuń</md-tooltip>
+                </md-icon>
 
-        <md-content class="page-content" style="background:#f6f6f6;" layout-fill>
-            <md-subheader class="md-primary"><b>Wysłane wiadomości</b></md-subheader>
-            <md-list>
-                <md-list-item class="md-2-line" ng-repeat="email in emails | filter:search" role="link"
-                              ng-click="selectItem(email)" ng-class="{'selected' : email === selected }">
+                <md-divider></md-divider>
+            </md-list-item>
+    </md-content>
+  </div>
 
-                    <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
-                    <p class="md-body-2"><b>{{email.userTo}}</b></p>
-                    <p class="md-body-2" style="margin-left: 20px;">{{email.subject}}</p>
-                    <!--<p class="md-body-2">{{email.date}}</p>-->
-                    <span flex></span>
-                    <md-icon class="md-secondary" md-svg-src="assets/icons/ic_done_black_24px.svg"
-                             ng-click="deleteEmail(email.id)">
-                        <md-tooltip>Usuń</md-tooltip>
-                    </md-icon>
-
-                    <md-divider></md-divider>
-                </md-list-item>
-            </md-list>
-
-        </md-content>
-    </div>
-
-    <div flex=50" layout-margin>
+    <div flex=50">
         <div ng-show="showEmail" layout-fill>
             <md-subheader class="md-primary"><b>Kliknij na wybraną wiadomość</b></md-subheader>
             <div class="">
-                <ng-md-icon icon="email" style="fill: white" size="512"></ng-md-icon>
+                <ng-md-icon icon="email" style="fill: #C0C0C0" size="512"></ng-md-icon>
             </div>
         </div>
 
@@ -57,16 +55,17 @@
                 </md-card-header>
                 <md-divider></md-divider>
 
-                <div class="" layout="column" layout-padding>
+                <section layout="column" layout-padding>
+                    <a class="toggle-details md-accent-color" ng-hide="selectedMailShowDetails"
+                       ng-click="selectedMailShowDetails = !selectedMailShowDetails">
+                       Pokaż szczegóły
+                    </a>
 
-                    <a class="md-body-1" ng-hide="selectedMailShowDetails"
-                       ng-click="selectedMailShowDetails = !selectedMailShowDetails">Pokaż szczegóły</a>
-
-                    <a class="md-body-1 " ng-show="selectedMailShowDetails"
+                    <a class="toggle-details md-accent-color" ng-show="selectedMailShowDetails"
                        ng-click="selectedMailShowDetails = !selectedMailShowDetails">
                         Schowaj szczegóły
                     </a>
-                </div>
+                </section>
 
                 <div ng-show="selectedMailShowDetails" class="details" layout="row" layout-padding>
                     <div layout="column">
@@ -95,5 +94,3 @@
         <ng-md-icon icon="mode_edit" style="fill: white"></ng-md-icon>
     </md-button>
 </div>
-
-

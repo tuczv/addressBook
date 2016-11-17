@@ -14,12 +14,15 @@ angular
                 createGroup: function (group) {
                     return $http.post('/api/groups/'+ group)
                         .then(function(response){
-                            return response;
+                            return response.data;
                     });
                 },
 
-                updateGroup: function () {
-
+                updateGroup: function (group, id) {
+                    return $http.put('/api/groups/' + id, group)
+                        .then(function (response) {
+                            return response.data;
+                        });    
                 },
 
                 deleteGroup: function (id) {

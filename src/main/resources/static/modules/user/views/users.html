@@ -1,25 +1,48 @@
 <div layout="column" layout>
     <md-whiteframe class="md-whiteframe-4dp">
-        <md-toolbar class="md-warn md-hue-3">
-            <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
-                <span layout="row" layout-align="center center">Użytkownicy</span>
+        <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch">
+            <div class="md-toolbar-tools">
+                <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+                    <span layout="row" layout-align="center center">Użytkownicy</span>
 
-            </h2>
-
+                </h2>
+                <span flex></span>
+                <md-button ng-click="options.showSearch = !options.showSearch"
+                               class="md-icon-button md-primary md-button md-ink-ripple">
+                        <md-tooltip>Szukaj</md-tooltip>
+                        <ng-md-icon icon="search" style="fill: black"></ng-md-icon>
+                </md-button>
+            </div>
         </md-toolbar>
 
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.showSearch" style="background:white">
+            <div class="md-toolbar-tools">
+                <md-button ng-click="options.showSearch = !options.showSearch" aria-label="Back"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <ng-md-icon icon="arrow_back" ng-click="resetFilter()"></ng-md-icon>
+                </md-button>
+                <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
+                    <label>&nbsp;</label>
+                    <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj użytkownika">
+                </md-input-container>
+                <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <ng-md-icon icon="search"></ng-md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
         <md-divider></md-divider>
 
         <md-content>
             <md-table-container>
-                <table md-table id="table">
+                <table md-table id="table" md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
                     <thead md-head md-order="$root.tableFilter.order"
                            md-on-reorder="users">
                     <tr md-row>
                         <th md-column></th>
-                        <th md-column></th>
-                        <th md-column md-order-by="name">Nazwa</th>
-                        <th md-column md-order-by="lastName">Email</th>
+                        <th md-column md-order-by="username">Nazwa</th>
+                        <th md-column md-order-by="email">Email</th>
                         <!--<th md-column>Hasło</th>-->
                         <th md-column>Dostęp</th>
                         <th md-column></th>
@@ -28,8 +51,13 @@
 
                     <tbody md-body>
                     <tr md-row
-                        ng-repeat="user in users">
-                        <td md-cell><md-checkbox></md-checkbox></td>
+                        md-select="user"
+                        md-on-select="selectItem"
+                        ng-repeat="user in users    
+                                | filter: filters
+                                | orderBy: $root.tableFilter.order
+                                | filter:  searchInput
+                                | limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit">
                         <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{user.username}} shape="round"></ng-letter-avatar></td>
                         <td md-cell>{{user.username}}</td>
                         <td md-cell>{{user.email}}</td>
@@ -55,11 +83,11 @@
                 </table>
 
             </md-table-container>
-            <!--<md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
+            <md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
                                  md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
                                  md-total="{{users.length}}" md-on-paginate="onPageChange"
                                  md-boundary-links>
-            </md-table-pagination>-->
+            </md-table-pagination>
         </md-content>
         <md-button class="md-fab md-fab-bottom-right md-warn"
                    ng-click="clickAddUser($event)">

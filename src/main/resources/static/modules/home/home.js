@@ -1,13 +1,22 @@
 angular
     .module('addressbook')
-    .controller('mainController', [ '$scope', '$http', 'Authentication', 'Security', 'Group', '$mdMedia', '$mdDialog', '$stateParams', '$state',
+    .controller('mainController', [ '$scope', '$http', 'Authentication', 'Security', 'Group', 'Inbox', '$mdMedia', '$mdDialog', '$stateParams', '$state',
         '$timeout', '$log', '$mdToast', '$mdSidenav', 'userService', '$mdBottomSheet',
-        function($scope, $http, Authentication, Security, Group, $mdMedia, $mdDialog, $stateParams, $state,
+        function($scope, $http, Authentication, Security, Group, Inbox, $mdMedia, $mdDialog, $stateParams, $state,
                    $timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet) {
 
             $scope.showMobileMainHeader = true;
             $scope.avatar = 'assets/icons/avatar.png';
             $scope.Security = Security;
+            $scope.emails = [];
+
+            function lengthEmails() {
+                Inbox.getAll()
+                    .then(function(data) {
+                        $scope.emails  = data.data;
+                    });
+            }
+            lengthEmails();
 
             $scope.getGroups = function () {
                 Group.getAll();
@@ -129,5 +138,6 @@ angular
                     $scope.alert = clickedItem['name'] + ' clicked!';
                 });
             };
+
         }
     ]);

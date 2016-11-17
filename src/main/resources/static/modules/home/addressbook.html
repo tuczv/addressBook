@@ -27,14 +27,20 @@
                 <span class="md-caption">{{user.email}}</span>
             </div>
             <span flex></span>
-            <md-button class="md-icon-button" aria-label="User Settings" ng-click="logout()">
-                <md-tooltip>Log out</md-tooltip>
-                <ng-md-icon icon="more_vert" style="fill: white" ></ng-md-icon>
-            </md-button>
+            <md-menu>
+                    <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+                        <md-tooltip>Menu</md-tooltip>
+                        <ng-md-icon icon="more_vert" style="fill: white"></ng-md-icon>
+                    </md-button>
+                    <md-menu-content width="4">
+                        <md-button>Profile</md-button>
+                        <md-button ng-click="logout()">Wyjdz</md-button>
+                    </md-menu-content>
+            </md-menu>
         </div>
     </md-toolbar>
 
-    <md-content role="navigation">
+    <md-content id="primary-theme-selector" role="navigation">
         <md-list ng-repeat="section in sidenavMenu.sections">
 
             <md-list-item  ng-click="goUsers()" ng-show="Security.hasRole('ROLE_ADMIN')">
@@ -62,6 +68,7 @@
                 <md-icon md-svg-src="assets/icons/ic_question_answer_black_24px.svg" class="email"></md-icon>
                 <span class="md-body-1">Wiadomości</span>
                 <span flex></span>
+                <span class="badge">{{emails.length}}</span>
             </md-list-item>
             <md-divider></md-divider>
 

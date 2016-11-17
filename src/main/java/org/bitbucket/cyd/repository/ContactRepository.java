@@ -16,4 +16,5 @@ public interface ContactRepository extends MongoRepository<Contact, String> {
 
     Contact getContactById(String id);
 
+    Contact getContactByEmail(String email);
 }

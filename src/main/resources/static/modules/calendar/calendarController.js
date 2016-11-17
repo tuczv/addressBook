@@ -1,57 +1,26 @@
 angular
     .module('addressbook')
-    .controller('calendarController', ['$scope', '$filter', '$http', '$q', '$mdDialog', '$document',
-        function ($scope, $filter, $http, $q, $mdDialog, $document) {
-
-            var date = new Date();
-            var d = date.getDate();
-            var m = date.getMonth();
-            var y = date.getFullYear();
-
-         /*   $scope.events = [
-
-                    {
-                        id   : 1,
-                        title: 'All Day Event',
-                        start: new Date(y, m, 1),
-                        end  : null
-                    },
-                    {
-                        id   : 2,
-                        title: 'Long Event',
-                        start: new Date(y, m, d - 5),
-                        end  : new Date(y, m, d - 2)
-                    },
-                    {
-                        id   : 3,
-                        title: 'Some Event',
-                        start: new Date(y, m, d - 3, 16, 0),
-                        end  : null
-                    },
-                    {
-                        id   : 4,
-                        title: 'Repeating Event',
-                        start: new Date(y, m, d + 4, 16, 0),
-                        end  : null
-                    },
-                    {
-                        id   : 5,
-                        title: 'Birthday Party',
-                        start: new Date(y, m, d + 1, 19, 0),
-                        end  : new Date(y, m, d + 1, 22, 30)
-                    }
-            ];*/
+    .controller('calendarController', ['$scope', '$filter', '$http', '$q', '$state', '$mdDialog', '$document',
+        function ($scope, $filter, $http, $q, $state, $mdDialog, $document) {
 
             $scope.events = [];
 
-            $http.get('/api/events')
-                .success(function (data) {
-                    $scope.events = data;
-                    console.log(data);
-
+            $http.get('api/events/')
+                .then(function(response){
+                    angular.forEach(response.data, function (scope) {
+                        $scope.events.push({
+                            id: scope.id,
+                            title: scope.title,
+                            start: new Date(scope.start),
+                            end:  new Date(scope.end),
+                            location: scope.location
+                        });
+                    });
                 });
 
-            /*$scope.eventSources = [$scope.events];*/
+            $scope.eventSources=[$scope.events];
+
+            console.log($scope.eventSources);
 
             $scope.uiConfig = {
                 calendar:{
@@ -59,50 +28,40 @@ angular
                     eventLimit        : true,
                     handleWindowResize: false,
                     aspectRatio       : 1,
-                    header            : '',
+                    header:'',
                     viewRender        : function (view) {
                         $scope.calendarView = view;
                         $scope.calendar = $scope.calendarView.calendar;
                         $scope.currentMonthShort = $scope.calendar.getDate().format('MMM');
+
+                    },
+                    columnFormat      : {
+                        month: 'ddd',
+                        week : 'ddd D',
+                        day  : 'ddd M'
                     },
                     lang              : "pl",
-                    eventClick        : alertEventOnClick,
+                    eventClick        : showFormEventDialog,
                     selectable        : true,
                     selectHelper      : true,
-                    select            : select
+                    select            : showNewEventDialog
                 }
             };
 
             $scope.next = next;
             $scope.prev = prev;
-            $scope.addEvent = addEvent;
+            $scope.showFormEventDialog = showFormEventDialog;
+            $scope.showNewEventDialog = showNewEventDialog;
 
-            function addEvent(e) {
-                var start = new Date(),
-                    end = new Date();
 
-                showNewEventDialog(start, end, e);
-            }
-
-            function alertEventOnClick() {
-                showFormEventDialog();
-            }
-
-            function select (start, end, e) {
-                showNewEventDialog(start, end, e);
-            }
-
-            function next()
-            {
+            function next() {
                 $scope.calendarView.calendar.next();
+                $state.reload('home.calendar');
             }
 
-            /**
-             * Go to previous on current view (week, month etc.)
-             */
-            function prev()
-            {
+            function prev() {
                 $scope.calendarView.calendar.prev();
+                $state.reload('home.calendar');
             }
 
             function showFormEventDialog(calendarEvent, e) {
@@ -113,27 +72,24 @@ angular
                     targetEvent: e,
                     clickOutsideToClose: true,
                     locals: {
-                        calendarEvent: calendarEvent,
-                        showNewEventDialog: showNewEventDialog,
-                        event: e
+                        calendarEvent: calendarEvent
                     }
                 });
             }
 
-            function showNewEventDialog(start, end, e) {
-
-                $mdDialog.show({
+            function showNewEventDialog (calendarEvent, event) {
+                $mdDialog
+                    .show({
                     controller: 'newEventController',
                     templateUrl: 'modules/calendar/event-new/new-event.html',
                     parent: angular.element($document.body),
-                    targetEvent: e,
+                    targetEvent: event,
                     clickOutsideToClose: true,
                     locals             : {
-
+                        calendarEvent: calendarEvent
                     }
-                }).then(function (response)
-                {
-
+                })
+                    .then(function (response) {
 
                 });
             }
@@ -141,26 +97,37 @@ angular
         }
     ])
 
-    .controller('newEventController', ['$scope', '$http', '$mdDialog', 'Authentication', '$state', '$mdToast',
-        function ($scope, $http, $mdDialog, Authentication, $state, $mdToast) {
+    .controller('newEventController', ['$scope', '$http', '$mdDialog', 'Authentication', '$state', '$mdToast', 'calendarEvent',
+        function ($scope, $http, $mdDialog, Authentication, $state, $mdToast, calendarEvent) {
 
             $scope.logged = Authentication.currentUser;
+            $scope.saveEvent = saveEvent;
+            $scope.calendarEvent = calendarEvent;
 
-            var start = new Date(),
-                end = new Date();
+            if (moment.isMoment($scope.start))
+            {
+                $scope.start = $scope.start.toDate();
+            }
 
-            $scope.event = {
+            if (moment.isMoment($scope.end))
+            {
+                $scope.end = $scope.end.toDate();
+            }
+
+            $scope.calendarEvent = {
                 title: $scope.title,
-                start: start ,
-                end: end,
+                start: $scope.start,
+                end: $scope.end,
+                location: $scope.location,
                 user: $scope.logged
             };
 
-            $scope.saveEvent = function() {
+            function saveEvent() {
+
                 $http({
                     method: 'POST',
                     url: '/api/events',
-                    data: $scope.event
+                    data: $scope.calendarEvent
                 })
                     .success(function () {
                         console.log('success');
@@ -178,7 +145,7 @@ angular
                     .error(function () {
                         alert("error creating event");
                     });
-            };
+            }
 
             $scope.cancelDialog = function () {
                 $mdDialog.cancel();
@@ -187,11 +154,64 @@ angular
         }
     ])
 
-    .controller('formEventController', ['$scope', '$mdDialog',
-        function ($scope, $mdDialog) {
+    .controller('formEventController', ['$http', '$scope', '$state', '$mdDialog', '$mdToast','calendarEvent',
+        function ($http, $scope, $state, $mdDialog, $mdToast, calendarEvent) {
 
-            $scope.cancelDialog = function () {
+            $scope.calendarEvent = calendarEvent;
+            $scope.editEvent = editEvent;
+            $scope.cancelDialog = cancelDialog;
+            $scope.removeEvent = removeEvent;
+
+            function editEvent() {
+
+                $http({
+                    method: "PUT",
+                    url: "api/events/" + $scope.calendarEvent.id,
+                    data: angular.toJson($scope.calendarEvent),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .success(function () {
+                        console.log('success updating event');
+                        $mdDialog.hide();
+                        $state.reload();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Wydarzenie edytowane")
+                                .position('top right')
+                                .hideDelay(1000)
+                        );
+                    })
+                    .error(function () {
+                        console.log('Error editing event');
+                    });
+            }
+            
+            function removeEvent(id) {
+                $http({
+                    method: 'DELETE',
+                    url: 'api/events/' + id
+                })
+                    .success(function () {
+                        console.log('success delete');
+                        $mdDialog.hide();
+                        $state.reload();
+                        $mdToast.show(
+                            $mdToast.simple()
+                                .content("Wydarzenie usunięte")
+                                .position('top right')
+                                .hideDelay(1000)
+                        );
+
+                    })
+                    .error(function () {
+                        alert('error deleting event ');
+                    });
+            }
+            
+            function cancelDialog() {
                 $mdDialog.cancel();
-            };
+            }
         }
     ]);
