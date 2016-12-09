@@ -12,7 +12,7 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "latest",
+    "angular": "~1.5.0",
     "angular-material":"",
     "angular-material-data-table":"",
     "angular-material-icons":"",
@@ -20,7 +20,7 @@
     "bootstrap":"",
     "angular-ui-router":"",
     "angular-ui-calendar":"",
-    "angular-animate":"",
+    "angular-animate":"~1.5.0",
     "angular-aria":"",
     "angular-cookies":"",
     "angular-messages":"",

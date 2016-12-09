@@ -9,6 +9,7 @@ angular
             $scope.groups = [];
             $scope.contacts = [];
             $scope.selected = [];
+            $scope.getContacts = getContacts;
 
             $scope.options = {
                 showSearch: false,
@@ -51,18 +52,13 @@ angular
             };
 
             function getContacts() {
-                $http.get('/api/contacts')
-                    .success(function (data) {
-                        $scope.contacts = data;
-                        console.log(data);
-                    })
-                    .error(function () {
-                        alert("error getting data");
-                    });
+              $http.get('/api/contacts')
+                .success(function (data) {
+                    $scope.contacts = data;
+                    console.log(data);
+                });
             }
-
-            getContacts();
-
+          
             // edit contact
             $scope.clickEdit = function (contact, $event) {
 

@@ -5,6 +5,7 @@ angular
 
             $scope.users = [];
             $scope.selected = [];
+            $scope.getUsers = getUsers;
 
             $scope.options = {
                 showSearch: false,

@@ -9,9 +9,9 @@ angular
 
 
            $mdThemingProvider
-                .theme('default')
-                .primaryPalette('grey', {'default':'900'})
-                .accentPalette('blue-grey', {'default':'900'});
+                .theme('blue-grey')
+                .primaryPalette('blue-grey')
+                .warnPalette('blue-grey');
 
             $mdThemingProvider.theme('teal') 
                 .primaryPalette('teal')
@@ -133,7 +133,7 @@ angular
     .run(['$rootScope', '$state', 'Authentication', 'Security',
         function ($rootScope, $state, Authentication, Security) {
 
-            $rootScope.theme = 'default';
+            $rootScope.theme = 'blue-grey';
 
             $rootScope.setTheme = function(value){
                 $rootScope.theme = value;
