@@ -39,6 +39,8 @@ angular
             };
 
             $scope.sameUser = {
+                username : '',
+                password: '',
                 authorities: [{authority: 'ROLE_USER'}]
             };
 

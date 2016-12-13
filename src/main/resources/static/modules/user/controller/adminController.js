@@ -77,7 +77,7 @@ angular
                     });
             };
 
-            $scope.create = {
+            $scope.sameUser = {
                 username: $scope.username,
                 email: $scope.email,
                 password: $scope.password,
@@ -89,7 +89,7 @@ angular
                 $http({
                     method: 'POST',
                     url: '/api/users/register',
-                    data: $scope.create
+                    data: $scope.sameUser
                 })
                     .success(function () {
                         console.log('success');

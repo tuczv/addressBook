@@ -9,7 +9,6 @@ angular
             $scope.groups = [];
             $scope.contacts = [];
             $scope.selected = [];
-            $scope.getContacts = getContacts;
 
             $scope.options = {
                 showSearch: false,
@@ -58,6 +57,7 @@ angular
                     console.log(data);
                 });
             }
+            getContacts();
           
             // edit contact
             $scope.clickEdit = function (contact, $event) {
@@ -227,8 +227,8 @@ angular
                 $scope.openMenu = function ($mdOpenMenu, $event) {
                     $mdOpenMenu($event);
                 };
-
-                return getGroups();
+   
+                getGroups();
             }
         }
     ]);

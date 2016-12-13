@@ -28,7 +28,7 @@ angular
             $scope.logout = function(){
                 userService.logout().then(function(response){
                     $scope.user = null;
-                    Authentication.currentUser = null;
+                    Authentication.currentUser = '';
                     $state.go('login');
                 });
             };
