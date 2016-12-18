@@ -1,10 +1,15 @@
 //noinspection JSAnnotator
 angular
     .module('addressbook')
-    .controller('loginController', ['$scope', '$state', 'userService', '$mdToast',
-        function ($scope, $state, userService, $mdToast) {
+    .controller('loginController', ['$scope', '$state', '$http', 'userService', '$mdToast', '$mdDialog',
+        function ($scope, $state, $http, userService, $mdToast, $mdDialog) {
 
-            $scope.user = {};
+            $scope.user = {
+                username: $scope.username,
+                email: $scope.email,
+                password: $scope.password,
+                authorities: [{authority:'ROLE_USER'}]
+            };
 
             $scope.error = {};
 
@@ -41,6 +46,8 @@ angular
             $scope.sameUser = {
                 username : '',
                 password: '',
+                email: '',
+                secret: '',
                 authorities: [{authority: 'ROLE_USER'}]
             };
 
@@ -56,14 +63,12 @@ angular
                         );
 
                         $scope.sameUser = {
-
-                            email: "",
-                            username: "",
-                            password: "",
+                            username : '',
+                            password: '',
+                            email: '',
+                            secret:'',
                             authorities: [{authority: 'ROLE_USER'}]
                         };
-
-                        $state.go('login');
 
                     }, function (err) {
                         console.log(err);
@@ -77,15 +82,32 @@ angular
 
             };
 
-            function reset() {
-                $scope.user = {
-                    email: "",
-                    username: "",
-                    password: ""
-                }
-            }
+            $scope.reset = function() {
 
-            $scope.reset = reset;
+                $scope.sameUser = {
+                    username: '',
+                    password: '',
+                    email: '',
+                    secret: '',
+                    authorities: [{authority: 'ROLE_USER'}]
+                };
+
+            };
+
+            $scope.clickResetPasswordUser = function (user, $event) {
+                $mdDialog.show({
+                    controller: resetDialogController,
+                    templateUrl: 'modules/user/views/reset.html',
+                    targetEvent: $event,
+                    locals: {
+                        user: user
+                    }
+                })
+                    .then(function (result) {
+
+                    });
+            };
+
 
             $scope.showReset = function () {
                 $state.go('reset');
@@ -94,5 +116,35 @@ angular
             $scope.closeReset = function () {
                 $state.go('login');
             };
+
+            function resetDialogController($scope, $mdDialog, user, $mdToast) {
+                $scope.user = user;
+
+                $scope.resetPassword = function (user) {
+                    $http({
+                        method: "PUT",
+                        url: "api/users/" + $scope.user.username,
+                        data: angular.toJson($scope.user),
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                        .success(function () {
+                            console.log('success reset password');
+                            $mdDialog.hide();
+                            $state.reload();
+                            $mdToast.show(
+                                $mdToast.simple()
+                                    .content("Hasło zostało zresetowane")
+                                    .position('top right')
+                                    .hideDelay(1000)
+                            );
+                        })
+                        .error(function () {
+                            console.log('Error reset password');
+                        });
+                };
+
+            }
         }
     ]);

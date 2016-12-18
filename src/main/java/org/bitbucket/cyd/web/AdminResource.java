@@ -34,7 +34,6 @@ public class AdminResource {
     @RequestMapping(value = "/users/{id}", method = RequestMethod.PUT)
     public User update(@PathVariable("id") String id, @RequestBody User user) {
         User update = userRepository.getUserById(id);
-
         update.setUsername(user.getUsername());
         update.setEmail(user.getEmail());
         update.setPassword(passwordEncoder.encode(user.getPassword()));

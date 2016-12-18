@@ -25,6 +25,9 @@ public class User {
     @Size(min = 6, max = 10)
     private String password;
 
+    @Size(min = 3, max = 10)
+    private String secret;
+
     @DBRef
     private Set<Authority> authorities = new HashSet<>();
 
@@ -35,13 +38,15 @@ public class User {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();
+        this.secret = user.getSecret();
         this.authorities = user.getAuthorities();
     }
 
-    public User(String username, String password, String email, Set<Authority> authorities) {
+    public User(String username, String password, String email, String secret, Set<Authority> authorities) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.secret = secret;
         this.authorities = authorities;
     }
 
@@ -76,6 +81,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSecret() {
+        return secret;
+    }
+
+    public void setSecret(String secret) {
+        this.secret = secret;
     }
 
     public Set<Authority> getAuthorities() {

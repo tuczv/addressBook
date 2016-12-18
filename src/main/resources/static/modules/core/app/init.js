@@ -44,7 +44,7 @@ angular
 
                     }
                 })
-                .state('reset', {
+                /*.state('reset', {
                     'url': '/reset',
                     'templateUrl': '/modules/user/views/reset.html',
                     'controller': 'loginController',
@@ -52,7 +52,7 @@ angular
                         'requiresLogin': false
 
                     }
-                })
+                })*/
                 .state('home', {
                     'url': '',
                     'templateUrl': '/modules/home/addressbook.html',
@@ -163,7 +163,6 @@ angular
                     });
 
             });
-
 
             $rootScope.tableFilter = {order: '-name', limit: 10, page: 1};
         }

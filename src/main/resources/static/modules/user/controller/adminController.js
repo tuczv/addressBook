@@ -53,7 +53,7 @@ angular
             $scope.clickAddUser = function ($event) {
                 var confirm = $mdDialog.confirm({
                     controller: 'adminController',
-                    templateUrl: 'modules/user/views/add-user.html',
+                    templateUrl: 'modules/user/views/add-user-admin.html',
                     targetEvent: $event,
                     parent: angular.element(document.body)
                 });
@@ -77,19 +77,11 @@ angular
                     });
             };
 
-            $scope.sameUser = {
-                username: $scope.username,
-                email: $scope.email,
-                password: $scope.password,
-                authorities: [{authority:'ROLE_USER'}]
-
-            };
-
             $scope.createUser = function () {
                 $http({
                     method: 'POST',
                     url: '/api/users/register',
-                    data: $scope.sameUser
+                    data: $scope.user
                 })
                     .success(function () {
                         console.log('success');

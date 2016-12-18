@@ -1,9 +1,9 @@
-<md-dialog aria-label="Dane użytkownika" ng-cloak flex="40">
+<md-dialog aria-label="Nowy użytkownik" ng-cloak flex="40">
     <form name="editForm">
         <md-toolbar>
             <div class="md-toolbar-tools">
 
-                <h2>Reset hasła</h2>
+                <h2>Nowy użytkownik</h2>
                 <span flex></span>
                 <!--      <md-button class="md-icon-button" ng-click="removeContact(contact.id)">
                           <ng-md-icon icon="delete" style="fill: pink"></ng-md-icon>
@@ -35,16 +35,16 @@
 
                         </div>
                         <div layout-gt-sm="row">
-                            <md-input-container md-is-error="editForm.secret.$invalid && (editForm.$submitted || editForm.secret.$dirty)" class="md-block" flex-gt-sm>
-                                <label>Pytanie pomocnicze</label>
+                            <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
+                                <label>Email</label>
                                 <input
-                                        type="secret"
+                                        type="email"
                                         id="email"
-                                        name="secret"
-                                        ng-model="user.secret"
+                                        name="email"
+                                        ng-model="user.email"
                                         required>
-                                <div ng-messages="editForm.secret.$error" ng-if="editForm.secret.$touched">
-                                    <div ng-message="required">Odpowiedź na pytanie</div>
+                                <div ng-messages="editForm.email.$error" ng-if="editForm.email.$touched">
+                                    <div ng-message="required">Wpisz email</div>
                                 </div>
                             </md-input-container>
 
@@ -73,12 +73,11 @@
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button class="md-raised md-primary" ng-click="cancelEditModal()">
+            <md-button class="md-raised md-primary" ng-click="cancelCreate()">
                 <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
             </md-button>
-            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="resetPassword(user.username)" class="md-raised md-warn">RESET</md-button>
+            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="createUser()" class="md-raised md-warn">Twórz</md-button>
 
         </md-dialog-actions>
     </form>
 </md-dialog>
-<!--  -->

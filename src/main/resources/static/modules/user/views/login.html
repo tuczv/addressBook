@@ -97,7 +97,7 @@
                         </md-input-container>
                     </form>
                     <md-button class="md-raised md-primary" ng-click="loginUser()">Login</md-button>
-                    <md-button class="md-primary" ng-click="showReset()">Nie pamiętam hasła</md-button>
+                    <md-button class="md-primary" ng-click="clickResetPasswordUser(user, $event)">Nie pamiętam hasła</md-button>
                 </div>
             </md-tab>
 
@@ -156,9 +156,27 @@
                                 <div ng-message="minlength">Zbyt krótkie hasło, 6 znaków minimalnie</div>
                             </div>
                         </md-input-container>
+
+                        <md-input-container style="width: 300px; margin-right: 5px;" md-is-error="registerForm.secret.$invalid && (registerForm.$submitted || registerForm.secret.$dirty)">
+                            <label>Pomocnicze pytanie(r. urodzenia)</label>
+                            <md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
+
+                            <input
+                                    ng-model="sameUser.secret"
+                                    id="secret"
+                                    name="secret"
+                                    type="secret"
+                                    ng-minlength="4"
+                                    ng-maxlength="4"
+                                    required>
+                            <div ng-messages="registerForm.secret.$error" ng-if="registerForm.secret.$touched">
+                                <div ng-message="required">Wpisz poprawne hasło</div>
+                                <div ng-message="minlength">Zbyt krótkie hasło, 4 znaków minimalnie</div>
+                            </div>
+                        </md-input-container>
                     </form>
                     <div layout="row" layout-align="center center">
-                        <md-button type="submit" ng-click="reset()" class="md-primary">
+                        <md-button ng-click="reset(sameUser)" class="md-primary">
                             RESET
                         </md-button>
                         <md-button ng-disabled="registerForm.$invalid" ng-click="registerUser()" class="md-raised md-primary">
