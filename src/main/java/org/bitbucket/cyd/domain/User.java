@@ -42,14 +42,13 @@ public class User {
         this.authorities = user.getAuthorities();
     }
 
-    public User(String username, String password, String email, String secret, Set<Authority> authorities) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.secret = secret;
         this.authorities = authorities;
     }
-
 
     public String getId() {
         return id;

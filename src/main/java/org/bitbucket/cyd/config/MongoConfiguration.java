@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @EnableMongoRepositories
 public class MongoConfiguration {
-
     @Bean
     public MongoTemplate mongoTemplate() throws Exception {
         return new MongoTemplate(new MongoClient("localhost", 27017), "test");

@@ -64,16 +64,13 @@
                             </md-input-container>
 
                         </div>
-
-
-
                     </form>
                 </div>
             </md-content>
         </md-dialog-content>
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button class="md-raised md-primary" ng-click="cancelEditModal()">
+            <md-button type="submit" class="md-raised md-primary" ng-click="cancel()">
                 <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
             </md-button>
             <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="resetPassword(user.username)" class="md-raised md-warn">RESET</md-button>

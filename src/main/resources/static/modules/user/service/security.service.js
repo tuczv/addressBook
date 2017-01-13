@@ -19,6 +19,7 @@ angular
 
                 hasRole: function (role) {
                     var boolean = false;
+                    var authorities = ['ROLE_USER', 'ROLE_ADMIN'];
                     angular.forEach(Authentication.currentUser.authorities, function (i) {
                         if (i.authority === role) {
                             boolean = true;
@@ -29,6 +30,8 @@ angular
 
                 hasAnyRole: function (arrayRoles) {
                     var boolean = false;
+                    var authorities = ['ROLE_USER', 'ROLE_ADMIN'];
+
                     angular.forEach(Authentication.currentUser.authorities, function (i) {
                         angular.forEach(arrayRoles, function (j) {
                             if (i.authority === j) {

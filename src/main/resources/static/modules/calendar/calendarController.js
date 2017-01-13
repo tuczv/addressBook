@@ -26,7 +26,7 @@ angular
                 calendar:{
                     editable          : true,
                     eventLimit        : true,
-                    handleWindowResize: false,
+                    handleWindowResize : false,
                     aspectRatio       : 1,
                     header:'',
                     viewRender        : function (view) {
