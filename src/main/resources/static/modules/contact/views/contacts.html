@@ -1,40 +1,40 @@
 <div layout="column" layout>
     <md-whiteframe class="md-whiteframe-z2">
 
-        <md-toolbar ng-show="!options.showSearch" ng-hide="options.rowSelection && selected.length"class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
+        <md-toolbar ng-show="!options.showSearch" ng-hide="options.rowSelection && selected.length"class="md-hue-1 md-whiteframe-z2" style="">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button" aria-label="Contacts">
                     <ng-md-icon icon="my_library_books" style="fill: black"></ng-md-icon>
                 </md-button>
                 <h3>
-                    Kontakty
+                    {{'CONTACTS' | translate}}
                 </h3>
                 <span flex></span>
 
                 <md-menu>
                     <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                        <md-tooltip>Sortuj</md-tooltip>
+                        <md-tooltip>Sort</md-tooltip>
                         <ng-md-icon icon="group"></ng-md-icon>
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item ng-repeat="group in groups">
                             <md-button class="md-button" ng-click="filters.group = group.name">{{group.name}}</md-button>
                         </md-menu-item>
-                        <md-button class="md-button" ng-click="filters.group = undefined">Wyczyść</md-button>
+                        <md-button class="md-button" ng-click="filters.group = undefined"><h6>{{'CLEAN' | translate}}</h6></md-button>
                     </md-menu-content>
                 </md-menu>
 
                 <md-menu>
                     <md-button class="md-icon-button" aria-label="Select" ng-click="$mdOpenMenu()">
-                        <md-tooltip>Export kontaktów do:</md-tooltip>
+                        <md-tooltip>export & import contacs</md-tooltip>
                         <ng-md-icon icon="import_export"></ng-md-icon>
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item>
-                            <md-button ng-click="exportData()">Eksport</md-button>
+                            <md-button ng-click="exportData()">{{'EXPORT' | translate}}</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button>Upload CSV</md-button>
+                            <md-button>{{'IMPORT' | translate}}</md-button>
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
@@ -42,7 +42,7 @@
 
                 <md-button ng-click="options.showSearch = !options.showSearch"
                            class="md-icon-button md-primary md-button md-ink-ripple">
-                    <md-tooltip>Szukaj</md-tooltip>
+                    <md-tooltip>Find</md-tooltip>
                     <ng-md-icon icon="search"></ng-md-icon>
                 </md-button>
             </div>
@@ -56,7 +56,7 @@
                 </md-button>
                 <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
                     <label>&nbsp;</label>
-                    <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj kontakt">
+                    <input ng-model="searchInput" class="md-body-1" placeholder="{{'FIND' | translate}}">
                 </md-input-container>
                 <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
                            class="md-icon-button md-primary md-button md-ink-ripple">
@@ -86,11 +86,11 @@
                            md-on-reorder="contacts">
                     <tr md-row>
                         <th md-column></th>
-                        <th md-column md-order-by="name">Imię</th>
-                        <th md-column md-order-by="lastName">Nazwisko</th>
-                        <th md-column md-order-by="email">Poczta</th>
-                        <th md-column md-numeric="phone">Telefon</th>
-                        <th md-column md-order-by="group">Grupa</th>
+                        <th md-column md-order-by="name">{{'NAME' | translate}}</th>
+                        <th md-column md-order-by="lastName">{{'LASTNAME' | translate}}</th>
+                        <th md-column md-order-by="email">{{'EMAIL' | translate}}</th>
+                        <th md-column md-numeric="phone">{{'PHONE' | translate}}</th>
+                        <th md-column md-order-by="group">{{'GROUP' | translate}}</th>
                     </tr>
                     </thead>
 
@@ -105,7 +105,7 @@
                             		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
                         ng-click="clickEdit(contact, $event)">
 
-                        <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#1E90FF" height="30" width="30"  data={{contact.name}} shape="round"></ng-letter-avatar></td>
+                        <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#D84315" height="30" width="30"  data={{contact.name}} shape="round"></ng-letter-avatar></td>
                         <td md-cell>{{contact.name}}</td>
                         <td md-cell>{{contact.lastName}}</td>
                         <td md-cell>{{contact.email}}</td>
@@ -123,7 +123,7 @@
             </md-table-pagination>
         </md-content>
 
-        <md-button class="md-fab md-fab-bottom-right md-warn" aria-label="Nowy message"
+        <md-button class="md-fab md-fab-bottom-right" aria-label="Nowy message"
                    ng-click="clickAdd($event)">
             <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
         </md-button>

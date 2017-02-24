@@ -1,13 +1,16 @@
-<md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;">
+<md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="">
     <div class="md-toolbar-tools">
-        <span>Wiadomości</span>
+        <md-button class="md-icon-button" aria-label="Contacts">
+            <ng-md-icon icon="facebook-messenger" style="fill: black"></ng-md-icon>
+        </md-button>
+        <span>{{'EMAILS' | translate}}</span>
     </div>
 </md-toolbar>
 
 <div layout="row" style="height:100%">
   <div flex="50">
     <md-content style="height: 100%;" flex>
-        <md-subheader class="md-primary"><b>Wysłane wiadomości</b></md-subheader>
+        <md-subheader class="md-primary"><b>{{'SEND_EMAIL' | translate}}</b></md-subheader>
         <md-list>
             <md-list-item class="md-3-line md-hue-1 md-whiteframe-z2" ng-repeat="email in emails | filter:search" 
             role="link"
@@ -21,7 +24,7 @@
                 <span flex></span>
                 <md-icon class="md-secondary" md-svg-src="assets/icons/ic_done_black_24px.svg"
                          ng-click="deleteEmail(email.id)">
-                    <md-tooltip>Usuń</md-tooltip>
+                    <md-tooltip>Delete</md-tooltip>
                 </md-icon>
 
                 <md-divider></md-divider>
@@ -31,18 +34,19 @@
 
     <div flex=50">
         <div ng-show="showEmail" layout-fill>
-            <md-subheader class="md-primary"><b>Kliknij na wybraną wiadomość</b></md-subheader>
+            <md-subheader class="md-primary"><b>{{'SELECT' | translate}}</b></md-subheader>
             <div class="">
                 <ng-md-icon icon="email" style="fill: #C0C0C0" size="512"></ng-md-icon>
             </div>
         </div>
 
         <div ng-show="showReadEmail" layout-fill>
-            <md-subheader class="md-primary"><b>Treść wiadomości</b></md-subheader>
+            <md-subheader class="md-primary"><b>{{'BODY' | translate}}</b></md-subheader>
             <md-card>
                 <md-card-header>
                     <md-card-avatar>
-                        <img ng-src="{{avatarEmail}}">
+                        <ng-letter-avatar fontsize="15" avatarcustombgcolor="#D84315" height="30" width="30"  data={{userTo}} shape="round"></ng-letter-avatar>
+
                     </md-card-avatar>
                     <md-card-header-text>
                         <span class="md-title"><b>{{selected.userTo}}</b></span>
@@ -50,7 +54,7 @@
                     </md-card-header-text>
                     <span flex></span>
                     <ng-md-icon icon="close" style="fill: gray" ng-click="closeSelectEmail()">
-                        <md-tooltip>Zamknij</md-tooltip>
+                        <md-tooltip>Close</md-tooltip>
                     </ng-md-icon>
                 </md-card-header>
                 <md-divider></md-divider>
@@ -58,12 +62,12 @@
                 <section layout="column" layout-padding>
                     <a class="toggle-details md-accent-color" ng-hide="selectedMailShowDetails"
                        ng-click="selectedMailShowDetails = !selectedMailShowDetails">
-                       Pokaż szczegóły
+                       {{'DETAILS' | translate}}
                     </a>
 
                     <a class="toggle-details md-accent-color" ng-show="selectedMailShowDetails"
                        ng-click="selectedMailShowDetails = !selectedMailShowDetails">
-                        Schowaj szczegóły
+                        {{'DETAILS' | translate}}
                     </a>
                 </section>
 
@@ -90,7 +94,7 @@
             </md-card>
         </div>
     </div>
-    <md-button class="md-fab md-fab-top-right md-warn" aria-label="Nowy message" ng-click="showCreateNews($event)">
+    <md-button class="md-fab md-fab-top-right" aria-label="Nowy message" ng-click="showCreateNews($event)">
         <ng-md-icon icon="mode_edit" style="fill: white"></ng-md-icon>
     </md-button>
 </div>

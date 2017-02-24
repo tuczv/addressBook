@@ -27,3 +27,4 @@ public class ContactService {
         return mongoTemplate.find(query, Contact.class);
     }
 }
+

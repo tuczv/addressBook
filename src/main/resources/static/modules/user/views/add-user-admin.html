@@ -3,7 +3,7 @@
         <md-toolbar>
             <div class="md-toolbar-tools">
 
-                <h2>Nowy użytkownik</h2>
+                <h2>{{'NEW' | translate}}</h2>
                 <span flex></span>
                 <!--      <md-button class="md-icon-button" ng-click="removeContact(contact.id)">
                           <ng-md-icon icon="delete" style="fill: pink"></ng-md-icon>
@@ -22,7 +22,7 @@
                     <form>
                         <div layout-gt-sm="row">
                             <md-input-container md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)" class="md-block" flex-gt-sm>
-                                <label>Imię</label>
+                                <label>{{'NAME' | translate}}</label>
                                 <input
                                         name="name"
                                         id="name"
@@ -36,7 +36,7 @@
                         </div>
                         <div layout-gt-sm="row">
                             <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
-                                <label>Email</label>
+                                <label>{{'EMAIL' | translate}}</label>
                                 <input
                                         type="email"
                                         id="email"
@@ -51,7 +51,7 @@
                         </div>
                         <div layout-gt-sm="row">
                             <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
-                                <label>Password</label>
+                                <label>{{'PASSWORD' | translate}}</label>
                                 <input
                                         type="password"
                                         id="password"
@@ -64,9 +64,6 @@
                             </md-input-container>
 
                         </div>
-
-
-
                     </form>
                 </div>
             </md-content>
@@ -76,7 +73,7 @@
             <md-button class="md-raised md-primary" ng-click="cancelCreate()">
                 <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
             </md-button>
-            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="createUser()" class="md-raised md-warn">Twórz</md-button>
+            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="createUser()" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
 
         </md-dialog-actions>
     </form>

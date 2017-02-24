@@ -100,7 +100,7 @@ angular
                         $mdDialog.hide();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Kontakt dodany do listy")
+                                .content("Create contact")
                                 .position('top right')
                                 .hideDelay(1000)
                         );
@@ -111,13 +111,13 @@ angular
                         if (error.status == 500) {
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Kontakt o takiej nazwie lub email istnieje w bazie!")
+                                    .content("Contact not found")
                                     .position('top right')
                                     .hideDelay(1000)
                             );
                         }
                         else
-                            alert("error creating contact");
+                            alert("Error creating contact");
                     });
             };
 
@@ -186,7 +186,7 @@ angular
                             $state.reload();
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Kontakt został edytowany")
+                                    .content("Update contact")
                                     .position('top right')
                                     .hideDelay(1000)
                             );
@@ -209,7 +209,7 @@ angular
                             $state.reload();
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Kontakt został usunięty")
+                                    .content("Delete contact")
                                     .position('top right')
                                     .hideDelay(1000)
                             );

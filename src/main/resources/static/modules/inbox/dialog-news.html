@@ -3,12 +3,12 @@
         <form name="createForm" ng-submit="createNews()">
             <div layout layout-sm="column">
                 <md-input-container>
-                    <label>Od</label>
+                    <label>{{'FROM' | translate}}</label>
                     <input ng-model="email.userFrom.username" disabled>
                 </md-input-container>
 
                 <md-input-container flex md-is-error="createForm.userTo.$invalid && (createForm.$submitted || createForm.userTo.$dirty)">
-                    <label>Do</label>
+                    <label>{{'TO' | translate}}</label>
                     <md-select ng-model="email.userTo"
                                name="userTo"
                                id="userTo"
@@ -23,7 +23,7 @@
 
             <div layout layout-sm="column">
                 <md-input-container flex md-is-error="createForm.subject.$invalid && (createForm.$submitted || createForm.subject.$dirty)">
-                    <label>Temat</label>
+                    <label>{{'NAME' | translate}}</label>
                     <input ng-model="email.subject"
                            md-minlength="3"
                            md-maxlength="25"
@@ -37,7 +37,7 @@
             </div>
 
             <md-input-container class="md-block">
-                <label>Wiadomość</label>
+                <label>{{'BODY' | translate}}</label>
                 <textarea ng-model="email.body" md-maxlength="200" rows="3" md-select-on-focus></textarea>
             </md-input-container>
 
@@ -45,8 +45,8 @@
 
     <md-dialog-action layout="row">
         <span flex></span>
-        <md-button ng-click="cancelAddModal()"> Wstecz</md-button>
-        <md-button type="submit" ng-disabled="createForm.$invalid" class="md-primary"> Wyślij</md-button>
+        <md-button ng-click="cancelAddModal()">{{'BACK' | translate}}</md-button>
+        <md-button type="submit" ng-disabled="createForm.$invalid" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
     </md-dialog-action >
     </form>
 </md-dialog>

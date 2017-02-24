@@ -89,7 +89,7 @@ angular
                         $mdDialog.hide();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Użytkownik dodany")
+                                .content("Create user")
                                 .position('top right')
                                 .hideDelay(1000)
                         );
@@ -100,13 +100,13 @@ angular
                         if (error.status == 500) {
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Użytkownik o takiej nazwie lub email istnieje w bazie!")
+                                    .content("User not found!")
                                     .position('top right')
                                     .hideDelay(1000)
                             );
                         }
                         else
-                            alert("error creating user");
+                            alert("Error creating user");
                     });
             };
 
@@ -120,7 +120,7 @@ angular
                         $state.reload();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Uzytkownik został usunięty")
+                                .content("Delete user")
                                 .position('top right')
                                 .hideDelay(1000)
                         );
@@ -158,7 +158,7 @@ angular
                             $state.reload();
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Użytkownik został edytowany")
+                                    .content("Update user")
                                     .position('top right')
                                     .hideDelay(1000)
                             );

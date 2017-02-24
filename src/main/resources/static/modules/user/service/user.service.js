@@ -1,9 +1,7 @@
-//noinspection JSAnnotator
 angular.module('addressbook')
     .factory('userService', ['$http',
         function ($http) {
             return {
-
                 loginUser: function (user) {
                     return $http({
                         method: 'POST',
@@ -20,13 +18,11 @@ angular.module('addressbook')
                         return response;
                     });
                 },
-
                 logout: function () {
                     return $http.post("/logout", {}).then(function (response) {
                         return response;
                     });
                 },
-
                 register: function (user) {
                     return $http.post("/api/users/register", user)
                         .then(function (response) {
@@ -36,3 +32,4 @@ angular.module('addressbook')
             }
         }
     ]);
+

@@ -10,6 +10,27 @@ angular
             $scope.Security = Security;
             $scope.emails = [];
 
+            /* sidenavs left and right */
+            $scope.toggleLeft = buildToggler('left');
+            $scope.toggleRight = buildToggler('right');
+
+            function buildToggler(componentId) {
+                return function() {
+                    $mdSidenav(componentId).toggle();
+                };
+            }
+
+            $scope.sidenavMenu = {
+                sections:[
+                    {
+                        icon: 'action:ic_shopping_cart_24px',
+                        name: 'Grupy',
+                        expand: false
+
+                    }]
+            };
+
+            /* ilość e-maili */
             function lengthEmails() {
                 Inbox.getAll()
                     .then(function(data) {
@@ -18,10 +39,12 @@ angular
             }
             lengthEmails();
 
+            /* wszystkie grupy */
             $scope.getGroups = function () {
                 Group.getAll();
             };
 
+            /* zalogowany użytkownik */
             $scope.user = Authentication.currentUser;
 
             console.log($scope.user);
@@ -42,21 +65,66 @@ angular
                 }
             });
 
-            $scope.sidenavMenu = {
-                sections:[
-                    {
-                        icon: 'action:ic_shopping_cart_24px',
-                        name: 'Grupy',
-                        expand: false
+            /* wszystkie użytkownicy*/
+            function getUsers() {
+                $http.get('admin/users')
+                    .success(function (data) {
+                        $scope.users = data;
+                    })
+                    .error(function (data) {
 
-                    }]
+                    });
+            }
+
+            getUsers();
+
+            // get all messages
+            $scope.messages = [];
+            $scope.message = {
+                author: $scope.user.username,
+                text: ''
             };
+
+            function showHistoryMessages() {
+                $http.get('/api/messages')
+                    .success(function (response) {
+                        $scope.messages = response;
+                    })
+                    .error(function () {
+                        alert('problem fetching message history');
+                    })
+            }
+
+            showHistoryMessages();
+
+            //configure STOMP and SOCKJs
+            var stompClient = null;
+
+            //add message
+            $scope.sendTo = function () {
+                stompClient.send('/api/chat', {}, JSON.stringify($scope.message));
+                $scope.message = '';
+            };
+
+            /* konfiguracja Stomp i SockJS */
+            function init() {
+                var sock = new SockJS('/chat');
+                stompClient = Stomp.over(sock);
+                stompClient.connect({}, function (frame) {
+                    stompClient.subscribe('/topic/chat', function (response) {
+                        $scope.messages.push(response.body);
+                        $scope.$apply();
+                    });
+                });
+            }
+
+            init();
 
             $scope.goToChat = function () {
                 $state.go('home.chat');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Czat")
+                        .content("Chat")
                         .position('top right')
                         .hideDelay(1000)
                 );
@@ -66,7 +134,7 @@ angular
                 $state.go('home.contacts');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Kontakty")
+                        .content("Contacts")
                         .position('top right')
                         .hideDelay(1000)
                 );
@@ -76,7 +144,7 @@ angular
                 $state.go('home.users');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Użytkownicy")
+                        .content("Users")
                         .position('top right')
                         .hideDelay(1000)
                 );
@@ -92,7 +160,7 @@ angular
                 $state.go('home.groups');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Grupy kontaktów")
+                        .content("Groups")
                         .position('top right')
                         .hideDelay(1000)
                 );
@@ -113,7 +181,7 @@ angular
                 $state.go('home.inbox');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Wysłane wiadomości")
+                        .content("Sent Mail")
                         .position('bottom right')
                         .hideDelay(1000)
                 );
@@ -123,7 +191,7 @@ angular
                 $state.go('home.calendar');
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Kalendarz")
+                        .content("Calendar")
                         .position('bottom right')
                         .hideDelay(1000)
                 );

@@ -2,14 +2,14 @@
 
 <div layout="column" layout-margin>
     <md-whiteframe class="md-whiteframe-4dp">
-        <md-toolbar class="md-accent">
+        <md-toolbar class="md-hue-1 md-whiteframe-z2">
             <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
                  <span layout="row" layout-align="left center">
                     <md-button ui-sref="home.contacts" class="md-icon-button" aria-label="">
                         <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
                     </md-button>
                 </span>
-                <span layout="row" layout-align="center center">Wiadomości</span>
+                <span layout="row" layout-align="center center">{{'CHAT' | translate}}</span>
                 <span flex></span>
                 <span layout="row" layout-align="left center">
                     <md-button ng-click="exportPDF()" class="md-icon-button" aria-label="">

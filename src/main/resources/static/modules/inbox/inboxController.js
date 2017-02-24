@@ -70,7 +70,7 @@ angular
                         $mdDialog.hide();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Wiadmość została wysłana")
+                                .content("Sent message")
                                 .position('bottom right')
                                 .hideDelay(1000)
                         );
@@ -94,7 +94,7 @@ angular
                         $state.reload();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Wiadomość została usunięta")
+                                .content("Delete message")
                                 .position('top right')
                                 .hideDelay(1000)
                         );

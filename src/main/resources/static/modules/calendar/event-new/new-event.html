@@ -2,7 +2,7 @@
     <form name="createForm">
         <md-toolbar>
             <div class="md-toolbar-tools">
-                <h2>Wydarzenie</h2>
+                <h2>{{'EVENT' | translate}}</h2>
                 <span flex></span>
 
             </div>
@@ -15,7 +15,7 @@
                             md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)"
                             class="md-icon-float md-block">
                         <!-- Use floating label instead of placeholder -->
-                        <label>Nazwa</label>
+                        <label>{{'NAME' | translate}}</label>
 
                         <input
                                 ng-model="calendarEvent.title"
@@ -27,12 +27,12 @@
                         </div>
 
                     </md-input-container>
-                    <md-datepicker ng-model="calendarEvent.start" md-placeholder="Date" ></md-datepicker>
+                    <md-datepicker ng-model="calendarEvent.start" md-placeholder="{{'FROM' | translate}}" ></md-datepicker>
 
-                    <md-datepicker ng-model="calendarEvent.end" md-placeholder="Date"></md-datepicker>
+                    <md-datepicker ng-model="calendarEvent.end" md-placeholder="{{'TO' | translate}}"></md-datepicker>
                     <br>
                     <md-input-container class="md-block" flex>
-                        <label>Gdzie?</label>
+                        <label>{{'WHERE' | translate}}</label>
                         <input ng-model="calendarEvent.location">
                     </md-input-container>
 
@@ -41,8 +41,8 @@
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button ng-click="cancelDialog()" class="md-raised md-primary">Cofnij</md-button>
-            <md-button ng-click="saveEvent()" ng-disabled="createForm.$invalid"  class="md-raised md-warn">Zapisz</md-button>
+            <md-button ng-click="cancelDialog()" class="md-raised md-primary">{{'BACK' | translate}}</md-button>
+            <md-button ng-click="saveEvent()" ng-disabled="createForm.$invalid"  class="md-raised md-warn">{{'SEND' | translate}}</md-button>
         </md-dialog-actions>
     </form>
 </md-dialog>

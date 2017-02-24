@@ -2,7 +2,7 @@
     <form name="createForm">
         <md-toolbar  class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
             <div class="md-toolbar-tools">
-                <h2>Nazwa grupy</h2>
+                <h2>{{'UPDATE' | translate}}</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="cancelAddModal()">
                     <ng-md-icon icon="close" style="fill: black"></ng-md-icon>
@@ -33,7 +33,7 @@
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button class="md-primary"  ng-click="editGroup(group.id)" ng-disabled="createForm.$invalid"  class="md-accent md-raised md-hue-1">Edytuj</md-button>
+            <md-button class="md-primary"  ng-click="editGroup(group.id)" ng-disabled="createForm.$invalid"  class="md-raised md-warn">{{'SEND' | translate}}</md-button>
 
         </md-dialog-actions>
     </form>

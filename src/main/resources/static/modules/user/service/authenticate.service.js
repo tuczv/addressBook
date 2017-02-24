@@ -1,4 +1,3 @@
-//noinspection JSAnnotator
 angular
     .module('addressbook')
     .factory('Authentication', ['$http', '$state', '$q',
@@ -8,28 +7,6 @@ angular
             var self = {
 
                 currentUser: null,
-             /*   loginState: 'login',
-                logoutPath: '/logout',
-                desireState: 'home.contacts',*/
-
-                /*authorize: function () {
-
-                    self.login()
-                        .then(function() {
-                            if(!self.isAuthenticated())
-                                $state.go(self.loginState);
-                        });
-
-                    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
-
-                        if(toState.name === self.loginState || self.isAuthenticated())
-                            return;
-
-                        self.desireState = toState.name;
-
-                        event.preventDefault();
-                    });
-                },*/
 
                 login: function () {
                     if (!self.isAuthenticated()) {

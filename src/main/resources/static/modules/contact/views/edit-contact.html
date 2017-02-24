@@ -3,7 +3,7 @@
         <md-toolbar>
             <div class="md-toolbar-tools">
                 
-                <h2>Dane kontaktowe</h2>
+                <h2>{{'UPDATE' | translate}}</h2>
                 <span flex></span>
                 <md-button class="md-icon-button" ng-click="removeContact(contact.id)">
                     <ng-md-icon icon="delete" style="fill: pink"></ng-md-icon>
@@ -22,7 +22,7 @@
                     <form>
                         <div layout-gt-sm="row">
                             <md-input-container md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)" class="md-block" flex-gt-sm>
-                                <label>Imię</label>
+                                <label>{{'NAME' | translate}}</label>
                                 <input 
                                 	name="name"
                                 	id="name"  
@@ -33,14 +33,14 @@
         						</div>	
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <label>Nazwisko</label>
+                                <label>{{'LASTNAME' | translate}}</label>
                                 <input type="text" name="lastName" ng-model="contact.lastName">
                             </md-input-container>
                             
                         </div>
                         <div layout-gt-sm="row">
                         	<md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
-                            	<label>Email</label>
+                            	<label>{{'EMAIL' | translate}}</label>
                             	<input 
                             		type="email" 
                             		id="email" 
@@ -59,11 +59,11 @@
                         
                         <div layout-gt-sm="row">
                             <md-input-container class="md-block" flex-gt-sm>
-                                <label>Telefon</label>
+                                <label>{{'PHONE' | translate}}</label>
                                 <input type="text" name="phone" ng-model="contact.phone">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
-                                <label>Grupa</label>
+                                <label>{{'GROUP' | translate}}</label>
                                 <md-select ng-model="contact.group">
                                     <md-option ng-repeat="group in groups" value="{{group.name}}">
                                         {{group.name}}
@@ -80,7 +80,7 @@
 			<md-button class="md-raised md-primary" ng-click="cancelEditModal()">
                     <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
             </md-button>
-            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="editContact(contact.id)" class="md-raised md-warn">Edytuj</md-button>
+            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="editContact(contact.id)" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
 
         </md-dialog-actions>
     </form>

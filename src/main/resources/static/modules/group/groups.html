@@ -4,16 +4,19 @@
     </div>
     <div class="md-whiteframe-z2" flex="70">
         <md-whiteframe>
-            <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch">
+            <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="!options.showSearch">
                 <div class="md-toolbar-tools">
+                    <md-button class="md-icon-button" aria-label="Contacts">
+                        <ng-md-icon icon="group" style="fill: black"></ng-md-icon>
+                    </md-button>
                     <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
-                        <span layout="row" layout-align="center center">Grupy kontaktów</span>
+                        <span layout="row" layout-align="center center">{{'GROUPS' | translate}}</span>
 
                     </h2>
                     <span flex></span>
                     <md-button ng-click="options.showSearch = !options.showSearch"
                                class="md-icon-button md-primary md-button md-ink-ripple">
-                        <md-tooltip>Szukaj</md-tooltip>
+                        <md-tooltip>Find</md-tooltip>
                         <ng-md-icon icon="search"></ng-md-icon>
                     </md-button>
                 </div>
@@ -27,7 +30,7 @@
                     </md-button>
                     <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
                         <label>&nbsp;</label>
-                        <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj grupy">
+                        <input ng-model="searchInput" class="md-body-1" placeholder="{{'FIND' | translate}}">
                     </md-input-container>
                     <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
                                class="md-icon-button md-primary md-button md-ink-ripple">
@@ -46,7 +49,7 @@
                                md-on-reorder="groups">
                         <tr md-row>
                             <th md-column></th>
-                            <th md-column md-order-by="name">Nazwa</th>
+                            <th md-column md-order-by="name">{{'NAME' | translate}}</th>
                             <th md-column></th>
                         </tr>
                         </thead>
@@ -56,8 +59,9 @@
                             ng-repeat="group in groups
                                     | filter: filters
                             		| orderBy: $root.tableFilter.order
-                            		| filter:  searchInput">
-                            <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{group.name}} shape="round"></ng-letter-avatar></td>
+                            		| filter:  searchInput"
+                            ng-click="clicked(group, $event)">
+                            <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#D84315" height="30" width="30"  data={{group.name}} shape="round"></ng-letter-avatar></td>
                             <td md-cell>{{group.name}}</td>
                             <td md-cell>
                                 <md-menu>
@@ -66,10 +70,10 @@
                                     </md-button>
                                     <md-menu-content width="4">
                                         <md-menu-item>
-                                            <md-button ng-click="showEditGroup(group, $event)">Edytuj</md-button>
+                                            <md-button ng-click="showEditGroup(group, $event)">{{'UPDATE' | translate}}</md-button>
                                         </md-menu-item>
                                         <md-menu-item>
-                                            <md-button ng-click="deleteGroup(group.id)">Usuń</md-button>
+                                            <md-button ng-click="deleteGroup(group.id)">{{'DELETE' | translate}}</md-button>
                                         </md-menu-item>
                                     </md-menu-content>
                                 </md-menu>
@@ -85,7 +89,7 @@
                                      md-boundary-links>
                 </md-table-pagination>-->
             </md-content>
-            <md-button class="md-fab md-fab-bottom-right md-warn"
+            <md-button class="md-fab md-fab-bottom-right"
                        ng-click="showAddGroup($event)">
                 <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
             </md-button>

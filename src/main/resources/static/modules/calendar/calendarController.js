@@ -40,7 +40,7 @@ angular
                         week : 'ddd D',
                         day  : 'ddd M'
                     },
-                    lang              : "pl",
+                    lang              : "en",
                     eventClick        : showFormEventDialog,
                     selectable        : true,
                     selectHelper      : true,
@@ -135,7 +135,7 @@ angular
                         $mdDialog.hide();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Wydarzenie zostało dodane")
+                                .content("Create event")
                                 .position('top right')
                                 .hideDelay(1000)
                         );
@@ -143,7 +143,7 @@ angular
 
                     })
                     .error(function () {
-                        alert("error creating event");
+                        alert("error created event");
                     });
             }
 
@@ -173,12 +173,12 @@ angular
                     }
                 })
                     .success(function () {
-                        console.log('success updating event');
+                        console.log('Update event');
                         $mdDialog.hide();
                         $state.reload();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Wydarzenie edytowane")
+                                .content("Success updated event")
                                 .position('top right')
                                 .hideDelay(1000)
                         );
@@ -199,7 +199,7 @@ angular
                         $state.reload();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Wydarzenie usunięte")
+                                .content("Delete event")
                                 .position('top right')
                                 .hideDelay(1000)
                         );

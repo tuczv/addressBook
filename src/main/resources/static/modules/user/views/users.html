@@ -3,13 +3,13 @@
         <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch">
             <div class="md-toolbar-tools">
                 <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
-                    <span layout="row" layout-align="center center">Użytkownicy</span>
+                    <span layout="row" layout-align="center center">{{'USERS' | translate}}</span>
 
                 </h2>
                 <span flex></span>
                 <md-button ng-click="options.showSearch = !options.showSearch"
                                class="md-icon-button md-primary md-button md-ink-ripple">
-                        <md-tooltip>Szukaj</md-tooltip>
+                        <md-tooltip>Find</md-tooltip>
                         <ng-md-icon icon="search" style="fill: black"></ng-md-icon>
                 </md-button>
             </div>
@@ -41,10 +41,10 @@
                            md-on-reorder="users">
                     <tr md-row>
                         <th md-column></th>
-                        <th md-column md-order-by="username">Nazwa</th>
-                        <th md-column md-order-by="email">Email</th>
+                        <th md-column md-order-by="username">{{'NAME' | translate}}</th>
+                        <th md-column md-order-by="email">{{'EMAIL' | translate}}</th>
                         <!--<th md-column>Hasło</th>-->
-                        <th md-column>Dostęp</th>
+                        <th md-column>{{'AUTHORITY' | translate}}</th>
                         <th md-column></th>
                     </tr>
                     </thead>
@@ -70,10 +70,10 @@
                                 </md-button>
                                 <md-menu-content width="4">
                                     <md-menu-item>
-                                        <md-button ng-click="clickUpdateUser(user, $event)">Edytuj</md-button>
+                                        <md-button ng-click="clickUpdateUser(user, $event)">{{'UPDATE' | translate}}</md-button>
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button ng-click="deleteUser(user.id)">Usuń</md-button>
+                                        <md-button ng-click="deleteUser(user.id)">{{'DELETE' | translate}}</md-button>
                                     </md-menu-item>
                                 </md-menu-content>
                             </md-menu>

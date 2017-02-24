@@ -39,30 +39,46 @@ angular
             }
 
 
-            $scope.showAddGroup = function($event) {
+            $scope.showAddGroup = function ($event) {
                 $mdDialog.show({
-                    controller:  'groupController',
+                    controller: 'groupController',
                     templateUrl: 'modules/group/dialog-group.html',
                     targetEvent: $event,
                     parent: angular.element(document.body)
                 })
-                    .then(function(result) {
+                    .then(function (result) {
 
                     });
             };
 
-            $scope.showEditGroup = function(group, $event) {
-                 $mdDialog.show({
-                    controller:  dialogGroupController,
+            $scope.clicked = function (group, $event) {
+                $mdDialog.show({
+                    controller: dialogGroupController,
+                    templateUrl: 'modules/group/contactsByGroup.html',
+                    targetEvent: $event,
+                    locals: {
+                        group: group
+                    },
+                    parent: angular.element(document.body)
+
+                })
+                    .then(function (result) {
+
+                    });
+            };
+
+            $scope.showEditGroup = function (group, $event) {
+                $mdDialog.show({
+                    controller: dialogGroupController,
                     templateUrl: 'modules/group/dialog-edit-group.html',
                     targetEvent: $event,
                     locals: {
                         group: group
                     },
-                     parent: angular.element(document.body)
+                    parent: angular.element(document.body)
 
-                 })
-                    .then(function(result) {
+                })
+                    .then(function (result) {
 
                     });
             };
@@ -72,22 +88,22 @@ angular
             };
 
 
-            $scope.saveGroup = function() {
-               /*  return Group.createGroup($scope.id)
-                     .then(function (response) {
-                         $state.reload();
-                         $mdToast.show(
-                             $mdToast.simple()
-                                 .content("Grupa dodana")
-                                 .position('top right')
-                                 .hideDelay(1000)
-                         );
-                         $mdDialog.hide();
+            $scope.saveGroup = function () {
+                /*  return Group.createGroup($scope.id)
+                 .then(function (response) {
+                 $state.reload();
+                 $mdToast.show(
+                 $mdToast.simple()
+                 .content("Grupa dodana")
+                 .position('top right')
+                 .hideDelay(1000)
+                 );
+                 $mdDialog.hide();
 
-                     }, function (err) {
+                 }, function (err) {
 
 
-                     });*/
+                 });*/
                 $http({
                     method: 'POST',
                     url: '/api/groups/' + $scope.group.id,
@@ -99,7 +115,7 @@ angular
                         $mdDialog.hide();
                         $mdToast.show(
                             $mdToast.simple()
-                                .content("Grupa dodana")
+                                .content("Create group")
                                 .position('top right')
                                 .hideDelay(1000)
                         );
@@ -109,7 +125,7 @@ angular
                         if (error.status == 500) {
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Grupa o takiej nazwie istnieje w bazie!")
+                                    .content("Group not found!")
                                     .position('top right')
                                     .hideDelay(1000)
                             );
@@ -120,19 +136,31 @@ angular
 
             };
 
-            $scope.deleteGroup = function(id) {
+            $scope.deleteGroup = function (id) {
                 return Group.deleteGroup(id)
                     .then(function () {
                         $state.reload();
                     });
             };
 
-            function dialogGroupController($scope, $mdDialog, group, $mdToast, Group) {
+            function dialogGroupController($scope, $http, $mdDialog, group, $mdToast, Group) {
 
                 $scope.group = group;
                 $scope.groups = [];
+                $scope.contact = {};
+                $scope.contacts = [];
 
-                 function getGroups() {
+
+                function getContactsByGroup(group){
+                    $http.get('api/contacts/group/' + $scope.group.name)
+                        .success(function (data) {
+                            $scope.contacts = data;
+                            console.log(data);
+                        });
+                }
+                getContactsByGroup();
+
+                function getGroups() {
                     return Group.getAll()
                         .then(function (response) {
                             $scope.groups = response.data;
@@ -140,7 +168,7 @@ angular
                 }
 
                 $scope.editGroup = function (group) {
-                
+
                     $http({
                         method: "PUT",
                         url: "api/groups/" + $scope.group.id,
@@ -155,7 +183,7 @@ angular
                             $state.reload();
                             $mdToast.show(
                                 $mdToast.simple()
-                                    .content("Nazwa grupy zmieniona")
+                                    .content("Update group")
                                     .position('top right')
                                     .hideDelay(1000)
                             );
@@ -168,10 +196,10 @@ angular
                 $scope.cancelAddModal = function () {
                     $mdDialog.cancel();
                 };
-                        
+
                 return getGroups();
             }
-                    
+
             return fetchGroups();
 
 

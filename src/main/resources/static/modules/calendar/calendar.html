@@ -1,41 +1,41 @@
 <div flex>
 
     <!-- ADD EVENT BUTTON -->
-    <md-button class="md-fab md-fab-top-left md-warn" ng-click="showNewEventDialog($event)"
+    <md-button class="md-fab md-fab-top-left" ng-click="showNewEventDialog($event)"
                aria-label="Add event">
         <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
     <!-- / ADD EVENT BUTTON -->
 
     <!-- TOOLBAR -->
-    <md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;">
+    <md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="">
         <div class="md-toolbar-tools">
-            <span class="calendarLeft">Kalendarz</span>
+            <span class="calendarLeft">{{'CALENDAR' | translate}}</span>
             <span flex></span>
 
             <md-button class="md-icon-button" aria-label="Search">
                 <ng-md-icon icon="search" style="fill: black"></ng-md-icon>
-                <md-tooltip><span>Wyszukaj</span></md-tooltip>
+                <md-tooltip><span>Find</span></md-tooltip>
             </md-button>
 
             <md-button class="md-icon-button" ng-click="calendar.today()" aria-label="Today">
                 <ng-md-icon icon="today" style="fill: black"></ng-md-icon>
-                <md-tooltip><span>Dzisiaj</span></md-tooltip>
+                <md-tooltip><span>Today</span></md-tooltip>
             </md-button>
 
             <md-button class="md-icon-button" ng-click="calendar.changeView('agendaDay')" aria-label="Day">
                 <ng-md-icon icon="view_day" style="fill: black"></ng-md-icon>
-                <md-tooltip><span>Dzień</span></md-tooltip>
+                <md-tooltip><span>Day</span></md-tooltip>
             </md-button>
 
             <md-button class="md-icon-button" ng-click="calendar.changeView('agendaWeek')" aria-label="Week">
                 <ng-md-icon icon="view_week" style="fill: black"></ng-md-icon>
-                <md-tooltip><span>Tydzień</span></md-tooltip>
+                <md-tooltip><span>Week</span></md-tooltip>
             </md-button>
 
             <md-button class="md-icon-button" ng-click="calendar.changeView('month')" aria-label="Month">
                 <ng-md-icon icon="view_module" style="fill: black"></ng-md-icon>
-                <md-tooltip><span>Miesiąc</span></md-tooltip>
+                <md-tooltip><span>Month</span></md-tooltip>
             </md-button>
         </div>
     </md-toolbar>
