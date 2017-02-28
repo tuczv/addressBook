@@ -34,7 +34,21 @@
                             <md-button ng-click="exportData()">{{'EXPORT' | translate}}</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button>{{'IMPORT' | translate}}</md-button>
+                            <ng-csv-import content="csv.content"
+                                           material
+                                           md-button-class="md-icon-button md-raised md-accent"
+                                           md-svg-icon="file:ic_file_upload_24px"
+                                           header="csv.header"
+                                           separator="csv.separator"
+                                           result="csv.result"
+                                           accept="csv.accept"></ng-csv-import>
+
+                            <div class="block row"  ng-if="csv.result">
+                                <div class="content" hljs source="toPrettyJSON(csv.result, 2)"></div>
+                            </div>
+                        </md-menu-item>
+                        <md-menu-item>
+                            <md-button ng-click="uploadFile()">{{'SEND' | translate}}</md-button>
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>

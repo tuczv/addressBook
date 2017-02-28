@@ -140,8 +140,17 @@ angular
                                     .hideDelay(1000)
                             );
                         })
-                        .error(function () {
-                            console.log('Error reset password');
+                         .error(function (error) {
+                            if (error.status == 500) {
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .content("Secret answer bad!")
+                                        .position('top right')
+                                        .hideDelay(1000)
+                                );
+                            }
+                            else
+                                alert("Error creating user");
                         });
                 };
 

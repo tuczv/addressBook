@@ -1,6 +1,21 @@
 angular
-    .module('addressbook', ['ui.router', 'ngMaterial', 'ngCookies',
-        'md.data.table', 'ngAnimate', 'ngAria', 'ngMdIcons', 'ngMessages', 'ngSanitize', 'ui.bootstrap', 'ui.calendar', 'pascalprecht.translate','ngLetterAvatar'])
+    .module('addressbook', [
+        'ui.router', 
+        'ngMaterial', 
+        'ngCookies',
+        'md.data.table', 
+        'ngAnimate', 
+        'ngAria', 
+        'ngMdIcons', 
+        'ngMessages', 
+        'ngSanitize', 
+        'ngCsvImport',
+        'ui.bootstrap', 
+        'ui.calendar', 
+        'pascalprecht.translate',
+        'ngLetterAvatar',
+        'hljs'
+    ])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider', '$translateProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider, $translateProvider) {
 
@@ -41,6 +56,7 @@ angular
                 CLEAN: 'Wyczyść',
                 EXPORT: 'Eksportuj',
                 IMPORT: 'Importuj',
+                DATE: 'Data',
                 en: 'English',
                 pl: 'Polski',
                 rus: 'Русский'
@@ -79,6 +95,7 @@ angular
                 CLEAN: 'Clean',
                 EXPORT: 'Export',
                 IMPORT: 'Import',
+                DATE: 'Date',
                 en: 'English',
                 pl: 'Polski',
                 rus: 'Русский'
@@ -117,6 +134,7 @@ angular
                 CLEAN: 'Очистить',
                 EXPORT: 'Экспорт',
                 IMPORT: 'Импорт',
+                DATE: 'Дата',
                 en: 'English',
                 pl: 'Polski',
                 rus: 'Русский'
@@ -150,7 +168,6 @@ angular
                 .warnPalette('blue');
 
             $mdThemingProvider.alwaysWatchTheme(true);
-
 
             $stateProvider
                 .state('login', {

@@ -1,16 +1,17 @@
 package org.bitbucket.cyd.domain;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Document(collection = "mails")
 public class Mail {
 
-    @Id private String id;
+    @Id
+    private String id;
 
     @NotNull
     private String userTo;

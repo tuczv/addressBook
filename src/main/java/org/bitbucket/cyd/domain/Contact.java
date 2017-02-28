@@ -1,10 +1,12 @@
 package org.bitbucket.cyd.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "contacts")
+@JsonSerialize
 public class Contact {
 
     @Id
@@ -18,7 +20,6 @@ public class Contact {
     @DBRef
     private User user;
 
-/*
     public Contact() {}
 
     public Contact( String name, String lastName, String email, String phone, String address, String group) {
@@ -29,7 +30,7 @@ public class Contact {
         this.address = address;
         this.group = group;
     }
-*/
+
 
     public String getId() {
         return id;

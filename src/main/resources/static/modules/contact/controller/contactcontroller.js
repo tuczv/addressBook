@@ -2,19 +2,19 @@
 angular
     .module('addressbook')
     .controller('contactController', ['$scope', '$http', 'Authentication', 'Group', '$mdDialog', '$stateParams', '$state',
-        '$timeout', '$log', '$mdToast',
-        function ($scope, $http, Authentication, Group, $mdDialog, $stateParams, $state, $timeout, $log, $mdToast) {
+        '$timeout', '$log', '$mdToast', '$parse',
+        function ($scope, $http, Authentication, Group, $mdDialog, $stateParams, $state, $timeout, $log, $mdToast, $parse) {
 
             $scope.user = Authentication.currentUser;
             $scope.groups = [];
             $scope.contacts = [];
-            $scope.selected = [];
+            $scope.selected = [];  
 
             $scope.options = {
                 showSearch: false,
                 rowSelection: true,
-                multiSelect: true
-            };
+                multiSelect: true 
+            }; 
 
             $scope.selectItem = function (item) {
                 console.log(item.name, 'selected');
@@ -57,7 +57,7 @@ angular
                     console.log(data);
                 });
             }
-            getContacts();
+            getContacts(); 
           
             // edit contact
             $scope.clickEdit = function (contact, $event) {
@@ -85,7 +85,81 @@ angular
                 alasql("SELECT * INTO CSV('kontakty.csv', {headers:true}) FROM ?", [$scope.contacts]);
             };
 
+            //import contacts CSV file
+            $scope.csv = {
+                content: null,
+                header: true,
+                separator: ',',
+                result: null,
+                uploadButtonLabel: "upload a csv file",
+                accept:true,
+                callback: 'uploadFile'
+            };
 
+            var _lastGoodResult = '';
+            var result = null;
+            $scope.toPrettyJSON = function (json, tabWidth) {
+                var objStr = JSON.stringify(json);
+                var obj = null;
+                try {
+                    obj = $parse(objStr)({});
+                } catch(e){
+                    // eat $parse error
+                    return _lastGoodResult;
+                }
+
+                 result = JSON.stringify(obj, null, Number(tabWidth));
+                _lastGoodResult = result;
+
+                return result;
+            };
+
+            // var table = new Array();
+            // var fileInput = document.getElementById('fileInput');
+            //
+            // fileInput.addEventListener('change', function(e) {
+            //     var file = fileInput.files[0];
+            //     var textType = /text.*/;
+            //
+            //     var reader = new FileReader();
+            //
+            //     reader.onload = function(e) {
+            //         table = new Array();
+            //
+            //         var lines = reader.result.split();
+            //         lines.forEach(function(line) {
+            //             var aLineArray = line.split(",");
+            //             table.push(aLineArray);
+            //         });
+            //
+            //         $timeout(function() {
+            //             table.push(null);
+            //         });
+            //     };
+            //     reader.readAsText(file);
+            // });
+            
+            
+            $scope.uploadFile = function() {
+
+                $http
+                    ({
+                        method: 'POST',
+                        url: 'api/contacts',
+                        // headers: {'content-type': 'application/json; charset=UTF-8'},
+                        data: result
+                    })
+                    .success(function(data, status) {
+                        console.log(result);
+
+                        console.log('success');
+                    })
+                    .error(function(data, status) {
+                        console.log(result);
+
+                        console.log('error');
+                    });
+            };
             // add contact
             $scope.saveContact = function () {
 
