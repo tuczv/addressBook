@@ -8,13 +8,13 @@ angular
             $scope.user = Authentication.currentUser;
             $scope.groups = [];
             $scope.contacts = [];
-            $scope.selected = [];  
+            $scope.selected = [];
 
             $scope.options = {
                 showSearch: false,
                 rowSelection: true,
-                multiSelect: true 
-            }; 
+                multiSelect: true
+            };
 
             $scope.selectItem = function (item) {
                 console.log(item.name, 'selected');
@@ -41,7 +41,7 @@ angular
             };
 
             $scope.contact = {
-                user: $scope.user,
+                user: $scope.user.username,
                 name: $scope.name,
                 lastName: $scope.lastName,
                 email: $scope.email,
@@ -51,14 +51,14 @@ angular
             };
 
             function getContacts() {
-              $http.get('/api/contacts')
-                .success(function (data) {
-                    $scope.contacts = data;
-                    console.log(data);
-                });
+                $http.get('/api/contacts')
+                    .success(function (data) {
+                        $scope.contacts = data;
+                        console.log(data);
+                    });
             }
-            getContacts(); 
-          
+            getContacts();
+
             // edit contact
             $scope.clickEdit = function (contact, $event) {
 
@@ -86,76 +86,92 @@ angular
             };
 
             //import contacts CSV file
-            $scope.csv = {
-                content: null,
-                header: true,
-                separator: ',',
-                result: null,
-                uploadButtonLabel: "upload a csv file",
-                accept:true,
-                callback: 'uploadFile'
-            };
 
-            var _lastGoodResult = '';
-            var result = null;
-            $scope.toPrettyJSON = function (json, tabWidth) {
-                var objStr = JSON.stringify(json);
-                var obj = null;
-                try {
-                    obj = $parse(objStr)({});
-                } catch(e){
-                    // eat $parse error
-                    return _lastGoodResult;
+            function CSVToArray(strData, strDelimiter) {
+                // Check to see if the delimiter is defined. If not,
+                // then default to comma.
+                strDelimiter = (strDelimiter || ";");
+                // Create a regular expression to parse the CSV values.
+                var objPattern = new RegExp((
+                    // Delimiters.
+                "(\\" + strDelimiter + "|\\r?\\n|\\r|^)" +
+                // Quoted fields.
+                "(?:\"([^\"]*(?:\"\"[^\"]*)*)\"|" +
+                // Standard fields.
+                "([^\"\\" + strDelimiter + "\\r\\n]*))"), "gi");
+                // Create an array to hold our data. Give the array
+                // a default empty first row.
+                var arrData = [[]];
+                // Create an array to hold our individual pattern
+                // matching groups.
+                var arrMatches = null;
+                // Keep looping over the regular expression matches
+                // until we can no longer find a match.
+                while (arrMatches = objPattern.exec(strData)) {
+                    // Get the delimiter that was found.
+                    var strMatchedDelimiter = arrMatches[1];
+                    // Check to see if the given delimiter has a length
+                    // (is not the start of string) and if it matches
+                    // field delimiter. If id does not, then we know
+                    // that this delimiter is a row delimiter.
+                    if (strMatchedDelimiter.length && (strMatchedDelimiter != strDelimiter)) {
+                        // Since we have reached a new row of data,
+                        // add an empty row to our data array.
+                        arrData.push([]);
+                    }
+                    // Now that we have our delimiter out of the way,
+                    // let's check to see which kind of value we
+                    // captured (quoted or unquoted).
+                    if (arrMatches[2]) {
+                        // We found a quoted value. When we capture
+                        // this value, unescape any double quotes.
+                        var strMatchedValue = arrMatches[2].replace(
+                            new RegExp("\"\"", "g"), "\"");
+                    } else {
+                        // We found a non-quoted value.
+                        var strMatchedValue = arrMatches[3];
+                    }
+                    // Now that we have our value string, let's add
+                    // it to the data array.
+                    arrData[arrData.length - 1].push(strMatchedValue);
+                }
+                // Return the parsed data.
+                return (arrData);
+            }
+
+            function CSV2JSON(csv) {
+                var array = CSVToArray(csv);
+                var objArray = [];
+                for (var i = 1; i < array.length; i++) {
+                    objArray[i - 1] = {};
+                    for (var k = 0; k < array[0].length && k < array[i].length; k++) {
+                        var key = array[0][k];
+                        objArray[i - 1][key] = array[i][k]
+                    }
                 }
 
-                 result = JSON.stringify(obj, null, Number(tabWidth));
-                _lastGoodResult = result;
+                var json = JSON.stringify(objArray);
+                var str = json.replace(/},/g, "},\r\n");
 
-                return result;
-            };
+                return str;
+            }
 
-            // var table = new Array();
-            // var fileInput = document.getElementById('fileInput');
-            //
-            // fileInput.addEventListener('change', function(e) {
-            //     var file = fileInput.files[0];
-            //     var textType = /text.*/;
-            //
-            //     var reader = new FileReader();
-            //
-            //     reader.onload = function(e) {
-            //         table = new Array();
-            //
-            //         var lines = reader.result.split();
-            //         lines.forEach(function(line) {
-            //             var aLineArray = line.split(",");
-            //             table.push(aLineArray);
-            //         });
-            //
-            //         $timeout(function() {
-            //             table.push(null);
-            //         });
-            //     };
-            //     reader.readAsText(file);
-            // });
-            
-            
-            $scope.uploadFile = function() {
+
+            $scope.uploadFile = function(csv) {
 
                 $http
-                    ({
-                        method: 'POST',
-                        url: 'api/contacts',
-                        // headers: {'content-type': 'application/json; charset=UTF-8'},
-                        data: result
-                    })
+                ({
+                    method: 'POST',
+                    url: 'api/contacts',
+                    data: CSV2JSON(csv)
+                })
                     .success(function(data, status) {
-                        console.log(result);
+                        console.log(CSV2JSON(csv));
 
                         console.log('success');
                     })
                     .error(function(data, status) {
-                        console.log(result);
+                        console.log(CSV2JSON(csv));
 
                         console.log('error');
                     });
@@ -195,13 +211,13 @@ angular
                     });
             };
 
-           /* $scope.deleteSelected = function (item) {
-                    var index = $scope.data.indexOf(item);
+            /* $scope.deleteSelected = function (item) {
+             var index = $scope.data.indexOf(item);
 
-                    if(index !== -1) {
-                        $scope.data.splice(index, 1);
-                    }
-            };*/
+             if(index !== -1) {
+             $scope.data.splice(index, 1);
+             }
+             };*/
 
             $scope.clickAdd = function ($event) {
 
@@ -301,8 +317,31 @@ angular
                 $scope.openMenu = function ($mdOpenMenu, $event) {
                     $mdOpenMenu($event);
                 };
-   
+
                 getGroups();
             }
         }
-    ]);
+    ])
+    .directive('fileReader', function() {
+        return {
+            scope: {
+                fileReader:"="
+            },
+            link: function(scope, element) {
+                $(element).on('change', function(changeEvent) {
+                    var files = changeEvent.target.files;
+                    if (files.length) {
+                        var r = new FileReader();
+                        r.onload = function(e) {
+                            var contents = e.target.result;
+                            scope.$apply(function () {
+                                scope.fileReader = contents;
+                            });
+                        };
+
+                        r.readAsText(files[0]);
+                    }
+                });
+            }
+        };
+    });

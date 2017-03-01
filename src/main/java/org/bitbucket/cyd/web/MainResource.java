@@ -48,8 +48,8 @@ public class MainResource {
 
     @RequestMapping(value = "/contacts", method = RequestMethod.GET)
     public List<Contact> getContacts() {
-        User user = userRepository.findByUsername(SecurityUtils.getCurrentLoginUser());
-        List<Contact> contacts = contactService.getContactsByUser(user);
+        String user = SecurityUtils.getCurrentLoginUser();
+        List<Contact> contacts = contactRepository.getContactsByUser(user);
         return contacts;
     }
     

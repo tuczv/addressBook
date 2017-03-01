@@ -11,6 +11,9 @@ public class ContactList {
     @JsonDeserialize(as=ArrayList.class, contentAs=Contact.class)
 	private ArrayList<Contact> contacts;
 
+    @JsonDeserialize(as=ArrayList.class, contentAs=Contact.class)
+    private ArrayList<User> users;
+
     public ContactList() {
     }
 
@@ -20,5 +23,13 @@ public class ContactList {
 
     public void setContacts(ArrayList<Contact> contacts) {
         this.contacts = contacts;
+    }
+
+    public ArrayList<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
     }
 }

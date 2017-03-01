@@ -17,12 +17,11 @@ public class Contact {
     private String phone;
     private String group;
     private String address;
-    @DBRef
-    private User user;
+    private String user;
 
     public Contact() {}
 
-    public Contact( String name, String lastName, String email, String phone, String address, String group) {
+    public Contact( String name, String lastName, String email, String phone, String address, String group, String user) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
@@ -88,11 +87,11 @@ public class Contact {
         this.address = address;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 }

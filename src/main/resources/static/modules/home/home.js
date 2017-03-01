@@ -78,6 +78,8 @@ angular
 
             getUsers();
 
+            $scope.user = Authentication.currentUser;
+
             // get all messages
             $scope.messages = [];
             $scope.message = {
