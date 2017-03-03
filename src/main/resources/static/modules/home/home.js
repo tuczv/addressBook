@@ -1,14 +1,14 @@
 angular
     .module('addressbook')
-    .controller('mainController', [ '$scope', '$http', 'Authentication', 'Security', 'Group', 'Inbox', '$mdMedia', '$mdDialog', '$stateParams', '$state',
-        '$timeout', '$log', '$mdToast', '$mdSidenav', 'userService', '$mdBottomSheet',
-        function($scope, $http, Authentication, Security, Group, Inbox, $mdMedia, $mdDialog, $stateParams, $state,
-                   $timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet) {
+    .controller('mainController', 
+        function($scope, $http, $q, Authentication, Security, Group, Inbox, $mdMedia, $mdDialog, $stateParams, 
+                    $state,$timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet, $location) {
 
             $scope.showMobileMainHeader = true;
             $scope.avatar = 'assets/icons/avatar.png';
             $scope.Security = Security;
             $scope.emails = [];
+            var listener = $q.defer();
 
             /* sidenavs left and right */
             $scope.toggleLeft = buildToggler('left');
@@ -79,7 +79,6 @@ angular
             getUsers();
 
             $scope.user = Authentication.currentUser;
-
             // get all messages
             $scope.messages = [];
             $scope.message = {
@@ -106,6 +105,8 @@ angular
             $scope.sendTo = function () {
                 stompClient.send('/api/chat', {}, JSON.stringify($scope.message));
                 $scope.message = '';
+                return listener.promise;
+                location.reload();
             };
 
             /* konfiguracja Stomp i SockJS */
@@ -114,8 +115,9 @@ angular
                 stompClient = Stomp.over(sock);
                 stompClient.connect({}, function (frame) {
                     stompClient.subscribe('/topic/chat', function (response) {
-                        $scope.messages.push(response.body);
+                        $scope.messages.push(response.data);
                         $scope.$apply();
+                        return listener.promise;
                     });
                 });
             }
@@ -209,5 +211,4 @@ angular
                 });
             };
 
-        }
-    ]);
+        });

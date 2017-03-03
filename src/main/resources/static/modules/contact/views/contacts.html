@@ -10,7 +10,7 @@
                     {{'CONTACTS' | translate}}
                 </h3>
                 <span flex></span>
-
+                
                 <md-menu>
                     <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
                         <md-tooltip>Sort</md-tooltip>
@@ -34,10 +34,13 @@
                             <md-button ng-click="exportData()">{{'EXPORT' | translate}}</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <input type="file" file-reader="csv">
+                            <input id="input-file-id" class="ng-hide" file-reader="csv" multiple type="file" />
+                            <label for="input-file-id" class="md-button md-raised md-primary">{{'SELECT' | translate}   }</label>
+
                         </md-menu-item>
                         <md-menu-item>
-                            <md-button ng-click="uploadFile(csv)">{{'SEND' | translate}}</md-button>
+                            <md-button ng-click="uploadFile(csv)">{{'IMPORT' | translate}}</md-button>
+
                         </md-menu-item>
                     </md-menu-content>
                 </md-menu>
@@ -74,12 +77,11 @@
             <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
           
           <span flex></span>
-          <!--<md-button class="md-icon-button" ng-click="deleteSelected()">
-            <ng-md-icon icon="delete"></ng-md-icon>
-          </md-button>-->
+          <md-button class="md-button md-raised md-primary" ng-click="removeAllContacts()">
+            {{'DELETE' | translate}}
+          </md-button>
           </div>  
         </md-toolbar>
-
 
         <md-content>
             <md-table-container>

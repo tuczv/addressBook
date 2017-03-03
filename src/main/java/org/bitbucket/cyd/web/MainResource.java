@@ -101,6 +101,11 @@ public class MainResource {
         contactRepository.delete(id);
     }
 
+    @RequestMapping(value = "/contacts", method = RequestMethod.DELETE)
+    public void deleteListContact() {
+        logger.info("Success deleting");
+        contactRepository.deleteAll();
+    }
 
      @RequestMapping(value= "/contacts", method = RequestMethod.POST)
      public ResponseEntity<List<Contact>> updateBeforeImportContacts(@RequestBody List<Contact> contacts) {
