@@ -4,11 +4,12 @@ angular
         function($scope, $http, $q, Authentication, Security, Group, Inbox, $mdMedia, $mdDialog, $stateParams, 
                     $state,$timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet, $location) {
 
-            $scope.showMobileMainHeader = true;
-            $scope.avatar = 'assets/icons/avatar.png';
+            $scope.user = Authentication.currentUser;
             $scope.Security = Security;
+            $scope.showMainHeader = true;
+            $scope.avatar = 'assets/icons/avatar.png';
             $scope.emails = [];
-            var listener = $q.defer();
+            $scope.messages = [];
 
             /* sidenavs left and right */
             $scope.toggleLeft = buildToggler('left');
@@ -44,10 +45,6 @@ angular
                 Group.getAll();
             };
 
-            /* zalogowany użytkownik */
-            $scope.user = Authentication.currentUser;
-
-            console.log($scope.user);
             $scope.logout = function(){
                 userService.logout().then(function(response){
                     $scope.user = null;
@@ -57,72 +54,78 @@ angular
             };
 
             $scope.$watch(function(){
-                return Authentication.currentUser
+                return Authentication.currentUser;
             },function(user){
                 $scope.user = user;
                 if(user == null){
                     $state.go('login');
                 }
             });
-
             /* wszystkie użytkownicy*/
-            function getUsers() {
-                $http.get('admin/users')
-                    .success(function (data) {
-                        $scope.users = data;
-                    })
-                    .error(function (data) {
 
-                    });
-            }
+            $http.get('admin/users')
+                .success(function (data) {
+                    $scope.users = data;
+                })
+                .error(function (data) {
 
-            getUsers();
+                });
 
-            $scope.user = Authentication.currentUser;
-            // get all messages
-            $scope.messages = [];
-            $scope.message = {
-                author: $scope.user.username,
-                text: ''
-            };
 
-            function showHistoryMessages() {
-                $http.get('/api/messages')
-                    .success(function (response) {
-                        $scope.messages = response;
-                    })
-                    .error(function () {
-                        alert('problem fetching message history');
-                    })
-            }
+            /*list messages in chat*/
+            $http
+                .get('/messages')
+                .success(function(data) {
+                    $scope.messages = data;
+                    console.log(data);
+                });
 
-            showHistoryMessages();
 
-            //configure STOMP and SOCKJs
-            var stompClient = null;
+            var socket = new SockJS('/websocket');
+            var stompClient = Stomp.over(socket);
 
-            //add message
-            $scope.sendTo = function () {
-                stompClient.send('/api/chat', {}, JSON.stringify($scope.message));
-                $scope.message = '';
-                return listener.promise;
-                location.reload();
-            };
+            stompClient.connect({}, function (frame) {
+                stompClient.subscribe('/app/chat', function (data) {
+                    $scope.messages = JSON.parse(data.body);
+                    $scope.$apply();
 
-            /* konfiguracja Stomp i SockJS */
-            function init() {
-                var sock = new SockJS('/chat');
-                stompClient = Stomp.over(sock);
-                stompClient.connect({}, function (frame) {
-                    stompClient.subscribe('/topic/chat', function (response) {
-                        $scope.messages.push(response.data);
+                    stompClient.subscribe('/topic/chat', function (data) {
+                        var message = JSON.parse(data.body);
+                        $scope.messages.unshift(message);
                         $scope.$apply();
-                        return listener.promise;
                     });
                 });
-            }
+            });
 
-            init();
+            $scope.messageSend = function () {
+
+                var data = {
+                    author: $scope.user.username,
+                    subject: $scope.message.subject,
+                    text: $scope.message.text,
+                    date: new Date()
+                };
+                stompClient.send("/app/chat", {}, JSON.stringify(data));
+                $scope.message.text = '';
+
+            };
+
+            //export to PDF
+            $scope.exportPDF = function () {
+
+                html2canvas(document.getElementById('exportPDF'), {
+                    onrendered: function (canvas) {
+                        var data = canvas.toDataURL();
+                        var definition = {
+                            content: [{
+                                image: data,
+                                width: 500
+                            }]
+                        };
+                        pdfMake.createPdf(definition).download("Historia_Czatu.pdf");
+                    }
+                });
+            };
 
             $scope.goToChat = function () {
                 $state.go('home.chat');

@@ -2,64 +2,60 @@
 angular
     .module('addressbook')
 
-    .controller('chatController', ['$scope', '$http', 'Authentication', '$timeout', '$log', '$state', '$stateParams',
-        function ($scope, $http, Authentication, $timeout, $log, $state, $stateParams) {
+    .controller('chatController',
+        function ($scope, $http, $q, Authentication, $timeout, $log, $state, $stateParams) {
 
             $scope.user = Authentication.currentUser;
 
-            function getUsers() {
-                $http.get('admin/users')
-                    .success(function (data) {
-                        $scope.users = data;
-                    })
-                    .error(function (data) {
-
-                    });
-            }
-
-            getUsers();
-
-            // get all messages
+          
             $scope.messages = [];
-            $scope.message = {
-                author: $scope.user.username,
-                text: ''
-            };
 
-            function showHistoryMessages() {
-                $http.get('/api/messages')
-                    .success(function (response) {
-                        $scope.messages = response;
-                    })
-                    .error(function () {
-                        alert('problem fetching message history');
-                    })
+            $scope.toggleLeft = buildToggler('left');
+            $scope.toggleRight = buildToggler('right');
+
+            function buildToggler(componentId) {
+                return function() {
+                    $mdSidenav(componentId).toggle();
+                };
             }
 
-            showHistoryMessages();
-
-            //configure STOMP and SOCKJs
-            var stompClient = null;
-
-            //add message
-            $scope.sendTo = function () {
-                stompClient.send('/api/chat', {}, JSON.stringify($scope.message));
-                $scope.message = '';
-                $state.reload();
-            };
-
-            function init() {
-                var sock = new SockJS('/chat');
-                stompClient = Stomp.over(sock);
-                stompClient.connect({}, function (frame) {
-                    stompClient.subscribe('/topic/chat', function (response) {
-                        $scope.messages.push(response.body);
-                        $scope.$apply();
-                    });
+            function getAll() {
+                 $http
+                    .get('/messages')
+                    .success(function(data) {
+                        $scope.messages = data;
+                        console.log(data);
                 });
             }
 
-            init();
+            getAll();
+            
+            var socket = new SockJS('/websocket');
+                     var stompClient = Stomp.over(socket);
+
+                     stompClient.connect({}, function (frame) {
+                             stompClient.subscribe('/app/chat', function (data) {
+                                     $scope.messages = JSON.parse(data.body);
+                                     $scope.$apply();
+
+                                     stompClient.subscribe('/topic/chat', function (data) {
+                                             var message = JSON.parse(data.body);
+                                             $scope.messages.unshift(message);
+                                             $scope.$apply();
+                                     });
+                             });
+                     });
+
+             $scope.messageSend = function () {
+
+                         var data = {
+                                 author: $scope.message.author,
+                                 body: $scope.message.body
+                         };
+                         stompClient.send("/app/chat", {}, JSON.stringify(data));
+                         $scope.message.body = '';
+
+             };
 
             //export to PDF
             $scope.exportPDF = function () {
@@ -77,4 +73,4 @@ angular
                     }
                 });
             };
-        }]);
+        });

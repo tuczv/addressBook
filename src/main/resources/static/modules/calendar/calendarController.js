@@ -116,8 +116,8 @@ angular
 
             $scope.calendarEvent = {
                 title: $scope.title,
-                start: $scope.start,
-                end: $scope.end,
+                start: new Date(),
+                end: new Date(),
                 location: $scope.location,
                 user: $scope.logged
             };

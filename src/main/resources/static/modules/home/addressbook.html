@@ -141,7 +141,7 @@
         <md-content layout-padding layout="column">
             <md-input-container class="md-accent">
                 <label>{{'WRITE' | translate}}</label>
-                <input flex="90" ng-model="message.text" md-maxlength="350"/> <ng-md-icon ng-click="sendTo()" icon="send" style="fill: blue"></ng-md-icon>
+                <input flex="90" ng-model="message.text" md-maxlength="350"/> <ng-md-icon ng-click="messageSend()" icon="send" style="fill: blue"></ng-md-icon>
             </md-input-container>
         </md-content>
 
@@ -151,7 +151,7 @@
 
 <div layout="column" flex>
     <md-toolbar class="md-primary md-whiteframe-z2">
-        <div class="md-toolbar-tools" data-ng-show="showMobileMainHeader">
+        <div class="md-toolbar-tools" data-ng-show="showMainHeader">
             <md-button class="md-icon-button" aria-label="Icon" ng-click="toggleLeft()">
                 <md-tooltip>AddressBook</md-tooltip>
                 <ng-md-icon icon="dashboard" style="fill: white"></ng-md-icon>

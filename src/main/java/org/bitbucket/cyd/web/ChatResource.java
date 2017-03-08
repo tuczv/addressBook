@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
 public class ChatResource {
     public static Logger logger = LoggerFactory.getLogger(ChatResource.class);
 
@@ -30,16 +29,10 @@ public class ChatResource {
     public List<Message> allMessages() {
         return messageRepository.findAll();
     }
- /*   public List<Message> allMessages(String username) {
-        User user = userRepository.findByUsername(username);
-        List<Message> messages = newsService.sendMessageToUser(user);
-
-        return messages;
-    }*/
 
     @RequestMapping(value = "/messages", method = RequestMethod.POST)
     @MessageMapping("/chat")
-    @SendTo("/topic/message")
+    @SendTo("/topic/chat")
     public Message send(Message userMessage) throws  Exception{
         userMessage.setDate(DateFormatUtils.format(new Date(System.currentTimeMillis()), "yyyy-MM-dd HH:mm:ss"));
         userMessage.getAuthor();
