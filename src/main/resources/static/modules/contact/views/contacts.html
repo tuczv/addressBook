@@ -10,7 +10,7 @@
                     {{'CONTACTS' | translate}}
                 </h3>
                 <span flex></span>
-                
+
                 <md-menu>
                     <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
                         <md-tooltip>Sort</md-tooltip>
@@ -75,12 +75,12 @@
         <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.rowSelection && selected.length" style="background:white">
           <div class="md-toolbar-tools">
             <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
-          
+
           <span flex></span>
-          <md-button class="md-button md-raised md-primary" ng-click="removeAllContacts()">
+          <md-button class="md-button md-raised md-primary" ng-click="openDeleteSelected($event, selected)">
             {{'DELETE' | translate}}
           </md-button>
-          </div>  
+          </div>
         </md-toolbar>
 
         <md-content>
@@ -96,6 +96,7 @@
                         <th md-column md-order-by="email">{{'EMAIL' | translate}}</th>
                         <th md-column md-numeric="phone">{{'PHONE' | translate}}</th>
                         <th md-column md-order-by="group">{{'GROUP' | translate}}</th>
+
                     </tr>
                     </thead>
 
@@ -116,6 +117,7 @@
                         <td md-cell>{{contact.email}}</td>
                         <td md-cell>{{contact.phone}}</td>
                         <td md-cell>{{contact.group}}</td>
+
                     </tr>
                     </tbody>
                 </table>

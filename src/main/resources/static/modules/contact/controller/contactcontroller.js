@@ -1,8 +1,7 @@
 angular
     .module('addressbook')
-    .controller('contactController', ['$scope', '$http', 'Authentication', 'Group', '$mdDialog', '$stateParams', '$state',
-        '$timeout', '$log', '$mdToast', '$parse',
-        function ($scope, $http, Authentication, Group, $mdDialog, $stateParams, $state, $timeout, $log, $mdToast, $parse) {
+    .controller('contactController',
+        function ($scope, $http, Authentication, Group, Contact, $mdDialog, $stateParams, $state, $timeout, $log, $mdToast, $parse) {
 
             $scope.user = Authentication.currentUser;
             $scope.groups = [];
@@ -16,7 +15,7 @@ angular
             };
 
             $scope.selectItem = function (item) {
-                console.log(item.name, 'selected');
+                console.log(item.id, 'selected');
             };
 
             //fetch groups
@@ -40,6 +39,7 @@ angular
             };
 
             $scope.contact = {
+                id: $scope.id,
                 user: $scope.user.username,
                 name: $scope.name,
                 lastName: $scope.lastName,
@@ -86,7 +86,7 @@ angular
 
             //import contacts CSV file
             function CSVToCollection(stringData, stringLimiter) {
-        
+
                 stringLimiter = (stringLimiter || ";");
                 var objectsPattern = new RegExp((
                 "(\\" + stringLimiter + "|\\r?\\n|\\r|^)" +
@@ -99,7 +99,7 @@ angular
                 while (arrayMatches = objectsPattern.exec(stringData)) {
 
                     var strMatchedDelimiter = arrayMatches[1];
-   
+
                     if (strMatchedDelimiter.length && (strMatchedDelimiter != stringLimiter)) {
                         arrayData.push([]);
                     }
@@ -185,29 +185,50 @@ angular
                         alert("Error creating contact");
                 });
             };
-            // delete all contacts
-            $scope.removeAllContacts = function() {
-                $http
-                ({
-                    method: 'DELETE',
-                    url: 'api/contacts'
-                })
-                .success(function () {
-                    console.log('success delete');
-                    $mdDialog.hide();
-                    $state.reload();
-                    $mdToast.show(
-                        $mdToast.simple()
-                            .content("Removing all contacts")
-                            .position('top right')
-                            .hideDelay(1000)
-                    );
 
-                })
-                .error(function () {
-                    alert('error deleting');
+            $scope.openDeleteSelected = function ($event, selected) {
+                var confirm = $mdDialog.confirm()
+                    .title('Would you like to delete?')
+                    .textContent('You will be logged out of the system')
+                    .ariaLabel('Lucky delete')
+                    .targetEvent($event)
+                    .ok('OK')
+                    .cancel('CANCEL');
+
+                $mdDialog.show(confirm).then(function() {
+
+                    function removeSelectContact (selected) {
+
+                        $http
+                        ({
+                            method: 'DELETE',
+                            url: 'api/contacts/',
+                            data: selected,
+                            headers: {
+                                'Content-type': 'application/json'
+                            }
+                        })
+                            .success(function () {
+                                console.log('success');
+                                $state.reload();
+                                $mdDialog.hide();
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .content("Create contact")
+                                        .position('top right')
+                                        .hideDelay(1000)
+                                );
+                            })
+                    }
+
+                    removeSelectContact(selected);
+
+                }, function() {
+                    $scope.status = '';
                 });
+
             };
+
             /* $scope.deleteSelected = function (item) {
              var index = $scope.data.indexOf(item);
              if(index !== -1) {
@@ -281,32 +302,52 @@ angular
                     });
                 };
 
-                // delete contact
-                $scope.removeContact = function (id) {
+                $scope.openDelete = function ($event, id) {
+                    console.log(id);
 
-                    $http({
-                        method: 'DELETE',
-                        url: 'api/contacts/' + id
-                    })
-                    .success(function () {
-                        console.log('success delete');
-                        $mdDialog.hide();
-                        $state.reload();
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .content("Delete contact")
-                                .position('top right')
-                                .hideDelay(1000)
-                        );
+                    var confirm = $mdDialog.confirm()
+                        .title('Would you like to delete?')
+                        .textContent('You will be logged out of the system')
+                        .ariaLabel('Lucky delete')
+                        .targetEvent($event)
+                        .ok('OK')
+                        .cancel('CANCEL');
 
-                    })
-                    .error(function () {
-                        alert('error deleting contact');
+                    $mdDialog.show(confirm).then(function() {
+
+                        function removeContact (id) {
+
+                            $http
+                            ({
+                                method: 'DELETE',
+                                url: 'api/contacts/' + id
+                            })
+                            .success(function () {
+                                console.log('success');
+                                $state.reload();
+                                $mdDialog.hide();
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .content("Create contact")
+                                        .position('top right')
+                                        .hideDelay(1000)
+                                );
+
+
+                            })
+                        }
+
+                        removeContact(id);
+
+                    }, function() {
+                        $scope.status = '';
                     });
+
                 };
-            
+
                 $scope.cancelEditModal = function () {
                     $mdDialog.cancel();
+                    $state.reload();
                 };
 
                 $scope.openMenu = function ($mdOpenMenu, $event) {
@@ -315,8 +356,7 @@ angular
 
                 getGroups();
             }
-        }
-    ])
+    })
     // angular directive file upload and read .csv
     .directive('fileReader', function() {
         return {

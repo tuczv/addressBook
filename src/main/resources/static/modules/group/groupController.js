@@ -136,11 +136,35 @@ angular
 
             };
 
-            $scope.deleteGroup = function (id) {
-                return Group.deleteGroup(id)
-                    .then(function () {
-                        $state.reload();
-                    });
+            $scope.openDelete = function ($event, id) {
+               console.log(id);
+               var confirm = $mdDialog.confirm()
+                     .title('Would you like to delete?')
+                     .textContent('You will be logged out of the system')
+                     .ariaLabel('Lucky delete')
+                     .targetEvent($event)
+                     .ok('OK')
+                     .cancel('CANCEL');
+               $mdDialog.show(confirm).then(function() {
+                   function deleteGroup (id) {
+                       return Group.deleteGroup(id)
+                           .then(function () {
+                               $state.reload();
+                           });
+                   }
+
+                   $mdToast.show(
+                       $mdToast.simple()
+                           .content("Success delete")
+                           .position('top right')
+                           .hideDelay(1000)
+                   );
+                   deleteGroup(id);
+
+               }, function() {
+                 $scope.status = '';
+               });
+
             };
 
             function dialogGroupController($scope, $http, $mdDialog, group, $mdToast, Group) {

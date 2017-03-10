@@ -1,17 +1,17 @@
 angular
     .module('addressbook', [
-        'ui.router', 
-        'ngMaterial', 
+        'ui.router',
+        'ngMaterial',
         'ngCookies',
         'md.data.table', 
-        'ngAnimate', 
-        'ngAria', 
-        'ngMdIcons', 
-        'ngMessages', 
-        'ngSanitize', 
+        'ngAnimate',
+        'ngAria',
+        'ngMdIcons',
+        'ngMessages',
+        'ngSanitize',
         'ngCsvImport',
-        'ui.bootstrap', 
-        'ui.calendar', 
+        'ui.bootstrap',
+        'ui.calendar',
         'pascalprecht.translate',
         'ngLetterAvatar',
         'hljs'
@@ -266,7 +266,7 @@ angular
             };
 
             $rootScope.setLanguage = function (argument) {
-                $translate.use(argument);   
+                $translate.use(argument);
             };
 
             Security.initialize();
@@ -297,4 +297,3 @@ angular
             $rootScope.tableFilter = {order: '-name', limit: 10, page: 1};
         }
     ]);
-

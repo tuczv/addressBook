@@ -1,7 +1,7 @@
 angular
     .module('addressbook')
-    .controller('mainController', 
-        function($scope, $http, $q, Authentication, Security, Group, Inbox, $mdMedia, $mdDialog, $stateParams, 
+    .controller('mainController',
+        function($scope, $http, $q, Authentication, Security, Group, Inbox, $mdMedia, $mdDialog, $stateParams,
                     $state,$timeout, $log, $mdToast, $mdSidenav, userService, $mdBottomSheet, $location) {
 
             $scope.user = Authentication.currentUser;
@@ -45,12 +45,34 @@ angular
                 Group.getAll();
             };
 
-            $scope.logout = function(){
-                userService.logout().then(function(response){
-                    $scope.user = null;
-                    Authentication.currentUser = '';
-                    $state.go('login');
-                });
+            $scope.openLogout = function ($event) {
+
+               var confirm = $mdDialog.confirm()
+                     .title('Would you like to logout?')
+                     .textContent('You will be logged out of the system')
+                     .ariaLabel('Lucky day')
+                     .targetEvent($event)
+                     .ok('OK')
+                     .cancel('CANCEL');
+               $mdDialog.show(confirm).then(function() {
+                   function logout (){
+                       userService.logout().then(function(response){
+                           $scope.user = null;
+                           Authentication.currentUser = '';
+                           $state.go('login');
+                       });
+                   };
+                   $mdToast.show(
+                       $mdToast.simple()
+                           .content("Success logout")
+                           .position('top right')
+                           .hideDelay(1000)
+                   );
+                   logout();
+               }, function() {
+                 $scope.status = '';
+               });
+
             };
 
             $scope.$watch(function(){

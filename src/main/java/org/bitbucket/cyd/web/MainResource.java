@@ -1,7 +1,6 @@
 package org.bitbucket.cyd.web;
 
 import org.bitbucket.cyd.domain.Contact;
-import org.bitbucket.cyd.domain.ContactList;
 import org.bitbucket.cyd.domain.Group;
 import org.bitbucket.cyd.domain.User;
 import org.bitbucket.cyd.repository.ContactRepository;
@@ -17,8 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+import java.util.Iterator;
 import java.util.List;
+
 
 @RestController
 @RequestMapping(value = "/api")
@@ -101,18 +101,30 @@ public class MainResource {
         contactRepository.delete(id);
     }
 
-    @RequestMapping(value = "/contacts", method = RequestMethod.DELETE)
+    @RequestMapping(value= "/contacts", method = RequestMethod.DELETE)
+    public @ResponseBody ResponseEntity deleteAll(@RequestBody List<Contact> contacts) {
+        logger.info("" + contacts);
+        Iterator<Contact> it = contacts.iterator();
+        while(it.hasNext())
+        {
+            Contact ud = (Contact) it.next();
+            contactRepository.delete(ud);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+
+    }
+
+   /* @RequestMapping(value = "/contacts", method = RequestMethod.DELETE)
     public void deleteListContact() {
         logger.info("Success deleting");
         contactRepository.deleteAll();
-    }
+    }*/
 
      @RequestMapping(value= "/contacts", method = RequestMethod.POST)
-     public ResponseEntity<List<Contact>> updateBeforeImportContacts(@RequestBody List<Contact> contacts) {
+     public void updateBeforeImportContacts(List<Contact> contacts) {
          for (Contact contact: contacts) {
              contactRepository.save(contact);
          }
-         return new ResponseEntity<List<Contact>>(contacts, HttpStatus.OK);
      }
 
     @RequestMapping(value = "/groups", method = RequestMethod.GET)

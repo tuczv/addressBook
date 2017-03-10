@@ -8,13 +8,12 @@
             <span flex></span>
         </div>
         <div class="md-toolbar-tools" layout layout-padding>
-
             <div layout="column">
                 <span class="md-body-2">{{user.username}}</span>
                 <span class="md-caption">{{user.email}}</span>
             </div>
             <span flex></span>
-            <md-button class="md-icon-button" ng-click="logout()">
+            <md-button class="md-icon-button" ng-click="openLogout($event)">
                 <md-tooltip>Logout</md-tooltip>
                 <ng-md-icon icon="logout" style="fill: white"></ng-md-icon>
             </md-button>

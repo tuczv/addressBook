@@ -17,14 +17,14 @@
                     <!-- Use floating label instead of placeholder -->
                     <label>{{'NAME' | translate}}</label>
                     <md-icon md-svg-src="assets/icons/ic_person.svg"  class="name" style="fill:gray"></md-icon>
-                    <input 
-                    	ng-model="contact.name" 
+                    <input
+                    	ng-model="contact.name"
                     	name="name"
                     	id="name"
                     	required>
                     <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
           				<div ng-message="required">Wpisz imię</div>
-        			</div>	
+        			</div>
                 </md-input-container>
                   <md-input-container class="md-block">
                     <!-- Use floating placeholder instead of label -->
@@ -43,7 +43,7 @@
                     <md-icon md-svg-src="assets/icons/ic_phone_black_24px.svg"></md-icon>
                     <input ng-model="contact.phone" type="text">
                 </md-input-container>
-              
+
                 <md-input-container class="md-block">
                     <!-- Use floating placeholder instead of label -->
                     <label>{{'GROUP' | translate}}</label>
