@@ -121,10 +121,17 @@ public class MainResource {
     }*/
 
      @RequestMapping(value= "/contacts", method = RequestMethod.POST)
-     public void updateBeforeImportContacts(List<Contact> contacts) {
-         for (Contact contact: contacts) {
+     public ResponseEntity updateBeforeImportContacts(@RequestBody List<Contact> contacts) {
+        /* for (Contact contact: contacts) {
              contactRepository.save(contact);
+         }*/
+         Iterator<Contact> it = contacts.iterator();
+         while(it.hasNext())
+         {
+             Contact ud = (Contact) it.next();
+             contactRepository.save(ud);
          }
+         return new ResponseEntity(HttpStatus.OK);
      }
 
     @RequestMapping(value = "/groups", method = RequestMethod.GET)

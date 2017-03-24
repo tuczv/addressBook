@@ -1,10 +1,11 @@
 angular
     .module('addressbook')
-    .controller('adminController', [ '$scope', '$http', '$state', '$mdDialog', '$mdToast',
-        function ($scope, $http, $state, $mdDialog, $mdToast) {
+    .controller('adminController', [ '$scope', '$http', '$state', '$mdDialog', '$mdToast', 'Authentication',
+        function ($scope, $http, $state, $mdDialog, $mdToast, Authentication) {
 
             $scope.users = [];
             $scope.selected = [];
+            $scope.authorities = ['ROLE_ADMIN', 'ROLE_USER'];
             $scope.getUsers = getUsers;
 
             $scope.options = {
@@ -28,6 +29,7 @@ angular
                 $http.get('/admin/users/')
                     .success(function (data) {
                         $scope.users = data;
+                        console.log($scope.users);
                     });
             }
 
@@ -43,11 +45,14 @@ angular
                 );
             };
 
+            var authority = $scope.user.authorities;
+            console.log(authority);
+
             $scope.user = {
                 username: $scope.username,
                 email: $scope.email,
                 password: $scope.password,
-                authorities: [{authority:'ROLE_USER'}]
+                authorities: $scope.authorities
             };
 
             $scope.clickAddUser = function ($event) {
@@ -129,6 +134,49 @@ angular
                     .error(function () {
                         alert('error deleting contact');
                     });
+            };
+
+            $scope.openDeleteSelected = function ($event, selected) {
+                var confirm = $mdDialog.confirm()
+                    .title('Would you like to delete?')
+                    .textContent('You will be logged out of the system')
+                    .ariaLabel('Lucky delete')
+                    .targetEvent($event)
+                    .ok('OK')
+                    .cancel('CANCEL');
+
+                $mdDialog.show(confirm).then(function() {
+
+                    function removeSelectUser (selected) {
+
+                        $http
+                        ({
+                            method: 'DELETE',
+                            url: 'admin/users/',
+                            data: selected,
+                            headers: {
+                                'Content-type': 'application/json'
+                            }
+                        })
+                            .success(function () {
+                                console.log('success');
+                                $state.reload();
+                                $mdDialog.hide();
+                                $mdToast.show(
+                                    $mdToast.simple()
+                                        .content("Delete selected users")
+                                        .position('top right')
+                                        .hideDelay(1000)
+                                );
+                            })
+                    }
+
+                    removeSelectUser(selected);
+
+                }, function() {
+                    $scope.status = '';
+                });
+
             };
 
             $scope.cancelCreate = function () {

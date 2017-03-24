@@ -1,7 +1,5 @@
 package org.bitbucket.cyd.service;
 
-import com.mongodb.BasicDBObjectBuilder;
-import com.mongodb.DBObject;
 import org.bitbucket.cyd.domain.Contact;
 import org.bitbucket.cyd.domain.Group;
 import org.bitbucket.cyd.domain.User;
@@ -9,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
 @Service

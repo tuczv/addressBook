@@ -1,6 +1,6 @@
 <div layout="column" layout>
     <md-whiteframe class="md-whiteframe-4dp">
-        <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch">
+        <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch" ng-hide="options.rowSelection && selected.length">
             <div class="md-toolbar-tools">
                 <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
                     <span layout="row" layout-align="center center">{{'USERS' | translate}}</span>
@@ -32,6 +32,17 @@
             </div>
 
         </md-toolbar>
+
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.rowSelection && selected.length" style="background:white">
+          <div class="md-toolbar-tools">
+            <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
+
+          <span flex></span>
+          <md-button class="md-button md-raised md-primary" ng-click="openDeleteSelected($event, selected)">
+            {{'DELETE' | translate}}
+          </md-button>
+          </div>
+        </md-toolbar>
         <md-divider></md-divider>
 
         <md-content>
@@ -53,7 +64,7 @@
                     <tr md-row
                         md-select="user"
                         md-on-select="selectItem"
-                        ng-repeat="user in users    
+                        ng-repeat="user in users
                                 | filter: filters
                                 | orderBy: $root.tableFilter.order
                                 | filter:  searchInput
@@ -62,7 +73,11 @@
                         <td md-cell>{{user.username}}</td>
                         <td md-cell>{{user.email}}</td>
                         <!--<td md-cell>{{user.password}}</td>-->
-                        <td md-cell>{{user.authorities}}</td>
+                        <td md-cell>
+                            <div ng-repeat="authority in user.authorities">
+                                <span class="label label-info">{{ authority.authority }}</span>
+                            </div>
+                        </td>
                         <td md-cell>
                             <md-menu>
                                 <md-button class="md-icon-button"  ng-click="$mdOpenMenu()">

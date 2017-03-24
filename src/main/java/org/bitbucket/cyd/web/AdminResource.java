@@ -1,13 +1,17 @@
 package org.bitbucket.cyd.web;
 
+
 import org.bitbucket.cyd.domain.User;
 import org.bitbucket.cyd.repository.UserRepository;
 import org.bitbucket.cyd.security.AuthorityConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Secured(AuthorityConstant.ADMIN)
@@ -43,6 +47,19 @@ public class AdminResource {
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("id") String id) {
         userRepository.delete(id);
+    }
+    
+    @RequestMapping(value= "/users", method = RequestMethod.DELETE)
+    public @ResponseBody
+    ResponseEntity deleteAll(@RequestBody List<User> users) {
+        Iterator<User> it = users.iterator();
+        while(it.hasNext())
+        {
+            User ud = (User) it.next();
+            userRepository.delete(ud);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+
     }
 
 }

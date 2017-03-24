@@ -28,7 +28,6 @@ public class User {
     @Size(min = 3, max = 10)
     private String secret;
 
-    @DBRef
     private Set<Authority> authorities = new HashSet<>();
 
     public User() {}

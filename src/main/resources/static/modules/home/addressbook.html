@@ -113,9 +113,9 @@
                 <span layout="row" layout-align="center center">{{'CHAT' | translate}}</span>
                 <span flex></span>
                 <span layout="row" layout-align="left center">
-                    <md-button ng-click="exportPDF()" class="md-icon-button" aria-label="">
+                   <!-- <md-button pdf-save-button="idOne" pdf-name="someone.pdf" ng-click="exportPDF()" class="md-icon-button" aria-label="">
                         <ng-md-icon icon="print" style="fill: white"></ng-md-icon>
-                    </md-button>
+                    </md-button>-->
                 </span>
                 <span flex="5"></span>
                 <span layout="row" layout-align="center center">
@@ -125,7 +125,8 @@
             </h2>
         </md-toolbar>
 
-        <md-content class="md-padding" id="exportPDF">
+        <md-content class="md-padding">
+
             <md-list layout-fill>
                 <md-list-item   ng-repeat="message in messages" class="contact-item md-2-line selected">
                     <!--<img ng-src="{{ messageCtrl.author.imageUrl }}" class="md-avatar message-avatar"/>-->
@@ -135,6 +136,7 @@
                     </div>
                 </md-list-item>
             </md-list>
+
         </md-content>
 
         <md-content layout-padding layout="column">

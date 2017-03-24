@@ -3,7 +3,7 @@ angular
         'ui.router',
         'ngMaterial',
         'ngCookies',
-        'md.data.table', 
+        'md.data.table',
         'ngAnimate',
         'ngAria',
         'ngMdIcons',
@@ -13,8 +13,7 @@ angular
         'ui.bootstrap',
         'ui.calendar',
         'pascalprecht.translate',
-        'ngLetterAvatar',
-        'hljs'
+        'ngLetterAvatar'
     ])
     .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', '$mdThemingProvider', '$translateProvider',
         function ($stateProvider, $urlRouterProvider, $httpProvider, $mdThemingProvider, $translateProvider) {
@@ -185,7 +184,6 @@ angular
                     'controller': 'mainController',
                     'data': {
                         'requiresLogin': true
-
                     }
                 })
                 .state('home.users', {
@@ -269,25 +267,26 @@ angular
                 $translate.use(argument);
             };
 
-            Security.initialize();
-
             $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 
                 Authentication.login()
                     .then(function () {
 
+                        Security.initialize();
                         var isAuthenticated = Authentication.isAuthenticated();
+                        console.log(isAuthenticated);
                         var requiresLogin = toState.data.requiresLogin;
-
-                        if (requiresLogin && !isAuthenticated) {
-                            event.preventDefault();
-                            $state.go('login');
-                        }
+                        console.log(requiresLogin);
 
                         if (!requiresLogin && isAuthenticated) {
                             console.log("called");
                             event.preventDefault();
                             $state.go('home');
+                        }
+
+                        if (requiresLogin && !isAuthenticated) {
+                            event.preventDefault();
+                            $state.go('login');
                         }
 
                     });

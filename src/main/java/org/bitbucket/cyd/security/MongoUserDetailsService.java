@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,14 +28,18 @@ public class MongoUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User userFromDatabase = userRepository.findByUsername(login);
+        Optional<User> userFromDatabase = Optional.ofNullable(userRepository.findByUsername(login));
 
-        List<GrantedAuthority> grantedAuthorities = userFromDatabase.getAuthorities().stream()
-                .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
-                .collect(Collectors.toList());
+        return userFromDatabase.map(user -> {
+            List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
+                    .map(authority -> new SimpleGrantedAuthority(authority.getAuthority()))
+                    .collect(Collectors.toList());
 
-        return new org.springframework.security.core.userdetails.User(userFromDatabase.getUsername(),
-                userFromDatabase.getPassword(), grantedAuthorities);
+            return new org.springframework.security.core.userdetails.User(user.getUsername(),
+                    user.getPassword(), grantedAuthorities);
+
+        }).orElseThrow(() -> new UsernameNotFoundException("User" + login + "was not found in the database"));
+
 
     }
 

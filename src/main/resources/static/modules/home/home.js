@@ -132,19 +132,17 @@ angular
 
             };
 
-            //export to PDF
-            $scope.exportPDF = function () {
-
+            $scope.exportPDF = function(){
                 html2canvas(document.getElementById('exportPDF'), {
                     onrendered: function (canvas) {
                         var data = canvas.toDataURL();
-                        var definition = {
+                        var docDefinition = {
                             content: [{
                                 image: data,
                                 width: 500
                             }]
                         };
-                        pdfMake.createPdf(definition).download("Historia_Czatu.pdf");
+                        pdfMake.createPdf(docDefinition).download("history.pdf");
                     }
                 });
             };
