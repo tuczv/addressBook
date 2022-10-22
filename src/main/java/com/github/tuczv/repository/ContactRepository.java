@@ -10,6 +10,7 @@ import java.util.List;
 public interface ContactRepository extends MongoRepository<Contact, String> {
 
     Contact getContactByName(String name);
+
     Contact getContactById(String id);
 
     List<Contact> getContactsByGroup(String group);

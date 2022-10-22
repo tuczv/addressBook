@@ -9,7 +9,8 @@ import java.util.Date;
 @Document(collection = "events")
 public class CalendarEvent {
 
-    @Id private String id;
+    @Id
+    private String id;
     private String title;
     private Date start;
     private Date end;

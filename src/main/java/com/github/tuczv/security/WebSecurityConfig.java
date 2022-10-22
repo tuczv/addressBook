@@ -1,10 +1,8 @@
 package com.github.tuczv.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -40,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -49,14 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.userDetailsService(mongoUserDetailService);
         auth.authenticationProvider(authenticationProvider());
-		/*
-		 * .inMemoryAuthentication().withUser("ram").password("ram").roles("ADMIN"
-		 * );
-		 */
+        /*
+         * .inMemoryAuthentication().withUser("ram").password("ram").roles("ADMIN"
+         * );
+         */
     }
 
     @Bean
-    public DaoAuthenticationProvider authenticationProvider(){
+    public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(mongoUserDetailService);
         authenticationProvider.setPasswordEncoder(passwordEncoder());
@@ -67,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers(HttpMethod.OPTIONS, "/**")
-                .antMatchers("/bower_components/**", "/static/**", "/modules/**", "/index.html","/assets/**");
+                .antMatchers("/bower_components/**", "/static/**", "/modules/**", "/index.html", "/assets/**");
 
     }
 
@@ -89,7 +87,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    private CsrfTokenRepository csrfTokenRepository(){
+    private CsrfTokenRepository csrfTokenRepository() {
         HttpSessionCsrfTokenRepository repository = new HttpSessionCsrfTokenRepository();
         repository.setHeaderName("X-XSRF-TOKEN");
         return repository;

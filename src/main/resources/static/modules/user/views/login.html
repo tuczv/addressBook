@@ -3,9 +3,9 @@
     <div class="loginContent md-whiteframe-z1" layout="column">
 
         <md-toolbar>
-            <div layout="column" layout-padding layout-align="center center">
+            <div layout="column" layout-align="center center" layout-padding>
                 <div>
-                    <ng-md-icon class="logo" icon="home"  style="fill: white" size="48"></ng-md-icon>
+                    <ng-md-icon class="logo" icon="home" size="48" style="fill: white"></ng-md-icon>
                 </div>
             </div>
         </md-toolbar>
@@ -57,129 +57,136 @@
                 </md-content>-->
 
         <!--TABS-->
-        <md-tabs md-dynamic-height="true" md-center-tabs="true" md-swipe-content="true">
+        <md-tabs md-center-tabs="true" md-dynamic-height="true" md-swipe-content="true">
             <md-tab label="SIGN IN">
                 <div layout="column" layout-align="start center">
                     <br>
-                    <form layout="column" name="loginForm" layout-align="start center">
-                        <md-input-container style="width: 300px; margin-right: 5px;"
-                                            md-is-error="loginForm.username.$invalid && (loginForm.$submitted || loginForm.username.$dirty)">
+                    <form layout="column" layout-align="start center" name="loginForm">
+                        <md-input-container md-is-error="loginForm.username.$invalid && (loginForm.$submitted || loginForm.username.$dirty)"
+                                            style="width: 300px; margin-right: 5px;">
                             <label>Username</label>
                             <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
-                            <input name="username"
-                                    id="username"
-                                    ng-model="user.username"
-                                    ng-minlength="3"
-                                    ng-maxlength="10"
-                                    required>
-                            <div ng-messages="loginForm.username.$error" ng-if="loginForm.username.$touched">
+                            <input id="username"
+                                   name="username"
+                                   ng-maxlength="10"
+                                   ng-minlength="3"
+                                   ng-model="user.username"
+                                   required>
+                            <div ng-if="loginForm.username.$touched" ng-messages="loginForm.username.$error">
                                 <div ng-message="required">Wpisz imię</div>
                                 <div ng-message="minlength">Zbyt ktrótkie, 3 znaki minimalnie</div>
                             </div>
                         </md-input-container>
 
-                        <md-input-container style="width: 300px; margin-right: 5px;"
-                                            md-is-error="loginForm.password.$invalid && (loginForm.$submitted || loginForm.password.$dirty)">
+                        <md-input-container md-is-error="loginForm.password.$invalid && (loginForm.$submitted || loginForm.password.$dirty)"
+                                            style="width: 300px; margin-right: 5px;">
                             <label>Password</label>
                             <md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
                             <input
-                                    ng-model="user.password"
                                     id="password"
                                     name="password"
-                                    type="password"
-                                    ng-minlength="6"
                                     ng-maxlength="10"
-                                    required>
-                            <div ng-messages="loginForm.password.$error" ng-if="loginForm.password.$touched">
+                                    ng-minlength="6"
+                                    ng-model="user.password"
+                                    required
+                                    type="password">
+                            <div ng-if="loginForm.password.$touched" ng-messages="loginForm.password.$error">
                                 <div ng-message="required">Wpisz poprawne hasło</div>
                                 <div ng-message="minlength">Zbyt ktrótkie, 6 znaków minimalnie</div>
                             </div>
                         </md-input-container>
                     </form>
                     <md-button class="md-raised md-primary" ng-click="loginUser()">SIGN IN</md-button>
-                    <md-button class="md-primary" ng-click="clickResetPasswordUser(user, $event)">FORGOT PASSWORD</md-button>
+                    <md-button class="md-primary" ng-click="clickResetPasswordUser(user, $event)">FORGOT PASSWORD
+                    </md-button>
                 </div>
             </md-tab>
 
             <md-tab label="CREATE ACCOUNT">
                 <div layout="column" layout-align="start center">
                     <form layout="column" layout-align="start center" name="registerForm" novalidate>
-                        <md-input-container style="width: 300px; margin-right: 5px;" md-is-error="registerForm.email.$invalid && (registerForm.$submitted || registerForm.email.$dirty)">
+                        <md-input-container md-is-error="registerForm.email.$invalid && (registerForm.$submitted || registerForm.email.$dirty)"
+                                            style="width: 300px; margin-right: 5px;">
                             <label>Email</label>
                             <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
 
                             <input
-                                    ng-model="sameUser.email"
                                     id="email"
                                     name="email"
-                                    type="email"
-                                    required>
+                                    ng-model="sameUser.email"
+                                    required
+                                    type="email">
                             <!-- 				<md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
-                             -->				<div ng-messages="registerForm.email.$error" ng-if="registerForm.email.$touched">
-                            <div ng-message="required">Wpisz email</div>
-                            <div ng-message="email">Wpisz e-mail, dodaj @</div>
-                        </div>
+                             -->
+                            <div ng-if="registerForm.email.$touched" ng-messages="registerForm.email.$error">
+                                <div ng-message="required">Wpisz email</div>
+                                <div ng-message="email">Wpisz e-mail, dodaj @</div>
+                            </div>
                         </md-input-container>
 
-                        <md-input-container style="width: 300px; margin-right: 5px;" md-is-error="registerForm.username.$invalid && (registerForm.$submitted || registerForm.username.$dirty)">
+                        <md-input-container md-is-error="registerForm.username.$invalid && (registerForm.$submitted || registerForm.username.$dirty)"
+                                            style="width: 300px; margin-right: 5px;">
                             <label>Username</label>
                             <md-icon md-svg-src="assets/icons/ic_person.svg"></md-icon>
 
                             <input
-                                    name="username"
-                                    ng-model="sameUser.username"
                                     id="usernameR"
-                                    ng-minlength="3"
+                                    name="username"
                                     ng-maxlength="10"
+                                    ng-minlength="3"
+                                    ng-model="sameUser.username"
                                     required>
-                            <div ng-messages="registerForm.username.$error" ng-if="registerForm.username.$touched">
+                            <div ng-if="registerForm.username.$touched" ng-messages="registerForm.username.$error">
                                 <div ng-message="required">Wpisz imię</div>
                                 <div ng-message="minlength">Zbyt ktrótkie, 3 znaki minimalnie</div>
                                 <div ng-message="maxlength">Zbyt duże</div>
                             </div>
                         </md-input-container>
 
-                        <md-input-container style="width: 300px; margin-right: 5px;" md-is-error="registerForm.password.$invalid && (registerForm.$submitted || registerForm.password.$dirty)">
+                        <md-input-container md-is-error="registerForm.password.$invalid && (registerForm.$submitted || registerForm.password.$dirty)"
+                                            style="width: 300px; margin-right: 5px;">
                             <label>Password</label>
                             <md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
 
                             <input
-                                   ng-model="sameUser.password"
-                                   id="passwordR"
-                                   name="password"
-                                   type="password"
-                                   ng-minlength="6"
-                                   ng-maxlength="10"
-                                   required>
-                            <div ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched">
+                                    id="passwordR"
+                                    name="password"
+                                    ng-maxlength="10"
+                                    ng-minlength="6"
+                                    ng-model="sameUser.password"
+                                    required
+                                    type="password">
+                            <div ng-if="registerForm.password.$touched" ng-messages="registerForm.password.$error">
                                 <div ng-message="required">Wpisz poprawne hasło</div>
                                 <div ng-message="minlength">Zbyt krótkie hasło, 6 znaków minimalnie</div>
                             </div>
                         </md-input-container>
 
-                        <md-input-container style="width: 300px; margin-right: 5px;" md-is-error="registerForm.secret.$invalid && (registerForm.$submitted || registerForm.secret.$dirty)">
+                        <md-input-container md-is-error="registerForm.secret.$invalid && (registerForm.$submitted || registerForm.secret.$dirty)"
+                                            style="width: 300px; margin-right: 5px;">
                             <label>Secret question</label>
                             <md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
 
                             <input
-                                    ng-model="sameUser.secret"
                                     id="secret"
                                     name="secret"
-                                    type="password"
-                                    ng-minlength="4"
                                     ng-maxlength="4"
-                                    required>
-                            <div ng-messages="registerForm.secret.$error" ng-if="registerForm.secret.$touched">
+                                    ng-minlength="4"
+                                    ng-model="sameUser.secret"
+                                    required
+                                    type="password">
+                            <div ng-if="registerForm.secret.$touched" ng-messages="registerForm.secret.$error">
                                 <div ng-message="required">Wpisz poprawne hasło</div>
                                 <div ng-message="minlength">Zbyt krótkie hasło, 4 znaków minimalnie</div>
                             </div>
                         </md-input-container>
                     </form>
                     <div layout="row" layout-align="center center">
-                        <md-button ng-click="reset(sameUser)" class="md-primary">
+                        <md-button class="md-primary" ng-click="reset(sameUser)">
                             RESET
                         </md-button>
-                        <md-button ng-disabled="registerForm.$invalid" ng-click="registerUser()" class="md-raised md-primary">
+                        <md-button class="md-raised md-primary" ng-click="registerUser()"
+                                   ng-disabled="registerForm.$invalid">
                             CREATE
                         </md-button>
                     </div>

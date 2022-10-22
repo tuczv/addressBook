@@ -1,16 +1,16 @@
-<md-dialog aria-label="Dane kontaktowe"  ng-cloak flex="50">
+<md-dialog aria-label="Dane kontaktowe" flex="50" ng-cloak>
     <form name="editForm">
         <md-toolbar>
             <div class="md-toolbar-tools">
 
                 <h2>{{'UPDATE' | translate}}</h2>
                 <span flex></span>
-                 <md-button class="md-icon-button" ng-click="openDelete($event, contact.id)">
+                <md-button class="md-icon-button" ng-click="openDelete($event, contact.id)">
                     <ng-md-icon icon="delete" style="fill: white"></ng-md-icon>
                 </md-button>
-               <!--  <md-button class="md-icon-button" ng-click="editContact(contact.id)">
-                    <ng-md-icon icon="save" style="fill: white"></ng-md-icon>
-                </md-button> -->
+                <!--  <md-button class="md-icon-button" ng-click="editContact(contact.id)">
+                     <ng-md-icon icon="save" style="fill: white"></ng-md-icon>
+                 </md-button> -->
             </div>
             <span flex></span>
 
@@ -21,46 +21,50 @@
                 <div>
                     <form>
                         <div layout-gt-sm="row">
-                            <md-input-container md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)" class="md-block" flex-gt-sm>
+                            <md-input-container
+                                    class="md-block"
+                                    flex-gt-sm md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)">
                                 <label>{{'NAME' | translate}}</label>
                                 <input
-                                	name="name"
-                                	id="name"
-                                	ng-model="contact.name"
-                                	required>
-                                <div ng-messages="editForm.name.$error" ng-if="editForm.name.$touched">
-          							<div ng-message="required">Wpisz imię</div>
-        						</div>
+                                        id="name"
+                                        name="name"
+                                        ng-model="contact.name"
+                                        required>
+                                <div ng-if="editForm.name.$touched" ng-messages="editForm.name.$error">
+                                    <div ng-message="required">Wpisz imię</div>
+                                </div>
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>{{'LASTNAME' | translate}}</label>
-                                <input type="text" name="lastName" ng-model="contact.lastName">
+                                <input name="lastName" ng-model="contact.lastName" type="text">
                             </md-input-container>
 
                         </div>
                         <div layout-gt-sm="row">
-                        	<md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
-                            	<label>{{'EMAIL' | translate}}</label>
-                            	<input
-                            		type="email"
-                            		id="email"
-                            		name="email"
-                            		ng-model="contact.email"
-                            		required>
-                            	<div ng-messages="editForm.email.$error" ng-if="editForm.email.$touched">
-          							<div ng-message="required">Wpisz email</div>
-        						</div>
-                        	</md-input-container>
-                        	<md-input-container class="md-block" flex-gt-sm>
-                        		<label>Address</label>
-                            	<input type="text" name="address" ng-model="contact.address" >
-                        	</md-input-container>
+                            <md-input-container
+                                    class="md-block"
+                                    flex-gt-sm md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)">
+                                <label>{{'EMAIL' | translate}}</label>
+                                <input
+                                        id="email"
+                                        name="email"
+                                        ng-model="contact.email"
+                                        required
+                                        type="email">
+                                <div ng-if="editForm.email.$touched" ng-messages="editForm.email.$error">
+                                    <div ng-message="required">Wpisz email</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block" flex-gt-sm>
+                                <label>Address</label>
+                                <input name="address" ng-model="contact.address" type="text">
+                            </md-input-container>
                         </div>
 
                         <div layout-gt-sm="row">
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>{{'PHONE' | translate}}</label>
-                                <input type="text" name="phone" ng-model="contact.phone">
+                                <input name="phone" ng-model="contact.phone" type="text">
                             </md-input-container>
                             <md-input-container class="md-block" flex-gt-sm>
                                 <label>{{'GROUP' | translate}}</label>
@@ -75,12 +79,14 @@
                 </div>
             </md-content>
         </md-dialog-content>
-         <md-dialog-actions layout="row">
+        <md-dialog-actions layout="row">
             <span flex></span>
-			<md-button class="md-raised md-primary" ng-click="cancelEditModal()">
-                    <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
+            <md-button class="md-raised md-primary" ng-click="cancelEditModal()">
+                <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
             </md-button>
-            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="editContact(contact.id)" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+            <md-button class="md-raised md-warn" ng-click="editContact(contact.id)" ng-disabled="editForm.$invalid"
+                       type="submit">{{'SEND' | translate}}
+            </md-button>
 
         </md-dialog-actions>
     </form>

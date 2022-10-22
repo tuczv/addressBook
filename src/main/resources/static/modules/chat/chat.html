@@ -1,53 +1,55 @@
 <!-- Chat.html-->
 
-    <md-tab  md-component-id="right"
-                md-disable-backdrop md-whiteframe="4">
+<md-tab md-component-id="right"
+        md-disable-backdrop md-whiteframe="4">
 
-        <md-whiteframe class="md-whiteframe-4dp">
-            <md-toolbar class="md-hue-1 md-whiteframe-z2">
-                <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+    <md-whiteframe class="md-whiteframe-4dp">
+        <md-toolbar class="md-hue-1 md-whiteframe-z2">
+            <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
                  <span layout="row" layout-align="left center">
-                    <md-button ng-click="toggleRight()" class="md-icon-button" aria-label="">
+                    <md-button aria-label="" class="md-icon-button" ng-click="toggleRight()">
                         <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
                     </md-button>
                 </span>
-                    <span layout="row" layout-align="center center">{{'CHAT' | translate}}</span>
-                    <span flex></span>
-                    <span layout="row" layout-align="left center">
-                    <md-button ng-click="exportPDF()" class="md-icon-button" aria-label="">
+                <span layout="row" layout-align="center center">{{'CHAT' | translate}}</span>
+                <span flex></span>
+                <span layout="row" layout-align="left center">
+                    <md-button aria-label="" class="md-icon-button" ng-click="exportPDF()">
                         <ng-md-icon icon="print" style="fill: white"></ng-md-icon>
                     </md-button>
                 </span>
-                    <span flex="5"></span>
-                    <span layout="row" layout-align="center center">
+                <span flex="5"></span>
+                <span layout="row" layout-align="center center">
                     {{users.length}}<ng-md-icon icon="people" style="fill: white"></ng-md-icon>
 
                 </span>
-                </h2>
-            </md-toolbar>
+            </h2>
+        </md-toolbar>
 
-            <md-content class="md-padding" id="exportPDF">
-                <md-list layout-fill>
-                    <md-list-item   ng-repeat="message in messages" class="contact-item md-2-line selected">
-                        <!--<img ng-src="{{ messageCtrl.author.imageUrl }}" class="md-avatar message-avatar"/>-->
-                        <div class="md-list-item-text compact">
-                            <p style="text-align: right;"><small><strong>{{message.author}}</strong> {{message.date}}</small></p>
-                            <div class="message-content">{{message.text}}</div>
-                        </div>
-                    </md-list-item>
-                </md-list>
-            </md-content>
+        <md-content class="md-padding" id="exportPDF">
+            <md-list layout-fill>
+                <md-list-item class="contact-item md-2-line selected" ng-repeat="message in messages">
+                    <!--<img ng-src="{{ messageCtrl.author.imageUrl }}" class="md-avatar message-avatar"/>-->
+                    <div class="md-list-item-text compact">
+                        <p style="text-align: right;"><small><strong>{{message.author}}</strong>
+                            {{message.date}}</small></p>
+                        <div class="message-content">{{message.text}}</div>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
 
-            <md-content layout-padding layout="column">
-                <md-input-container class="md-accent">
-                    <label>{{'WRITE' | translate}}</label>
-                    <input flex="90" ng-model="message.text" md-maxlength="350"/> <ng-md-icon ng-click="messageSend()" icon="send" style="fill: blue"></ng-md-icon>
-                </md-input-container>
-            </md-content>
+        <md-content layout="column" layout-padding>
+            <md-input-container class="md-accent">
+                <label>{{'WRITE' | translate}}</label>
+                <input flex="90" md-maxlength="350" ng-model="message.text"/>
+                <ng-md-icon icon="send" ng-click="messageSend()" style="fill: blue"></ng-md-icon>
+            </md-input-container>
+        </md-content>
 
-        </md-whiteframe>
+    </md-whiteframe>
 
-    </md-tab>
+</md-tab>
 
 
 

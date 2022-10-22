@@ -1,23 +1,22 @@
-
-<html ng-app="addressbook" md-theme="{{theme}}">
+<html md-theme="{{theme}}" ng-app="addressbook">
 <head>
     <!-- META -->
     <meta charset="utf-8">
     <!-- Optimize mobile viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
 
     <title>AddressBook</title>
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
-    <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet">
+    <link href="bower_components/angular-material-data-table/dist/md-data-table.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bower_components/fullcalendar/dist/fullcalendar.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css" rel="stylesheet">
 
 </head>
 
 <body>
-<div ui-view layout="row" layout-fill></div>
+<div layout="row" layout-fill ui-view></div>
 
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>

@@ -9,5 +9,6 @@ public final class AuthorityConstant {
 
     public static final String USER = "ROLE_USER";
 
-    private AuthorityConstant() {}
+    private AuthorityConstant() {
+    }
 }

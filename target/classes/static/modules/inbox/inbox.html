@@ -1,6 +1,6 @@
-<md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="">
+<md-toolbar class="md-hue-1 md-whiteframe-z2" layout="column" role="toolbar" style="">
     <div class="md-toolbar-tools">
-        <md-button class="md-icon-button" aria-label="Contacts">
+        <md-button aria-label="Contacts" class="md-icon-button">
             <ng-md-icon icon="facebook-messenger" style="fill: black"></ng-md-icon>
         </md-button>
         <span>{{'EMAILS' | translate}}</span>
@@ -8,44 +8,45 @@
 </md-toolbar>
 
 <div layout="row" style="height:100%">
-  <div flex="50">
-    <md-content style="height: 100%;" flex>
-        <md-subheader class="md-primary"><b>{{'SEND_EMAIL' | translate}}</b></md-subheader>
-        <md-list>
-            <md-list-item class="md-3-line md-hue-1 md-whiteframe-z2" ng-repeat="email in emails | filter:search" 
-            role="link"
-            ng-click="selectItem(email)" 
-            ng-class="{'selected' : email === selected }">
+    <div flex="50">
+        <md-content flex style="height: 100%;">
+            <md-subheader class="md-primary"><b>{{'SEND_EMAIL' | translate}}</b></md-subheader>
+            <md-list>
+                <md-list-item class="md-3-line md-hue-1 md-whiteframe-z2" ng-class="{'selected' : email === selected }"
+                              ng-click="selectItem(email)"
+                              ng-repeat="email in emails | filter:search"
+                              role="link">
 
-                <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
-                <p class="md-body-2"><b>{{email.userTo}}</b></p>
-                <p class="md-body-2" style="margin-left: 20px;">{{email.subject}}</p>
-                <!--<p class="md-body-2">{{email.date}}</p>-->
-                <span flex></span>
-                <md-icon class="md-secondary" md-svg-src="assets/icons/ic_done_black_24px.svg"
-                         ng-click="deleteEmail(email.id)">
-                    <md-tooltip>Delete</md-tooltip>
-                </md-icon>
+                    <md-icon class="email" md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
+                    <p class="md-body-2"><b>{{email.userTo}}</b></p>
+                    <p class="md-body-2" style="margin-left: 20px;">{{email.subject}}</p>
+                    <!--<p class="md-body-2">{{email.date}}</p>-->
+                    <span flex></span>
+                    <md-icon class="md-secondary" md-svg-src="assets/icons/ic_done_black_24px.svg"
+                             ng-click="deleteEmail(email.id)">
+                        <md-tooltip>Delete</md-tooltip>
+                    </md-icon>
 
-                <md-divider></md-divider>
-            </md-list-item>
-    </md-content>
-  </div>
+                    <md-divider></md-divider>
+                </md-list-item>
+        </md-content>
+    </div>
 
     <div flex=50">
-        <div ng-show="showEmail" layout-fill>
+        <div layout-fill ng-show="showEmail">
             <md-subheader class="md-primary"><b>{{'SELECT' | translate}}</b></md-subheader>
             <div class="">
-                <ng-md-icon icon="email" style="fill: #C0C0C0" size="512"></ng-md-icon>
+                <ng-md-icon icon="email" size="512" style="fill: #C0C0C0"></ng-md-icon>
             </div>
         </div>
 
-        <div ng-show="showReadEmail" layout-fill>
+        <div layout-fill ng-show="showReadEmail">
             <md-subheader class="md-primary"><b>{{'BODY' | translate}}</b></md-subheader>
             <md-card>
                 <md-card-header>
                     <md-card-avatar>
-                        <ng-letter-avatar fontsize="15" avatarcustombgcolor="#D84315" height="30" width="30"  data={{userTo}} shape="round"></ng-letter-avatar>
+                        <ng-letter-avatar avatarcustombgcolor="#D84315" data={{userTo}} fontsize="15" height="30"
+                                          shape="round" width="30"></ng-letter-avatar>
 
                     </md-card-avatar>
                     <md-card-header-text>
@@ -53,25 +54,25 @@
                         <span class="md-subhead">{{selected.subject}}</span>
                     </md-card-header-text>
                     <span flex></span>
-                    <ng-md-icon icon="close" style="fill: gray" ng-click="closeSelectEmail()">
+                    <ng-md-icon icon="close" ng-click="closeSelectEmail()" style="fill: gray">
                         <md-tooltip>Close</md-tooltip>
                     </ng-md-icon>
                 </md-card-header>
                 <md-divider></md-divider>
 
                 <section layout="column" layout-padding>
-                    <a class="toggle-details md-accent-color" ng-hide="selectedMailShowDetails"
-                       ng-click="selectedMailShowDetails = !selectedMailShowDetails">
-                       {{'DETAILS' | translate}}
+                    <a class="toggle-details md-accent-color" ng-click="selectedMailShowDetails = !selectedMailShowDetails"
+                       ng-hide="selectedMailShowDetails">
+                        {{'DETAILS' | translate}}
                     </a>
 
-                    <a class="toggle-details md-accent-color" ng-show="selectedMailShowDetails"
-                       ng-click="selectedMailShowDetails = !selectedMailShowDetails">
+                    <a class="toggle-details md-accent-color" ng-click="selectedMailShowDetails = !selectedMailShowDetails"
+                       ng-show="selectedMailShowDetails">
                         {{'DETAILS' | translate}}
                     </a>
                 </section>
 
-                <div ng-show="selectedMailShowDetails" class="details" layout="row" layout-padding>
+                <div class="details" layout="row" layout-padding ng-show="selectedMailShowDetails">
                     <div layout="column">
                         <span class="title">{{'FROM' | translate}}</span>
                         <span class="title">{{'TO' | translate}}</span>
@@ -94,7 +95,7 @@
             </md-card>
         </div>
     </div>
-    <md-button class="md-fab md-fab-top-right" aria-label="Nowy message" ng-click="showCreateNews($event)">
+    <md-button aria-label="Nowy message" class="md-fab md-fab-top-right" ng-click="showCreateNews($event)">
         <ng-md-icon icon="mode_edit" style="fill: white"></ng-md-icon>
     </md-button>
 </div>

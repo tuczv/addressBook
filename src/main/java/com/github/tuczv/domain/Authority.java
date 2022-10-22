@@ -10,7 +10,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Document(collection = "authority")
-public class Authority implements GrantedAuthority{
+public class Authority implements GrantedAuthority {
 
     @Id
     private String authority;
@@ -19,7 +19,8 @@ public class Authority implements GrantedAuthority{
     @JsonIgnore
     private Set<User> users = new HashSet<>();
 
-    public Authority() {}
+    public Authority() {
+    }
 
     public Authority(String authority) {
         this.authority = authority;

@@ -29,7 +29,8 @@ public class User {
 
     private Set<Authority> authorities = new HashSet<>();
 
-    public User() {}
+    public User() {
+    }
 
     public User(User user) {
         super();

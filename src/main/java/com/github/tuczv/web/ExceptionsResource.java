@@ -20,7 +20,7 @@ public class ExceptionsResource {
     @ResponseStatus(HttpStatus.CONFLICT)
     @ResponseBody
     public String handlerUserAlreadyExistException(HttpServletRequest servletRequest, UserAlreadyExistException e) {
-        logger.info("UserAlreadyExistException occured: URL="+ servletRequest.getRequestURL());
+        logger.info("UserAlreadyExistException occured: URL=" + servletRequest.getRequestURL());
         return e.getLocalizedMessage();
     }
 

@@ -14,18 +14,18 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableAutoConfiguration
 public class SpringbootAngularjsAddressbookApplication implements CommandLineRunner {
 
-	@Autowired
-	UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-	@Autowired
-	AuthorityRepo authorityRepo;
+    @Autowired
+    AuthorityRepo authorityRepo;
 
-	public static void main(String[] args) {
-		SpringApplication.run(SpringbootAngularjsAddressbookApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SpringbootAngularjsAddressbookApplication.class, args);
+    }
 
-	@Override
-	public void run(String... strings) throws Exception {
+    @Override
+    public void run(String... strings) throws Exception {
 /*		if (!userRepository.exists("admin")) {
             Authority administrator = new Authority("ROLE_ADMIN");
 			Authority user = new Authority("ROLE_USER");
@@ -38,5 +38,5 @@ public class SpringbootAngularjsAddressbookApplication implements CommandLineRun
             admin.setAuthorities(new HashSet<>(asList(administrator)));
             userRepository.save(admin);
         }*/
-	}
+    }
 }

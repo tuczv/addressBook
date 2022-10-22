@@ -1,36 +1,38 @@
-<md-dialog aria-label="Nowa wiadomość" ng-cloak flex="40">
+<md-dialog aria-label="Nowa wiadomość" flex="40" ng-cloak>
     <md-dialog-content class="md-padding">
         <form name="createForm" ng-submit="createNews()">
             <div layout layout-sm="column">
                 <md-input-container>
                     <label>{{'FROM' | translate}}</label>
-                    <input ng-model="email.userFrom.username" disabled>
+                    <input disabled ng-model="email.userFrom.username">
                 </md-input-container>
 
-                <md-input-container flex md-is-error="createForm.userTo.$invalid && (createForm.$submitted || createForm.userTo.$dirty)">
+                <md-input-container flex
+                                    md-is-error="createForm.userTo.$invalid && (createForm.$submitted || createForm.userTo.$dirty)">
                     <label>{{'TO' | translate}}</label>
-                    <md-select ng-model="email.userTo"
+                    <md-select id="userTo"
                                name="userTo"
-                               id="userTo"
+                               ng-model="email.userTo"
                                required>
                         <md-option ng-repeat="user in users" required>{{user.username}}</md-option>
                     </md-select>
-                    <div ng-messages="createForm.userTo.$error" ng-if="createForm.userTo.$touched">
+                    <div ng-if="createForm.userTo.$touched" ng-messages="createForm.userTo.$error">
                         <div ng-message="required">Podaj co najmniej jednego odbiorcę</div>
                     </div>
                 </md-input-container>
             </div>
 
             <div layout layout-sm="column">
-                <md-input-container flex md-is-error="createForm.subject.$invalid && (createForm.$submitted || createForm.subject.$dirty)">
+                <md-input-container flex
+                                    md-is-error="createForm.subject.$invalid && (createForm.$submitted || createForm.subject.$dirty)">
                     <label>{{'NAME' | translate}}</label>
-                    <input ng-model="email.subject"
-                           md-minlength="3"
+                    <input id="subject"
                            md-maxlength="25"
+                           md-minlength="3"
                            name="subject"
-                           id="subject"
+                           ng-model="email.subject"
                            required>
-                    <div ng-messages="createForm.subject.$error" ng-if="createForm.subject.$touched">
+                    <div ng-if="createForm.subject.$touched" ng-messages="createForm.subject.$error">
                         <div ng-message="required">Temat wiadomości jest obowiązkowy</div>
                     </div>
                 </md-input-container>
@@ -38,7 +40,7 @@
 
             <md-input-container class="md-block">
                 <label>{{'BODY' | translate}}</label>
-                <textarea ng-model="email.body" md-maxlength="200" rows="3" md-select-on-focus></textarea>
+                <textarea md-maxlength="200" md-select-on-focus ng-model="email.body" rows="3"></textarea>
             </md-input-container>
 
     </md-dialog-content>
@@ -46,8 +48,9 @@
     <md-dialog-action layout="row">
         <span flex></span>
         <md-button ng-click="cancelAddModal()">{{'BACK' | translate}}</md-button>
-        <md-button type="submit" ng-disabled="createForm.$invalid" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
-    </md-dialog-action >
+        <md-button class="md-raised md-warn" ng-disabled="createForm.$invalid" type="submit">{{'SEND' | translate}}
+        </md-button>
+    </md-dialog-action>
     </form>
 </md-dialog>
 

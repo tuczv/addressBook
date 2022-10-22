@@ -1,4 +1,4 @@
-<md-dialog aria-label="Nowy użytkownik" ng-cloak flex="40">
+<md-dialog aria-label="Nowy użytkownik" flex="40" ng-cloak>
     <form name="editForm">
         <md-toolbar>
             <div class="md-toolbar-tools">
@@ -21,44 +21,50 @@
                 <div>
                     <form>
                         <div layout-gt-sm="row">
-                            <md-input-container md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)" class="md-block" flex-gt-sm>
+                            <md-input-container
+                                    class="md-block"
+                                    flex-gt-sm md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)">
                                 <label>{{'NAME' | translate}}</label>
                                 <input
-                                        name="name"
                                         id="name"
+                                        name="name"
                                         ng-model="sameUser.username"
                                         required>
-                                <div ng-messages="editForm.name.$error" ng-if="editForm.name.$touched">
+                                <div ng-if="editForm.name.$touched" ng-messages="editForm.name.$error">
                                     <div ng-message="required">Wpisz imię</div>
                                 </div>
                             </md-input-container>
 
                         </div>
                         <div layout-gt-sm="row">
-                            <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
+                            <md-input-container
+                                    class="md-block"
+                                    flex-gt-sm md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)">
                                 <label>{{'EMAIL' | translate}}</label>
                                 <input
-                                        type="email"
                                         id="email"
                                         name="email"
                                         ng-model="sameUser.email"
-                                        required>
-                                <div ng-messages="editForm.email.$error" ng-if="editForm.email.$touched">
+                                        required
+                                        type="email">
+                                <div ng-if="editForm.email.$touched" ng-messages="editForm.email.$error">
                                     <div ng-message="required">Wpisz email</div>
                                 </div>
                             </md-input-container>
 
                         </div>
                         <div layout-gt-sm="row">
-                            <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
+                            <md-input-container
+                                    class="md-block"
+                                    flex-gt-sm md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)">
                                 <label>{{'PASSWORD' | translate}}</label>
                                 <input
-                                        type="password"
                                         id="password"
                                         name="password"
                                         ng-model="sameUser.password"
-                                        required>
-                                <div ng-messages="editForm.password.$error" ng-if="editForm.password.$touched">
+                                        required
+                                        type="password">
+                                <div ng-if="editForm.password.$touched" ng-messages="editForm.password.$error">
                                     <div ng-message="required">Wpisz password</div>
                                 </div>
                             </md-input-container>
@@ -74,7 +80,9 @@
             <md-button class="md-raised md-primary" ng-click="cancelCreate()">
                 <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
             </md-button>
-            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="createUser()" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+            <md-button class="md-raised md-warn" ng-click="createUser()" ng-disabled="editForm.$invalid" type="submit">
+                {{'SEND' | translate}}
+            </md-button>
 
         </md-dialog-actions>
     </form>

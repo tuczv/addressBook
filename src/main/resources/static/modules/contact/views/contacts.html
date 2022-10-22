@@ -1,9 +1,10 @@
 <div layout="column" layout>
     <md-whiteframe class="md-whiteframe-z2">
 
-        <md-toolbar ng-show="!options.showSearch" ng-hide="options.rowSelection && selected.length" class="md-hue-1 md-whiteframe-z2" style="">
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-hide="options.rowSelection && selected.length"
+                    ng-show="!options.showSearch" style="">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button" aria-label="Contacts">
+                <md-button aria-label="Contacts" class="md-icon-button">
                     <ng-md-icon icon="my_library_books" style="fill: black"></ng-md-icon>
                 </md-button>
                 <h3>
@@ -18,14 +19,16 @@
                     </md-button>
                     <md-menu-content width="4">
                         <md-menu-item ng-repeat="group in groups">
-                            <md-button class="md-button" ng-click="filters.group = group.name">{{group.name}}</md-button>
+                            <md-button class="md-button" ng-click="filters.group = group.name">{{group.name}}
+                            </md-button>
                         </md-menu-item>
-                        <md-button class="md-button" ng-click="filters.group = undefined"><h6>{{'CLEAN' | translate}}</h6></md-button>
+                        <md-button class="md-button" ng-click="filters.group = undefined"><h6>{{'CLEAN' |
+                            translate}}</h6></md-button>
                     </md-menu-content>
                 </md-menu>
 
                 <md-menu>
-                    <md-button class="md-icon-button" aria-label="Select" ng-click="$mdOpenMenu()">
+                    <md-button aria-label="Select" class="md-icon-button" ng-click="$mdOpenMenu()">
                         <md-tooltip>export & import contacs</md-tooltip>
                         <ng-md-icon icon="import_export"></ng-md-icon>
                     </md-button>
@@ -34,8 +37,9 @@
                             <md-button ng-click="exportData()">{{'EXPORT' | translate}}</md-button>
                         </md-menu-item>
                         <md-menu-item>
-                            <input id="input-file-id" class="ng-hide" file-reader="csv" multiple type="file" />
-                            <label for="input-file-id" class="md-button md-raised md-primary">{{'SELECT' | translate}}</label>
+                            <input class="ng-hide" file-reader="csv" id="input-file-id" multiple type="file"/>
+                            <label class="md-button md-raised md-primary" for="input-file-id">{{'SELECT' |
+                                translate}}</label>
 
                         </md-menu-item>
                         <md-menu-item>
@@ -46,8 +50,8 @@
                 </md-menu>
 
 
-                <md-button ng-click="options.showSearch = !options.showSearch"
-                           class="md-icon-button md-primary md-button md-ink-ripple">
+                <md-button class="md-icon-button md-primary md-button md-ink-ripple"
+                           ng-click="options.showSearch = !options.showSearch">
                     <md-tooltip>Find</md-tooltip>
                     <ng-md-icon icon="search"></ng-md-icon>
                 </md-button>
@@ -56,39 +60,42 @@
 
         <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.showSearch" style="background:white">
             <div class="md-toolbar-tools">
-                <md-button ng-click="options.showSearch = !options.showSearch" aria-label="Back"
-                           class="md-icon-button md-primary md-button md-ink-ripple">
+                <md-button aria-label="Back" class="md-icon-button md-primary md-button md-ink-ripple"
+                           ng-click="options.showSearch = !options.showSearch">
                     <ng-md-icon icon="arrow_back" ng-click="resetFilter()"></ng-md-icon>
                 </md-button>
-                <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
+                <md-input-container flex md-theme="input" style="width: 300px; margin-top: 40px; margin-right: 5px;">
                     <label>&nbsp;</label>
-                    <input ng-model="searchInput" class="md-body-1" placeholder="{{'FIND' | translate}}">
+                    <input class="md-body-1" ng-model="searchInput" placeholder="{{'FIND' | translate}}">
                 </md-input-container>
-                <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
-                           class="md-icon-button md-primary md-button md-ink-ripple">
+                <md-button aria-label="Search" class="md-icon-button md-primary md-button md-ink-ripple"
+                           ng-click="options.showSearch = !options.showSearch">
                     <ng-md-icon icon="search"></ng-md-icon>
                 </md-button>
             </div>
 
         </md-toolbar>
 
-        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.rowSelection && selected.length" style="background:white">
-          <div class="md-toolbar-tools">
-            <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.rowSelection && selected.length"
+                    style="background:white">
+            <div class="md-toolbar-tools">
+                <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
 
-          <span flex></span>
-          <md-button class="md-button md-raised md-primary" ng-click="openDeleteSelected($event, selected)">
-            {{'DELETE' | translate}}
-          </md-button>
-          </div>
+                <span flex></span>
+                <md-button class="md-button md-raised md-primary" ng-click="openDeleteSelected($event, selected)">
+                    {{'DELETE' | translate}}
+                </md-button>
+            </div>
         </md-toolbar>
 
         <md-content>
             <md-table-container>
 
-                <table md-table id="table" md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise"> <!--md-on-close: expression; multiple:boolean; placeholder: string;-->
-                    <thead md-head md-order="$root.tableFilter.order"
-                           md-on-reorder="contacts">
+                <table id="table" md-progress="promise" md-row-select="options.rowSelection" md-table
+                       multiple="{{options.multiSelect}}" ng-model="selected">
+                    <!--md-on-close: expression; multiple:boolean; placeholder: string;-->
+                    <thead md-head md-on-reorder="contacts"
+                           md-order="$root.tableFilter.order">
                     <tr md-row>
                         <th md-column></th>
                         <th md-column md-order-by="name">{{'NAME' | translate}}</th>
@@ -101,17 +108,20 @@
                     </thead>
 
                     <tbody md-body>
-                    <tr md-row
+                    <tr md-on-select="selectItem"
+                        md-row
                         md-select="contact"
-                        md-on-select="selectItem"
+                        ng-click="clickEdit(contact, $event)"
                         ng-repeat="contact in contacts
                                     | filter: filters
                             		| orderBy: $root.tableFilter.order
                             		| filter:  searchInput
-                            		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
-                        ng-click="clickEdit(contact, $event)">
+                            		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit">
 
-                        <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#D84315" height="30" width="30"  data={{contact.name}} shape="round"></ng-letter-avatar></td>
+                        <td md-cell>
+                            <ng-letter-avatar avatarcustombgcolor="#D84315" data={{contact.name}} fontsize="15" height="30"
+                                              shape="round" width="30"></ng-letter-avatar>
+                        </td>
                         <td md-cell>{{contact.name}}</td>
                         <td md-cell>{{contact.lastName}}</td>
                         <td md-cell>{{contact.email}}</td>
@@ -123,14 +133,14 @@
                 </table>
 
             </md-table-container>
-            <md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
-                                 md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
-                                 md-total="{{contacts.length}}" md-on-paginate="onPageChange"
-                                 md-boundary-links>
+            <md-table-pagination md-boundary-links
+                                 md-limit="$root.tableFilter.limit" md-limit-options="[10, 20, 30, 40, 50]"
+                                 md-on-paginate="onPageChange" md-page="$root.tableFilter.page"
+                                 md-total="{{contacts.length}}">
             </md-table-pagination>
         </md-content>
 
-        <md-button class="md-fab md-fab-bottom-right" aria-label="Nowy message"
+        <md-button aria-label="Nowy message" class="md-fab md-fab-bottom-right"
                    ng-click="clickAdd($event)">
             <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
         </md-button>

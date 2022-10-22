@@ -5,10 +5,10 @@ import com.github.tuczv.domain.Group;
 import com.github.tuczv.domain.User;
 import com.github.tuczv.repository.ContactRepository;
 import com.github.tuczv.repository.GroupRepository;
+import com.github.tuczv.repository.UserRepository;
 import com.github.tuczv.security.SecurityUtils;
 import com.github.tuczv.service.ContactService;
 import com.github.tuczv.service.GroupService;
-import com.github.tuczv.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,14 +52,14 @@ public class MainResource {
         List<Contact> contacts = contactRepository.getContactsByUser(user);
         return contacts;
     }
-    
+
     @RequestMapping(value = "/contacts/{id}", method = RequestMethod.POST)
     public @ResponseBody void saveContact(@PathVariable("id") String id, @RequestBody Contact contact) {
         /*if ((contactRepository.getContactByName(contact.getName()) != null) || (contactRepository.getContactByEmail(contact.getEmail()) != null)) {
             throw new ContactAlreadyExistException("");
         }*/
         contactRepository.save(contact);
-    } 
+    }
 
     @RequestMapping(value = "/contacts/{id}", method = RequestMethod.GET)
     public @ResponseBody Contact getContactById(@PathVariable("id") String id) {
@@ -67,7 +67,7 @@ public class MainResource {
 
         if (contact == null) {
             logger.info("Contact with id: " + id + " NOT FOUND");
-        } 
+        }
         return contact;
     }
 
@@ -101,12 +101,11 @@ public class MainResource {
         contactRepository.delete(id);
     }
 
-    @RequestMapping(value= "/contacts", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/contacts", method = RequestMethod.DELETE)
     public @ResponseBody ResponseEntity deleteAll(@RequestBody List<Contact> contacts) {
         logger.info("" + contacts);
         Iterator<Contact> it = contacts.iterator();
-        while(it.hasNext())
-        {
+        while (it.hasNext()) {
             Contact ud = (Contact) it.next();
             contactRepository.delete(ud);
         }
@@ -120,19 +119,18 @@ public class MainResource {
         contactRepository.deleteAll();
     }*/
 
-     @RequestMapping(value= "/contacts", method = RequestMethod.POST)
-     public ResponseEntity updateBeforeImportContacts(@RequestBody List<Contact> contacts) {
+    @RequestMapping(value = "/contacts", method = RequestMethod.POST)
+    public ResponseEntity updateBeforeImportContacts(@RequestBody List<Contact> contacts) {
         /* for (Contact contact: contacts) {
              contactRepository.save(contact);
          }*/
-         Iterator<Contact> it = contacts.iterator();
-         while(it.hasNext())
-         {
-             Contact ud = (Contact) it.next();
-             contactRepository.save(ud);
-         }
-         return new ResponseEntity(HttpStatus.OK);
-     }
+        Iterator<Contact> it = contacts.iterator();
+        while (it.hasNext()) {
+            Contact ud = (Contact) it.next();
+            contactRepository.save(ud);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @RequestMapping(value = "/groups", method = RequestMethod.GET)
     public List<Group> getGroups() {
@@ -190,7 +188,7 @@ public class MainResource {
 
         List<Contact> contacts = null;
 
-        if (group != null ) {
+        if (group != null) {
             contacts = contactRepository.getContactsByGroup(group);
         }
 

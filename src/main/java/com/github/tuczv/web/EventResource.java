@@ -2,10 +2,10 @@ package com.github.tuczv.web;
 
 import com.github.tuczv.domain.CalendarEvent;
 import com.github.tuczv.domain.User;
-import com.github.tuczv.security.SecurityUtils;
-import com.github.tuczv.service.EventService;
 import com.github.tuczv.repository.EventsRepository;
 import com.github.tuczv.repository.UserRepository;
+import com.github.tuczv.security.SecurityUtils;
+import com.github.tuczv.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +42,7 @@ public class EventResource {
         event.setStart(calendarEvent.getStart());
         event.setEnd(calendarEvent.getEnd());
         event.setLocation(calendarEvent.getLocation());
-        return  eventsRepository.save(event);
+        return eventsRepository.save(event);
     }
 
     @RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)

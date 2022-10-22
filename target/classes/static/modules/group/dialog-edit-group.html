@@ -1,6 +1,6 @@
-<md-dialog aria-label="Edytuj grupę"  ng-cloak flex="40">
+<md-dialog aria-label="Edytuj grupę" flex="40" ng-cloak>
     <form name="createForm">
-        <md-toolbar  class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
             <div class="md-toolbar-tools">
                 <h2>{{'UPDATE' | translate}}</h2>
                 <span flex></span>
@@ -14,16 +14,18 @@
             <md-content class="md-no-momentum">
                 <section layout="column" layout-margin="">
                     <br>
-                    <md-input-container md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)" class="md-icon-float md-block">
+                    <md-input-container
+                            class="md-icon-float md-block"
+                            md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)">
                         <!-- Use floating label instead of placeholder -->
                         <label>Nazwa</label>
-                        <md-icon md-svg-src="assets/icons/ic_person.svg"  class="name"></md-icon>
+                        <md-icon class="name" md-svg-src="assets/icons/ic_person.svg"></md-icon>
                         <input
-                                ng-model="group.name"
-                                name="name"
                                 id="name"
+                                name="name"
+                                ng-model="group.name"
                                 required>
-                        <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+                        <div ng-if="createForm.name.$touched" ng-messages="createForm.name.$error">
                             <div ng-message="required">Wpisz nazwę</div>
                         </div>
                     </md-input-container>
@@ -33,7 +35,9 @@
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button class="md-primary"  ng-click="editGroup(group.id)" ng-disabled="createForm.$invalid"  class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+            <md-button class="md-primary" class="md-raised md-warn" ng-click="editGroup(group.id)"
+                       ng-disabled="createForm.$invalid">{{'SEND' | translate}}
+            </md-button>
 
         </md-dialog-actions>
     </form>

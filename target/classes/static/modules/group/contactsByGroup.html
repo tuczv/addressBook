@@ -1,6 +1,6 @@
-<md-dialog aria-label="Zestaw grupy"  ng-cloak flex="80">
+<md-dialog aria-label="Zestaw grupy" flex="80" ng-cloak>
     <form name="createForm">
-        <md-toolbar  class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" style="background:#f6f6f6;">
             <div class="md-toolbar-tools">
                 <h2>{{group.name}}</h2>
                 <span flex></span>
@@ -14,9 +14,11 @@
             <md-content>
                 <md-table-container>
 
-                    <table md-table id="table" md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise"> <!--md-on-close: expression; multiple:boolean; placeholder: string;-->
-                        <thead md-head md-order="$root.tableFilter.order"
-                               md-on-reorder="contacts">
+                    <table id="table" md-progress="promise" md-row-select="options.rowSelection" md-table
+                           multiple="{{options.multiSelect}}" ng-model="selected">
+                        <!--md-on-close: expression; multiple:boolean; placeholder: string;-->
+                        <thead md-head md-on-reorder="contacts"
+                               md-order="$root.tableFilter.order">
                         <tr md-row>
                             <th md-column></th>
                             <th md-column md-order-by="name">{{'NAME' | translate}}</th>
@@ -27,17 +29,20 @@
                         </thead>
 
                         <tbody md-body>
-                        <tr md-row
+                        <tr md-on-select="selectItem"
+                            md-row
                             md-select="contact"
-                            md-on-select="selectItem"
+                            ng-click="clickEdit(contact, $event)"
                             ng-repeat="contact in contacts
                                     | filter: filters
                             		| orderBy: $root.tableFilter.order
                             		| filter:  searchInput
-                            		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit"
-                            ng-click="clickEdit(contact, $event)">
+                            		| limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit">
 
-                            <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#D84315" height="30" width="30"  data={{contact.name}} shape="round"></ng-letter-avatar></td>
+                            <td md-cell>
+                                <ng-letter-avatar avatarcustombgcolor="#D84315" data={{contact.name}} fontsize="15" height="30"
+                                                  shape="round" width="30"></ng-letter-avatar>
+                            </td>
                             <td md-cell>{{contact.name}}</td>
                             <td md-cell>{{contact.lastName}}</td>
                             <td md-cell>{{contact.email}}</td>
@@ -52,7 +57,9 @@
 
         <md-dialog-actions layout="row">
             <span flex></span>
-            <md-button class="md-primary"  ng-click="cancelAddModal()"  class="md-accent md-raised md-hue-1">{{'BACK' | translate}}</md-button>
+            <md-button class="md-primary" class="md-accent md-raised md-hue-1" ng-click="cancelAddModal()">{{'BACK' |
+                translate}}
+            </md-button>
 
         </md-dialog-actions>
     </form>

@@ -1,9 +1,9 @@
-
-<md-sidenav class="md-sidenav-left md-whiteframe-z2 md-primary" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+<md-sidenav class="md-sidenav-left md-whiteframe-z2 md-primary" md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-md')">
 
     <md-toolbar class="md-toolbar-tools-bottom inset" layout-align="center start">
         <span flex></span>
-        <div layout="row" >
+        <div layout="row">
             <img ng-src="{{avatar}}" style="height:90pt; margin-left:40pt;padding-top:5px;">
             <span flex></span>
         </div>
@@ -33,64 +33,64 @@
     <md-content id="primary-theme-selector" role="navigation">
         <md-list ng-repeat="section in sidenavMenu.sections">
 
-            <md-list-item  ng-click="goUsers()" ng-show="Security.hasRole('ROLE_ADMIN')">
-                <md-icon md-svg-src="assets/icons/people.svg" class="email"></md-icon>
+            <md-list-item ng-click="goUsers()" ng-show="Security.hasRole('ROLE_ADMIN')">
+                <md-icon class="email" md-svg-src="assets/icons/people.svg"></md-icon>
                 <span class="md-body-1">{{'USERS' | translate}}</span>
                 <span flex></span>
             </md-list-item>
             <md-divider></md-divider>
 
             <md-list-item ng-click="goToGroups()" ng-show="Security.hasRole('ROLE_USER')">
-                <md-icon md-svg-src="assets/icons/ic_group_add_black_24px.svg" class="email"></md-icon>
+                <md-icon class="email" md-svg-src="assets/icons/ic_group_add_black_24px.svg"></md-icon>
                 <span class="md-body-1" layout-align="center center">{{'GROUPS' | translate}}</span>
                 <span flex></span>
             </md-list-item>
             <md-divider></md-divider>
 
             <md-list-item ng-click="goToContact()" ng-show="Security.hasAnyRole(['ROLE_ADMIN', 'ROLE_USER'])">
-                <md-icon md-svg-src="assets/icons/contacts.svg" class="email"></md-icon>
+                <md-icon class="email" md-svg-src="assets/icons/contacts.svg"></md-icon>
                 <span class="md-body-1">{{'CONTACTS' | translate}}</span>
                 <span flex></span>
             </md-list-item>
             <md-divider></md-divider>
 
             <md-list-item ng-click="goToInbox()" ng-show="Security.hasAnyRole(['ROLE_ADMIN', 'ROLE_USER'])">
-                <md-icon md-svg-src="assets/icons/ic_question_answer_black_24px.svg" class="email"></md-icon>
+                <md-icon class="email" md-svg-src="assets/icons/ic_question_answer_black_24px.svg"></md-icon>
                 <span class="md-body-1">{{'EMAILS' | translate}}</span>
                 <span flex></span>
                 <span class="badge">{{emails.length}}</span>
             </md-list-item>
             <md-divider></md-divider>
 
-        <!--    <md-list-item ng-click="goToChat()" ng-show="Security.hasAnyRole(['ROLE_ADMIN', 'ROLE_USER'])">
-                <md-icon md-svg-src="assets/icons/ic_comment_black_24px.svg" class="email"></md-icon>
-                <span class="md-body-1">Czat</span>
-                <span flex></span>
-            </md-list-item>
-            <md-divider></md-divider>-->
+            <!--    <md-list-item ng-click="goToChat()" ng-show="Security.hasAnyRole(['ROLE_ADMIN', 'ROLE_USER'])">
+                    <md-icon md-svg-src="assets/icons/ic_comment_black_24px.svg" class="email"></md-icon>
+                    <span class="md-body-1">Czat</span>
+                    <span flex></span>
+                </md-list-item>
+                <md-divider></md-divider>-->
 
-           <!-- <md-list-item ng-click="section.expand = !section.expand">
-                <md-icon md-svg-src="assets/icons/ic_comment_black_24px.svg" class="email"></md-icon>
-                <span class="md-body-1">{{section.name}}</span>
-                <span flex></span>
-            </md-list-item>
+            <!-- <md-list-item ng-click="section.expand = !section.expand">
+                 <md-icon md-svg-src="assets/icons/ic_comment_black_24px.svg" class="email"></md-icon>
+                 <span class="md-body-1">{{section.name}}</span>
+                 <span flex></span>
+             </md-list-item>
 
-            <md-list-item ng-show="section.expand" ng-repeat="group in groups" ng-click="toast(action.link)">
-                <md-icon md-svg-src="assets/icons/ic_arrow_forward_black_24px.svg" class="email"></md-icon>
-                <span class="md-body-1" layout-align="center center">{{group.name}}</span>
-                <span flex></span>
-            </md-list-item>
-            <md-divider></md-divider>-->
+             <md-list-item ng-show="section.expand" ng-repeat="group in groups" ng-click="toast(action.link)">
+                 <md-icon md-svg-src="assets/icons/ic_arrow_forward_black_24px.svg" class="email"></md-icon>
+                 <span class="md-body-1" layout-align="center center">{{group.name}}</span>
+                 <span flex></span>
+             </md-list-item>
+             <md-divider></md-divider>-->
 
             <md-list-item ng-click="goToCalendar()" ng-show="Security.hasRole('ROLE_USER')">
-                <md-icon md-svg-src="assets/icons/ic_today_black_24px.svg" class="email"></md-icon>
+                <md-icon class="email" md-svg-src="assets/icons/ic_today_black_24px.svg"></md-icon>
                 <span class="md-body-1" layout-align="center center">{{'CALENDAR' | translate}}</span>
                 <span flex></span>
             </md-list-item>
             <md-divider></md-divider>
 
             <md-list-item ng-click="bottomSettings()" ng-show="Security.hasRole('ROLE_USER')">
-                <md-icon md-svg-src="assets/icons/ic_settings_black_24px.svg" class="email"></md-icon>
+                <md-icon class="email" md-svg-src="assets/icons/ic_settings_black_24px.svg"></md-icon>
                 <span class="md-body-1">{{'SETTINGS' | translate}}</span>
                 <span flex></span>
             </md-list-item>
@@ -106,7 +106,7 @@
         <md-toolbar class="md-hue-1 md-whiteframe-z2">
             <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
                  <span layout="row" layout-align="left center">
-                    <md-button ng-click="toggleRight()" class="md-icon-button" aria-label="">
+                    <md-button aria-label="" class="md-icon-button" ng-click="toggleRight()">
                         <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
                     </md-button>
                 </span>
@@ -128,10 +128,11 @@
         <md-content class="md-padding">
 
             <md-list layout-fill>
-                <md-list-item   ng-repeat="message in messages" class="contact-item md-2-line selected">
+                <md-list-item class="contact-item md-2-line selected" ng-repeat="message in messages">
                     <!--<img ng-src="{{ messageCtrl.author.imageUrl }}" class="md-avatar message-avatar"/>-->
                     <div class="md-list-item-text compact">
-                        <p style="text-align: right;"><small><strong>{{message.author}}</strong> {{message.date}}</small></p>
+                        <p style="text-align: right;"><small><strong>{{message.author}}</strong>
+                            {{message.date}}</small></p>
                         <div class="message-content">{{message.text}}</div>
                     </div>
                 </md-list-item>
@@ -139,10 +140,11 @@
 
         </md-content>
 
-        <md-content layout-padding layout="column">
+        <md-content layout="column" layout-padding>
             <md-input-container class="md-accent">
                 <label>{{'WRITE' | translate}}</label>
-                <input flex="90" ng-model="message.text" md-maxlength="350"/> <ng-md-icon ng-click="messageSend()" icon="send" style="fill: blue"></ng-md-icon>
+                <input flex="90" md-maxlength="350" ng-model="message.text"/>
+                <ng-md-icon icon="send" ng-click="messageSend()" style="fill: blue"></ng-md-icon>
             </md-input-container>
         </md-content>
 
@@ -150,46 +152,46 @@
 
 </md-sidenav>
 
-<div layout="column" flex>
+<div flex layout="column">
     <md-toolbar class="md-primary md-whiteframe-z2">
         <div class="md-toolbar-tools" data-ng-show="showMainHeader">
-            <md-button class="md-icon-button" aria-label="Icon" ng-click="toggleLeft()">
+            <md-button aria-label="Icon" class="md-icon-button" ng-click="toggleLeft()">
                 <md-tooltip>AddressBook</md-tooltip>
                 <ng-md-icon icon="dashboard" style="fill: white"></ng-md-icon>
             </md-button>
-            <h2 >
+            <h2>
                 <span>{{'TITLE' | translate}}</span>
             </h2>
             <span flex></span>
             <!--<ng-md-icon icon="person" style="fill: white"></ng-md-icon>-->
             <!--<span>{{user.name}}</span>-->
-             <md-menu>
-                    <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
-                        <md-tooltip>Language</md-tooltip>
-                        <ng-md-icon icon="language" style="fill: white"></ng-md-icon>
-                    </md-button>
-                    <md-menu-content width="4">
-                        <md-button ng-click="setLanguage('pl')">Polski</md-button>
-                        <md-button ng-click="setLanguage('en')">English</md-button>
-                        <md-button ng-click="setLanguage('rus')">Русский</md-button>
-                    </md-menu-content>
+            <md-menu>
+                <md-button class="md-icon-button" ng-click="$mdOpenMenu()">
+                    <md-tooltip>Language</md-tooltip>
+                    <ng-md-icon icon="language" style="fill: white"></ng-md-icon>
+                </md-button>
+                <md-menu-content width="4">
+                    <md-button ng-click="setLanguage('pl')">Polski</md-button>
+                    <md-button ng-click="setLanguage('en')">English</md-button>
+                    <md-button ng-click="setLanguage('rus')">Русский</md-button>
+                </md-menu-content>
             </md-menu>
             <md-button>
                 <md-tooltip>
                     Chat
                 </md-tooltip>
-                <ng-md-icon ng-click="toggleRight()" icon="chat" style="fill: white"></ng-md-icon>
+                <ng-md-icon icon="chat" ng-click="toggleRight()" style="fill: white"></ng-md-icon>
             </md-button>
 
-           <!-- <md-button type="button" ng-click="logout()" class="md-icon-button logout">
-                <md-tooltip>Log out</md-tooltip>
-                <ng-md-icon icon="logout" style="fill: white"></ng-md-icon>
-            </md-button>-->
+            <!-- <md-button type="button" ng-click="logout()" class="md-icon-button logout">
+                 <md-tooltip>Log out</md-tooltip>
+                 <ng-md-icon icon="logout" style="fill: white"></ng-md-icon>
+             </md-button>-->
 
         </div>
     </md-toolbar>
 
-    <md-content flex class="md-padding page-content">
+    <md-content class="md-padding page-content" flex>
         <div ui-view></div>
     </md-content>
 </div>

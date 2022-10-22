@@ -8,15 +8,14 @@ public final class SecurityUtils {
     public SecurityUtils() {
     }
 
-/*Get current login*/
+    /*Get current login*/
     public static String getCurrentLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = null;
 
-        if(principal instanceof UserDetails){
-            username = ((UserDetails)principal).getUsername();
-        }
-        else{
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails) principal).getUsername();
+        } else {
             username = principal.toString();
         }
 

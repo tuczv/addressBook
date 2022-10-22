@@ -4,14 +4,16 @@ import org.springframework.data.annotation.Id;
 
 public class Message {
 
-    @Id private String id;
+    @Id
+    private String id;
     private String author;
     private String text;
     private String date;
     private String subject;
 
 
-    public Message() {}
+    public Message() {
+    }
 
     public Message(String text, String date, String author, String subject) {
         this.text = text;

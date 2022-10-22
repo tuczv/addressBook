@@ -2,7 +2,6 @@ package com.github.tuczv.domain;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "contacts")
@@ -19,13 +18,14 @@ public class Contact {
     private String address;
     private String user;
 
-    public Contact() {}
+    public Contact() {
+    }
 
-    public Contact( String name, String lastName, String email, String phone, String address, String group, String user) {
+    public Contact(String name, String lastName, String email, String phone, String address, String group, String user) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.phone =  phone;
+        this.phone = phone;
         this.address = address;
         this.group = group;
     }

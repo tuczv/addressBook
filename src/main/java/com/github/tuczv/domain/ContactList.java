@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class ContactList {
 
     public String error;
-    
-    @JsonDeserialize(as=ArrayList.class, contentAs=Contact.class)
-	private ArrayList<Contact> contacts;
 
-    @JsonDeserialize(as=ArrayList.class, contentAs=Contact.class)
+    @JsonDeserialize(as = ArrayList.class, contentAs = Contact.class)
+    private ArrayList<Contact> contacts;
+
+    @JsonDeserialize(as = ArrayList.class, contentAs = Contact.class)
     private ArrayList<User> users;
 
     public ContactList() {
@@ -19,7 +19,7 @@ public class ContactList {
 
     public ArrayList<Contact> getContacts() {
         return contacts;
-    }	
+    }
 
     public void setContacts(ArrayList<Contact> contacts) {
         this.contacts = contacts;

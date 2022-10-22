@@ -1,10 +1,10 @@
 package com.github.tuczv.web;
 
 import com.github.tuczv.domain.User;
+import com.github.tuczv.repository.UserRepository;
 import com.github.tuczv.security.SecurityUtils;
 import com.github.tuczv.web.exceptions.SecretQuestionExistException;
 import com.github.tuczv.web.exceptions.UserAlreadyExistException;
-import com.github.tuczv.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

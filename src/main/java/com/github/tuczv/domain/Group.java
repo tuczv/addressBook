@@ -7,13 +7,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "groups")
 public class Group {
 
-    @Id private String id;
+    @Id
+    private String id;
     private String name;
 
     @DBRef
     private User user;
 
-    public Group() {}
+    public Group() {
+    }
 
     public Group(String id, String name, User user) {
         this.id = id;

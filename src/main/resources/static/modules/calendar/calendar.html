@@ -1,39 +1,39 @@
 <div flex>
 
     <!-- ADD EVENT BUTTON -->
-    <md-button class="md-fab md-fab-top-left" ng-click="showNewEventDialog($event)"
-               aria-label="Add event">
+    <md-button aria-label="Add event" class="md-fab md-fab-top-left"
+               ng-click="showNewEventDialog($event)">
         <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
     </md-button>
     <!-- / ADD EVENT BUTTON -->
 
     <!-- TOOLBAR -->
-    <md-toolbar layout="column" class="md-hue-1 md-whiteframe-z2" role="toolbar" style="">
+    <md-toolbar class="md-hue-1 md-whiteframe-z2" layout="column" role="toolbar" style="">
         <div class="md-toolbar-tools">
             <span class="calendarLeft">{{'CALENDAR' | translate}}</span>
             <span flex></span>
-            
-            <md-button class="md-icon-button" aria-label="Search">
+
+            <md-button aria-label="Search" class="md-icon-button">
                 <ng-md-icon icon="search" style="fill: black"></ng-md-icon>
                 <md-tooltip><span>Find</span></md-tooltip>
             </md-button>
 
-            <md-button class="md-icon-button" ng-click="calendar.today()" aria-label="Today">
+            <md-button aria-label="Today" class="md-icon-button" ng-click="calendar.today()">
                 <ng-md-icon icon="today" style="fill: black"></ng-md-icon>
                 <md-tooltip><span>Today</span></md-tooltip>
             </md-button>
 
-            <md-button class="md-icon-button" ng-click="calendar.changeView('agendaDay')" aria-label="Day">
+            <md-button aria-label="Day" class="md-icon-button" ng-click="calendar.changeView('agendaDay')">
                 <ng-md-icon icon="view_day" style="fill: black"></ng-md-icon>
                 <md-tooltip><span>Day</span></md-tooltip>
             </md-button>
 
-            <md-button class="md-icon-button" ng-click="calendar.changeView('agendaWeek')" aria-label="Week">
+            <md-button aria-label="Week" class="md-icon-button" ng-click="calendar.changeView('agendaWeek')">
                 <ng-md-icon icon="view_week" style="fill: black"></ng-md-icon>
                 <md-tooltip><span>Week</span></md-tooltip>
             </md-button>
 
-            <md-button class="md-icon-button" ng-click="calendar.changeView('month')" aria-label="Month">
+            <md-button aria-label="Month" class="md-icon-button" ng-click="calendar.changeView('month')">
                 <ng-md-icon icon="view_module" style="fill: black"></ng-md-icon>
                 <md-tooltip><span>Month</span></md-tooltip>
             </md-button>
@@ -42,11 +42,11 @@
     <!-- / TOOLBAR -->
 
     <!--HEAD-->
-    <div id="calendar" ng-class="currentMonthShort" layout="column">
+    <div id="calendar" layout="column" ng-class="currentMonthShort">
 
         <!-- HEADER BOTTOM -->
         <div class="header-bottom" layout="row" layout-align="center center">
-            <md-button class="md-icon-button arrow" ng-click="calendar.prev()" aria-label="Previous"
+            <md-button aria-label="Previous" class="md-icon-button arrow" ng-click="calendar.prev()"
                        translate translate-attr-aria-label="CALENDAR.PREVIOUS">
                 <ng-md-icon icon="chevron_left" style="fill: black"></ng-md-icon>
             </md-button>
@@ -55,7 +55,7 @@
                 {{calendarView.title}}
             </div>
 
-            <md-button class="md-icon-button arrow" ng-click="calendar.next()" aria-label="Next" translate
+            <md-button aria-label="Next" class="md-icon-button arrow" ng-click="calendar.next()" translate
                        translate-attr-aria-label="CALENDAR.NEXT">
                 <ng-md-icon icon="chevron_right" style="fill: black"></ng-md-icon>
             </md-button>
@@ -66,7 +66,8 @@
 
     <!-- CONTENT -->
     <div class="content">
-        <md-content id="calendarView" ng-model="eventSources"  ui-calendar="uiConfig.calendar" calendar="main" layout-fill>
+        <md-content calendar="main" id="calendarView" layout-fill ng-model="eventSources"
+                    ui-calendar="uiConfig.calendar">
 
         </md-content>
     </div>
