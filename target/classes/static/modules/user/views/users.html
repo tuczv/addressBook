@@ -1,0 +1,113 @@
+<div layout="column" layout>
+    <md-whiteframe class="md-whiteframe-4dp">
+        <md-toolbar class="md-warn md-hue-3" ng-show="!options.showSearch" ng-hide="options.rowSelection && selected.length">
+            <div class="md-toolbar-tools">
+                <h2 class="md-toolbar-tools" layout="row" layout-align="space-between">
+                    <span layout="row" layout-align="center center">{{'USERS' | translate}}</span>
+
+                </h2>
+                <span flex></span>
+                <md-button ng-click="options.showSearch = !options.showSearch"
+                               class="md-icon-button md-primary md-button md-ink-ripple">
+                        <md-tooltip>Find</md-tooltip>
+                        <ng-md-icon icon="search" style="fill: black"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.showSearch" style="background:white">
+            <div class="md-toolbar-tools">
+                <md-button ng-click="options.showSearch = !options.showSearch" aria-label="Back"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <ng-md-icon icon="arrow_back" ng-click="resetFilter()"></ng-md-icon>
+                </md-button>
+                <md-input-container style="width: 300px; margin-top: 40px; margin-right: 5px;" md-theme="input" flex>
+                    <label>&nbsp;</label>
+                    <input ng-model="searchInput" class="md-body-1" placeholder="Wyszukaj użytkownika">
+                </md-input-container>
+                <md-button aria-label="Search" ng-click="options.showSearch = !options.showSearch"
+                           class="md-icon-button md-primary md-button md-ink-ripple">
+                    <ng-md-icon icon="search"></ng-md-icon>
+                </md-button>
+            </div>
+
+        </md-toolbar>
+
+        <md-toolbar class="md-hue-1 md-whiteframe-z2" ng-show="options.rowSelection && selected.length" style="background:white">
+          <div class="md-toolbar-tools">
+            <span class="md-body-1">{{selected.length}} {{selected.length > 1 ? 'pozycje' : 'pozycja'}} zaznaczone</span>
+
+          <span flex></span>
+          <md-button class="md-button md-raised md-primary" ng-click="openDeleteSelected($event, selected)">
+            {{'DELETE' | translate}}
+          </md-button>
+          </div>
+        </md-toolbar>
+        <md-divider></md-divider>
+
+        <md-content>
+            <md-table-container>
+                <table md-table id="table" md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
+                    <thead md-head md-order="$root.tableFilter.order"
+                           md-on-reorder="users">
+                    <tr md-row>
+                        <th md-column></th>
+                        <th md-column md-order-by="username">{{'NAME' | translate}}</th>
+                        <th md-column md-order-by="email">{{'EMAIL' | translate}}</th>
+                        <!--<th md-column>Hasło</th>-->
+                        <th md-column>{{'AUTHORITY' | translate}}</th>
+                        <th md-column></th>
+                    </tr>
+                    </thead>
+
+                    <tbody md-body>
+                    <tr md-row
+                        md-select="user"
+                        md-on-select="selectItem"
+                        ng-repeat="user in users
+                                | filter: filters
+                                | orderBy: $root.tableFilter.order
+                                | filter:  searchInput
+                                | limitTo: $root.tableFilter.limit: ($root.tableFilter.page - 1) * $root.tableFilter.limit">
+                        <td md-cell><ng-letter-avatar fontsize="15" avatarcustombgcolor="#FF7F50" height="30" width="30"  data={{user.username}} shape="round"></ng-letter-avatar></td>
+                        <td md-cell>{{user.username}}</td>
+                        <td md-cell>{{user.email}}</td>
+                        <!--<td md-cell>{{user.password}}</td>-->
+                        <td md-cell>
+                            <div ng-repeat="authority in user.authorities">
+                                <span class="label label-info">{{ authority.authority }}</span>
+                            </div>
+                        </td>
+                        <td md-cell>
+                            <md-menu>
+                                <md-button class="md-icon-button"  ng-click="$mdOpenMenu()">
+                                    <ng-md-icon icon="more_vert"></ng-md-icon>
+                                </md-button>
+                                <md-menu-content width="4">
+                                    <md-menu-item>
+                                        <md-button ng-click="clickUpdateUser(user, $event)">{{'UPDATE' | translate}}</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click="deleteUser(user.id)">{{'DELETE' | translate}}</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </md-table-container>
+            <md-table-pagination md-limit-options="[10, 20, 30, 40, 50]"
+                                 md-limit="$root.tableFilter.limit" md-page="$root.tableFilter.page"
+                                 md-total="{{users.length}}" md-on-paginate="onPageChange"
+                                 md-boundary-links>
+            </md-table-pagination>
+        </md-content>
+        <md-button class="md-fab md-fab-bottom-right md-warn"
+                   ng-click="clickAddUser($event)">
+            <ng-md-icon icon="add" style="fill: white"></ng-md-icon>
+        </md-button>
+    </md-whiteframe>
+
+</div>

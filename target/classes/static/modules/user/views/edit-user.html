@@ -1,0 +1,81 @@
+<md-dialog aria-label="Dane użytkownika" ng-cloak flex="40">
+    <form name="editForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+
+                <h2>{{'UPDATE' | translate}}</h2>
+                <span flex></span>
+          <!--      <md-button class="md-icon-button" ng-click="removeContact(contact.id)">
+                    <ng-md-icon icon="delete" style="fill: pink"></ng-md-icon>
+                </md-button>-->
+                <!--  <md-button class="md-icon-button" ng-click="editContact(contact.id)">
+                     <ng-md-icon icon="save" style="fill: white"></ng-md-icon>
+                 </md-button> -->
+            </div>
+            <span flex></span>
+
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-content layout-padding>
+                <div>
+                    <form>
+                        <div layout-gt-sm="row">
+                            <md-input-container md-is-error="editForm.name.$invalid && (editForm.$submitted || editForm.name.$dirty)" class="md-block" flex-gt-sm>
+                                <label>{{'NAME' | translate}}</label>
+                                <input
+                                        name="name"
+                                        id="name"
+                                        ng-model="user.username"
+                                        required>
+                                <div ng-messages="editForm.name.$error" ng-if="editForm.name.$touched">
+                                    <div ng-message="required">Wpisz imię</div>
+                                </div>
+                            </md-input-container>
+
+                        </div>
+                        <div layout-gt-sm="row">
+                            <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
+                                <label>{{'EMAIL' | translate}}</label>
+                                <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        ng-model="user.email"
+                                        required>
+                                <div ng-messages="editForm.email.$error" ng-if="editForm.email.$touched">
+                                    <div ng-message="required">Wpisz email</div>
+                                </div>
+                            </md-input-container>
+
+                        </div>
+                    <!--     <div layout-gt-sm="row">
+                            <md-input-container md-is-error="editForm.email.$invalid && (editForm.$submitted || editForm.email.$dirty)" class="md-block" flex-gt-sm>
+                                <label>Password</label>
+                                <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        ng-model="user.password"
+                                        required>
+                                <div ng-messages="editForm.password.$error" ng-if="editForm.password.$touched">
+                                    <div ng-message="required">Wpisz password</div>
+                                </div>
+                            </md-input-container>
+
+                        </div>
+ -->
+                    </form>
+                </div>
+            </md-content>
+        </md-dialog-content>
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button class="md-raised md-primary" ng-click="cancelEditModal()">
+                <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
+            </md-button>
+            <md-button type="submit"  ng-disabled="editForm.$invalid" ng-click="updateUser(user.id)" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,65 @@
+<md-dialog aria-label="Nowy kontakt"  ng-cloak flex="40">
+    <form name="createForm" ng-submit="saveContact()">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'NEW' | translate}}</h2>
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancelAddModal()">
+                    <ng-md-icon icon="close" style="fill: white"></ng-md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <md-content class="md-no-momentum">
+                <section layout="column" layout-margin="">
+                <md-input-container md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)" class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>{{'NAME' | translate}}</label>
+                    <md-icon md-svg-src="assets/icons/ic_person.svg"  class="name" style="fill:gray"></md-icon>
+                    <input
+                    	ng-model="contact.name"
+                    	name="name"
+                    	id="name"
+                    	required>
+                    <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+          				<div ng-message="required">Wpisz imię</div>
+        			</div>
+                </md-input-container>
+                  <md-input-container class="md-block">
+                    <!-- Use floating placeholder instead of label -->
+                    <label>{{'EMAIL' | translate}}</label>
+                    <md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
+                    <input ng-model="contact.email" type="email" ng-required="true">
+                </md-input-container>
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label>{{'LASTNAME' | translate}}</label>
+                    <md-icon md-svg-src="assets/icons/ic_person.svg"  class="lastName"></md-icon>
+                    <input ng-model="contact.lastName" type="text">
+                </md-input-container>
+                <md-input-container md-no-float class="md-block">
+                    <label>{{'PHONE' | translate}}</label>
+                    <md-icon md-svg-src="assets/icons/ic_phone_black_24px.svg"></md-icon>
+                    <input ng-model="contact.phone" type="text">
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <!-- Use floating placeholder instead of label -->
+                    <label>{{'GROUP' | translate}}</label>
+                    <md-icon md-svg-src="assets/icons/ic_group_black_24px.svg" class="group"></md-icon>
+                    <md-select ng-model="contact.group">
+                    	<md-option ng-repeat="group in groups" value="{{group.name}}">{{group.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                </section>
+            </md-content>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancelAddModal()" class="md-raised md-primary">{{'BACK' | translate}}</md-button>
+            <md-button type="submit" ng-disabled="createForm.$invalid" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

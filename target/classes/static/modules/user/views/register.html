@@ -1,0 +1,83 @@
+<!--
+
+&lt;!&ndash;  &ndash;&gt;
+<div layout="column" layout-align="center center" layout-fill>
+	<div class="loginContent md-whiteframe-z1" layout="column">
+		
+		<md-toolbar class="md-toolbar-tools">
+			 <span layout="row" layout-align="left center">
+                    <md-button ui-sref="login" class="md-icon-button" aria-label="">
+                        <ng-md-icon icon="keyboard_backspace" style="fill: white"></ng-md-icon>
+                    </md-button>
+                </span>
+			<span layout="row" layout-align="center center">Rejestracja</span>
+		</md-toolbar>
+		
+
+		<md-content class="md-padding" layout="column">
+			<form name="registerForm" novalidate>
+			<md-input-container md-is-error="registerForm.email.$invalid && (registerForm.$submitted || registerForm.email.$dirty)" flex>
+				<label>Email</label>
+				<md-icon md-svg-src="assets/icons/ic_email_black_24px.svg"></md-icon>
+				
+				<input
+					ng-model="user.email" 
+					id="email"
+					name="email" 
+					type="email"  
+					required>
+&lt;!&ndash; 				<md-icon md-svg-src="assets/icons/ic_email_black_24px.svg" class="email"></md-icon>
+ &ndash;&gt;				<div ng-messages="registerForm.email.$error" ng-if="registerForm.email.$touched">
+ 						<div ng-message="required">Wpisz email</div>
+          				<div ng-message="email">Wpisz e-mail, dodaj @</div>
+       			 	</div>
+			</md-input-container>
+			
+			<md-input-container md-is-error="registerForm.username.$invalid && (registerForm.$submitted || registerForm.username.$dirty)" flex>
+				<label>Username</label>
+				<md-icon md-svg-src="assets/icons/ic_person.svg"></md-icon>
+				
+				<input 
+					name="username"
+					ng-model="user.username"  
+					id="username" 
+					ng-minlength="3"
+           			ng-maxlength="10" 
+					required>
+				<div ng-messages="registerForm.username.$error" ng-if="registerForm.username.$touched">
+          			<div ng-message="required">Wpisz imię</div>
+          			<div ng-message="minlength">Zbyt ktrótkie, 3 znaki minimalnie</div>
+          			<div ng-message="maxlength">Zbyt duże</div>
+        		</div>
+			</md-input-container>
+			
+			<md-input-container md-is-error="registerForm.password.$invalid && (registerForm.$submitted || registerForm.password.$dirty)" flex>
+				<label>Password</label>
+				<md-icon md-svg-src="assets/icons/ic_lock.svg" style="color: #00F;"></md-icon>
+		
+				<input flex
+					ng-model="user.password"
+					id="password"
+				 	name="password" 
+				 	type="password" 
+				 	ng-minlength="6"
+           			ng-maxlength="10" 
+				 	required>
+				<div ng-messages="registerForm.password.$error" ng-if="registerForm.password.$touched">
+          			<div ng-message="required">Wpisz poprawne hasło</div>
+          			<div ng-message="minlength">Zbyt krótkie hasło, 6 znaków minimalnie</div>
+        		</div>
+			</md-input-container>
+			<div layout="row" layout-align="center center">
+				<md-button type="submit" ng-click="reset()" class="md-primary">
+					RESET
+				</md-button>
+				<md-button ng-disabled="registerForm.$invalid" ng-click="registerUser()" class="md-raised md-primary">
+					Zarejestruj się
+				</md-button>
+			</div>
+		</form>
+		</md-content>
+	</div>
+</div>
+-->

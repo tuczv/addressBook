@@ -1,0 +1,53 @@
+<md-dialog aria-label="Nowa wiadomość" ng-cloak flex="40">
+    <md-dialog-content class="md-padding">
+        <form name="createForm" ng-submit="createNews()">
+            <div layout layout-sm="column">
+                <md-input-container>
+                    <label>{{'FROM' | translate}}</label>
+                    <input ng-model="email.userFrom.username" disabled>
+                </md-input-container>
+
+                <md-input-container flex md-is-error="createForm.userTo.$invalid && (createForm.$submitted || createForm.userTo.$dirty)">
+                    <label>{{'TO' | translate}}</label>
+                    <md-select ng-model="email.userTo"
+                               name="userTo"
+                               id="userTo"
+                               required>
+                        <md-option ng-repeat="user in users" required>{{user.username}}</md-option>
+                    </md-select>
+                    <div ng-messages="createForm.userTo.$error" ng-if="createForm.userTo.$touched">
+                        <div ng-message="required">Podaj co najmniej jednego odbiorcę</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <div layout layout-sm="column">
+                <md-input-container flex md-is-error="createForm.subject.$invalid && (createForm.$submitted || createForm.subject.$dirty)">
+                    <label>{{'NAME' | translate}}</label>
+                    <input ng-model="email.subject"
+                           md-minlength="3"
+                           md-maxlength="25"
+                           name="subject"
+                           id="subject"
+                           required>
+                    <div ng-messages="createForm.subject.$error" ng-if="createForm.subject.$touched">
+                        <div ng-message="required">Temat wiadomości jest obowiązkowy</div>
+                    </div>
+                </md-input-container>
+            </div>
+
+            <md-input-container class="md-block">
+                <label>{{'BODY' | translate}}</label>
+                <textarea ng-model="email.body" md-maxlength="200" rows="3" md-select-on-focus></textarea>
+            </md-input-container>
+
+    </md-dialog-content>
+
+    <md-dialog-action layout="row">
+        <span flex></span>
+        <md-button ng-click="cancelAddModal()">{{'BACK' | translate}}</md-button>
+        <md-button type="submit" ng-disabled="createForm.$invalid" class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+    </md-dialog-action >
+    </form>
+</md-dialog>
+

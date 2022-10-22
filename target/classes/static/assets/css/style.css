@@ -1,0 +1,131 @@
+
+body {
+    max-width: 100%;
+    max-height: 100%;
+
+}
+
+.md-subheader {
+    background-color: #ECECEC;
+}
+
+/*
+md-sidenav  .md-sidenav-list {
+    min-width: 250px !important;
+    width: 50vw !important;
+    max-width: 250px !important;
+}
+*/
+
+md-icon svg {
+    fill: gray;
+}
+
+.list-container {
+    margin:0 auto;
+    width:50%;
+}
+
+.logo {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+}
+
+.loginContent {
+    max-width:  90%;
+    width: 400px
+}
+
+.loginError {
+	background-color: red;
+
+}
+
+.table-block {
+    margin: 0.5rem 2rem;
+}
+
+
+.boxWithHeight {
+    border: 2px solid #009688
+}
+
+.md-sidenav, md-sidenav.md-locked-open, md-sidenav.md-closed.md-locked-open-add-active {
+    min-width: 250px !important;
+    width: 50vw !important;
+    max-width: 250px !important;
+}
+
+/*.page-content {
+    background-color: #ECECEC;
+}*/
+
+.chat {
+    margin-top: 20px;
+    margin-left: 150px;
+    margin-right: 150px;
+
+}
+
+.formChat {
+    overflow: auto;
+}
+
+.pad-lef-5 {
+    padding-left: 5px !important;
+}
+
+.message div.md-list-item-text.compact{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.md-list-item-text.compact .message-content{
+    background-color: #F5F5F5;
+    border-color: #F5F5F5;
+    padding: 10px;
+    margin: 0px;
+    position: relative;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.message:not(.repeated-author) .message-content:before{
+    left: -8px;
+    border-width: 0 8px 8px 0 !important;
+    border-right-color: inherit;
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-bottom-color: transparent;
+}
+
+.items-content {
+    overflow: auto;
+}
+
+.inputdemoIcons md-input-container.md-input-invalid > md-icon.email,
+  .inputdemoIcons md-input-container.md-input-invalid > md-icon.username {
+    color: red; }
+
+.full-heigth {
+    height: -moz-calc(100% - 64px);
+    height: -webkit-calc(100% - 64px);
+    height: calc(100% - 64px);
+}
+
+.calendarLeft {
+    margin-left: 470px;
+}
+
+.toggle-details {
+    padding-top: 16px;
+    cursor: pointer;
+    font-weight: 500;
+}

@@ -1,0 +1,71 @@
+
+<html ng-app="addressbook" md-theme="{{theme}}">
+<head>
+    <!-- META -->
+    <meta charset="utf-8">
+    <!-- Optimize mobile viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AddressBook</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
+    <link rel="stylesheet" href="bower_components/angular-material-data-table/dist/md-data-table.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css">
+
+</head>
+
+<body>
+<div ui-view layout="row" layout-fill></div>
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-material/angular-material.min.js"></script>
+<script src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+<script src="bower_components/sockjs/sockjs.min.js"></script>
+<script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+<script src="bower_components/angular-material-icons/angular-material-icons.min.js"></script>
+<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+<script src="bower_components/angular-toastr/dist/angular-toastr.min.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+<script src="bower_components/angular-translate/angular-translate.min.js"></script>
+
+<script src="bower_components/moment/min/moment.min.js"></script>
+<script src="bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="bower_components/fullcalendar/dist/gcal.js"></script>
+<script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
+<script src="bower_components/fullcalendar/dist/lang-all.js"></script>
+<script src="bower_components/ngletteravatar-master/dist/ngletteravatar.min.js"></script>
+<script src="bower_components/exportToCSV/alasql.min.js"></script>
+<script src="bower_components/exportToCSV/xlsx.core.min.js"></script>
+<script src="bower_components/angular-csv-import-master/dist/angular-csv-import.js"></script>
+
+
+<script src="modules/core/app/init.js"></script>
+<script src="modules/core/service/auth.interceptor.js"></script>
+<script src="modules/user/service/user.service.js"></script>
+<script src="modules/user/service/authenticate.service.js"></script>
+<script src="modules/user/service/security.service.js"></script>
+<script src="modules/group/groups.service.js"></script>
+<script src="modules/contact/controller/contact.service.js"></script>
+<script src="modules/inbox/inbox.service.js"></script>
+<script src="modules/user/controller/logincontroller.js"></script>
+<script src="modules/user/controller/registercontroller.js"></script>
+<script src="modules/home/home.js"></script>
+<script src="modules/contact/controller/contactcontroller.js"></script>
+<script src="modules/chat/chatController.js"></script>
+<script src="modules/profile/profileController.js"></script>
+<script src="modules/user/controller/adminController.js"></script>
+<script src="modules/inbox/inboxController.js"></script>
+<script src="modules/calendar/calendarController.js"></script>
+<script src="modules/group/groupController.js"></script>
+
+
+</body>
+</html>

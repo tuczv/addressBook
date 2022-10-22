@@ -1,0 +1,29 @@
+<md-bottom-sheet class="md-list md-has-header">
+
+    <md-subheader ng-cloak>{{'SETTINGS' | translate}}</md-subheader>
+    <md-content>
+    <md-list ng-cloak>
+        <md-menu>
+            <md-button
+                    ng-click="$mdOpenMenu()">
+                <md-icon md-svg-src="assets/icons/photo.svg"></md-icon>
+                <span class="md-inline-list-icon-label">{{'SELECT' | translate}}</span>
+            </md-button>
+            <md-menu-content width="4">
+                <md-menu-item>
+                    <md-button class="md-raised" md-colors="{background: 'blue-grey'}" ng-click="setTheme('blue-grey')">Default</md-button>
+                </md-menu-item>
+
+                <md-menu-item>
+                    <md-button class="md-raised" md-colors="{background: 'teal'}" ng-click="setTheme('teal')">Teal</md-button>
+                </md-menu-item>
+                
+                <md-menu-item>
+                    <md-button class="md-raised" md-colors="{background: 'lime'}" ng-click="setTheme('lime')">Lime</md-button>
+                </md-menu-item>
+            </md-menu-content>
+        </md-menu>
+    </md-list>
+    </md-content>
+
+</md-bottom-sheet>

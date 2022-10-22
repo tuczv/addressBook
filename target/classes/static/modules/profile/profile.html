@@ -1,0 +1,28 @@
+<md-card>
+    <!--<img ng-src="{{imagePath}}" class="md-card-image" alt="Washed Out">-->
+    <md-toolbar class="md-hue-1 md-whiteframe-z2" role="toolbar" style="background:#f6f6f6;">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button">
+                <ng-md-icon icon="account_balance" style="fill: black"></ng-md-icon>
+            </md-button>
+            <span>Dane profilowe</span>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+
+    <md-card-title>
+        <md-card-title-media>
+            <div class="md-media-sm card-media" layout>
+                <ng-md-icon icon="person" style="fill: gray" size="32"></ng-md-icon>
+            </div>
+        </md-card-title-media>
+        <md-card-title-text>
+            <span class="md-body1"><b>{{user.username}}</b></span>
+            <span class="md-caption">{{user.email}}</span>
+        </md-card-title-text>
+    </md-card-title>
+
+    <md-card-actions layout="row" layout-align="end center">
+        <!--<md-button class="md-raised md-warn" ng-click="back()">Wróć</md-button>-->
+    </md-card-actions>
+</md-card>

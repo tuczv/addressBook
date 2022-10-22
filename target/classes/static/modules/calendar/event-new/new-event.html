@@ -1,0 +1,48 @@
+<md-dialog aria-label="Nowe wydarzenie" ng-cloak flex="40">
+    <form name="createForm">
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>{{'EVENT' | translate}}</h2>
+                <span flex></span>
+
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+                <section layout-margin>
+                    <br>
+                    <md-input-container
+                            md-is-error="createForm.name.$invalid && (createForm.$submitted || createForm.name.$dirty)"
+                            class="md-icon-float md-block">
+                        <!-- Use floating label instead of placeholder -->
+                        <label>{{'NAME' | translate}}</label>
+
+                        <input
+                                ng-model="calendarEvent.title"
+                                name="name"
+                                id="name"
+                                required>
+                        <div ng-messages="createForm.name.$error" ng-if="createForm.name.$touched">
+                            <div ng-message="required">Wpisz nazwę</div>
+                        </div>
+
+                    </md-input-container>
+                    <md-datepicker ng-model="calendarEvent.start" md-placeholder="{{'FROM' | translate}}" ></md-datepicker>
+
+                    <md-datepicker ng-model="calendarEvent.end" md-placeholder="{{'TO' | translate}}"></md-datepicker>
+                    <br>
+                    <md-input-container class="md-block" flex>
+                        <label>{{'WHERE' | translate}}</label>
+                        <input ng-model="calendarEvent.location">
+                    </md-input-container>
+
+                </section>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button ng-click="cancelDialog()" class="md-raised md-primary">{{'BACK' | translate}}</md-button>
+            <md-button ng-click="saveEvent()" ng-disabled="createForm.$invalid"  class="md-raised md-warn">{{'SEND' | translate}}</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
