@@ -1,0 +1,777 @@
+openapi: 3.0.0
+info:
+  title: Addressbook API
+  description: |
+    **Maintainer**: Cyd88
+  version: 1.0.0
+  contact:
+    name: victor
+    email: tuczkovski@gmail.com
+
+servers:
+  - url: /
+paths:
+  /v1/contacts:
+    get:
+      tags: [ contacts-v1 ]
+      operationId: findContacts
+      summary: Get contacts. Results are pageable with seek method.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags: [ contacts-v1 ]
+      summary: Add new contact.
+      operationId: createContact
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/contacts/{contactId}:
+    get:
+      tags: [ contacts-v1 ]
+      operationId: findContactById
+      summary: Get a contact by id. Results are pageable with seek method.
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          description: Contact Id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags: [ contacts-v1 ]
+      summary: Update a contact by id.
+      operationId: updateContactById
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          description: Contact Id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contact'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags: [ contacts-v1 ]
+      operationId: removeContactById
+      summary: Delete a contact by id.
+      parameters:
+        - name: contactId
+          in: path
+          required: true
+          description: Contact Id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Contact'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/contacts/group/{groupName}:
+    get:
+      tags: [ contacts-v1 ]
+      operationId: findContactByGroup
+      summary: Get a contacts by group. Results are pageable with seek method.
+      parameters:
+        - name: groupName
+          in: path
+          required: true
+          description: Group name
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Contact'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/groups:
+    get:
+      tags: [ groups-v1 ]
+      operationId: findGroups
+      summary: Get a groups. Results are pageable with seek method.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags: [ groups-v1 ]
+      operationId: createGroup
+      summary: Create a group.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/groups/{groupId}:
+    get:
+      tags: [ groups-v1 ]
+      operationId: findGroup
+      summary: Get a group by Id.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags: [ groups-v1 ]
+      operationId: updateGroup
+      summary: Update a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Group'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags: [ groups-v1 ]
+      operationId: removeGroup
+      summary: Delete a group.
+      parameters:
+        - name: groupId
+          in: path
+          required: true
+          description: Group id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/groups/search/{name}:
+    get:
+      tags: [ groups-v1 ]
+      operationId: findGroupByName
+      summary: Get a group by name.
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Group name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Group'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/messages:
+    get:
+      tags: [ chat-v1 ]
+      operationId: findMessages
+      summary: Get a messages. Results are pageable with seek method.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags: [ chat-v1 ]
+      operationId: createMessage
+      summary: Post a message.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/events:
+    get:
+      tags: [ events-v1 ]
+      operationId: findEvents
+      summary: Get a calendar events. Results are pageable with seek method.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CalendarEvent'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags: [ events-v1 ]
+      operationId: createEvent
+      summary: Post a event.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarEvent'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/events/{eventId}:
+    get:
+      tags: [ events-v1 ]
+      operationId: findEventById
+      summary: Get a event by Id.
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          description: Event id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarEvent'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags: [ events-v1 ]
+      operationId: updateEvent
+      summary: Update a event.
+      parameters:
+        - name: eventId
+          in: path
+          required: true
+          description: Event id
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalendarEvent'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalendarEvent'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/emails:
+    get:
+      tags: [ emails-v1 ]
+      operationId: findEmails
+      summary: Get a emails. Results are pageable with seek method.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Mail'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags: [ emails-v1 ]
+      operationId: createEmail
+      summary: Post a email.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mail'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mail'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/emails/{emailId}:
+    delete:
+      tags: [ events-v1 ]
+      operationId: findEmailById
+      summary: Get a email by Id.
+      parameters:
+        - name: emailId
+          in: path
+          required: true
+          description: Email id
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Mail'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/users:
+    get:
+      tags: [ users-v1 ]
+      operationId: findUsers
+      summary: Get a users.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/users/register:
+    post:
+      tags: [ users-v1 ]
+      operationId: createUser
+      summary: Add a user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/users/login:
+    get:
+      tags: [ users-v1 ]
+      operationId: loginUser
+      summary: Login user.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/users/{username}:
+    get:
+      tags: [ users-v1 ]
+      operationId: findUserByUsername
+      summary: Get a user by username.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: Username
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags: [ users-v1 ]
+      operationId: updateUser
+      summary: Update a user.
+      parameters:
+        - name: username
+          in: path
+          required: true
+          description: Username
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /v1/users/{secret}:
+    get:
+      tags: [ users-v1 ]
+      operationId: findUserBySecret
+      summary: Get a user by secret.
+      parameters:
+        - name: secret
+          in: path
+          required: true
+          description: Secret
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      required: [ id, code, timestamp ]
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique error ID, used for logging purposes, UUID format
+        code:
+          type: string
+          description: A string coding the error type. This is given to caller so he can translate them if required.
+        timestamp:
+          type: integer
+        message:
+          type: string
+          description: A short localized string that describes the error.
+    Contact:
+      title: Contact
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        group:
+          type: string
+        address:
+          type: string
+        user:
+          type: string
+    Group:
+      title: Group
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        user:
+          type: object
+    User:
+      title: Group
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        secret:
+          type: string
+    CalendarEvent:
+      title: Calendar event
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        location:
+          type: string
+    Mail:
+      title: Mail
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userTo:
+          type: string
+        subject:
+          type: string
+        body:
+          type: string
+        date:
+          type: string
+        userFrom:
+          type: object
+    Message:
+      title: Mail
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        author:
+          type: string
+        text:
+          type: string
+        date:
+          type: string
+        subject:
+          type: string
+
+
+
+
+
