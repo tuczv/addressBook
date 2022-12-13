@@ -1,19 +1,33 @@
 plugins {
-    id 'org.springframework.boot' version '2.7.5'
-    id "io.spring.dependency-management" version "1.1.0"
-    id 'java'
+    id 'application'
     id 'groovy'
-    id 'org.openapi.generator' version '6.2.0'
+    id 'org.openapi.generator' version '6.2.1'
 }
 
 group = 'com.github.tuczv'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
+    springBom
+
+    annotationProcessor.extendsFrom springBom
+    compileOnly.extendsFrom springBom
+    implementation.extendsFrom springBom
+
+    testBase.extendsFrom springBom
+
+    testImplementation.extendsFrom testBase, implementation
+    testAnnotationProcessor.extendsFrom annotationProcessor
+    testCompileOnly.extendsFrom testAnnotationProcessor
+
+    integrationTestImplementation.extendsFrom testBase, implementation
+    integrationTestAnnotationProcessor.extendsFrom annotationProcessor, springBom
+    integrationTestCompileOnly.extendsFrom integrationTestAnnotationProcessor, springBom
+
+    acceptanceTestImplementation.extendsFrom testBase
+    acceptanceTestAnnotationProcessor.extendsFrom springBom
+    acceptanceTestCompileOnly.extendsFrom(acceptanceTestAnnotationProcessor, springBom)
 }
 
 sourceSets {
@@ -35,10 +49,10 @@ repositories {
 }
 
 dependencies {
+    springBom enforcedPlatform("org.springframework.boot:spring-boot-dependencies:3.0.0")
     compileOnly group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.4'
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-    annotationProcessor group: 'org.springframework', name: 'spring-context-indexer'
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -73,8 +87,8 @@ openApiGenerate {
             sourceFolder           : '',
             skipOverwrite          : false,
             skipDefaultInterface   : true,
-            interfaceOnly          : true,
             useTags                : true,
+            interfaceOnly          : true,
             hideGenerationTimestamp: true,
     ].collectEntries { [it.key, it.value as String] }
     additionalProperties = [
@@ -82,7 +96,8 @@ openApiGenerate {
             openApiNullable: false,
     ].collectEntries { [it.key, it.value as String] }
 }
-tasks.compileJava.dependsOn tasks.openApiGenerate
+
+//tasks.compileJava.dependsOn tasks.openApiGenerate
 
 openApiValidate {
     inputSpec = openApiGenerate.inputSpec.get()
