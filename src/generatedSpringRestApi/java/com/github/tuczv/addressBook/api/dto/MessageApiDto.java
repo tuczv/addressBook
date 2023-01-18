@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -48,7 +47,6 @@ public class MessageApiDto {
    * @return id
   */
   @Valid 
-  @Schema(name = "id", required = false)
   public UUID getId() {
     return id;
   }
@@ -67,7 +65,6 @@ public class MessageApiDto {
    * @return author
   */
   
-  @Schema(name = "author", required = false)
   public String getAuthor() {
     return author;
   }
@@ -86,7 +83,6 @@ public class MessageApiDto {
    * @return text
   */
   
-  @Schema(name = "text", required = false)
   public String getText() {
     return text;
   }
@@ -105,7 +101,6 @@ public class MessageApiDto {
    * @return date
   */
   
-  @Schema(name = "date", required = false)
   public String getDate() {
     return date;
   }
@@ -124,7 +119,6 @@ public class MessageApiDto {
    * @return subject
   */
   
-  @Schema(name = "subject", required = false)
   public String getSubject() {
     return subject;
   }

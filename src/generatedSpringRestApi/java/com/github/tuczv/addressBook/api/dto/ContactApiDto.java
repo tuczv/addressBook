@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -57,7 +56,6 @@ public class ContactApiDto {
    * @return id
   */
   @Valid 
-  @Schema(name = "id", required = false)
   public UUID getId() {
     return id;
   }
@@ -76,7 +74,6 @@ public class ContactApiDto {
    * @return name
   */
   
-  @Schema(name = "name", required = false)
   public String getName() {
     return name;
   }
@@ -95,7 +92,6 @@ public class ContactApiDto {
    * @return lastName
   */
   
-  @Schema(name = "lastName", required = false)
   public String getLastName() {
     return lastName;
   }
@@ -114,7 +110,6 @@ public class ContactApiDto {
    * @return email
   */
   
-  @Schema(name = "email", required = false)
   public String getEmail() {
     return email;
   }
@@ -133,7 +128,6 @@ public class ContactApiDto {
    * @return phone
   */
   
-  @Schema(name = "phone", required = false)
   public String getPhone() {
     return phone;
   }
@@ -152,7 +146,6 @@ public class ContactApiDto {
    * @return group
   */
   
-  @Schema(name = "group", required = false)
   public String getGroup() {
     return group;
   }
@@ -171,7 +164,6 @@ public class ContactApiDto {
    * @return address
   */
   
-  @Schema(name = "address", required = false)
   public String getAddress() {
     return address;
   }
@@ -190,7 +182,6 @@ public class ContactApiDto {
    * @return user
   */
   
-  @Schema(name = "user", required = false)
   public String getUser() {
     return user;
   }

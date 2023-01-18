@@ -11,7 +11,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -52,7 +51,6 @@ public class CalendarEventApiDto {
    * @return id
   */
   @Valid 
-  @Schema(name = "id", required = false)
   public UUID getId() {
     return id;
   }
@@ -71,7 +69,6 @@ public class CalendarEventApiDto {
    * @return title
   */
   
-  @Schema(name = "title", required = false)
   public String getTitle() {
     return title;
   }
@@ -90,7 +87,6 @@ public class CalendarEventApiDto {
    * @return startDate
   */
   @Valid 
-  @Schema(name = "startDate", required = false)
   public OffsetDateTime getStartDate() {
     return startDate;
   }
@@ -109,7 +105,6 @@ public class CalendarEventApiDto {
    * @return endDate
   */
   @Valid 
-  @Schema(name = "endDate", required = false)
   public OffsetDateTime getEndDate() {
     return endDate;
   }
@@ -128,7 +123,6 @@ public class CalendarEventApiDto {
    * @return location
   */
   
-  @Schema(name = "location", required = false)
   public String getLocation() {
     return location;
   }

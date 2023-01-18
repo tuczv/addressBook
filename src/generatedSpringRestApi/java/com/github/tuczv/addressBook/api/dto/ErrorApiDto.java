@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -45,7 +44,6 @@ public class ErrorApiDto {
    * @return id
   */
   @NotNull @Valid 
-  @Schema(name = "id", description = "Unique error ID, used for logging purposes, UUID format", required = true)
   public UUID getId() {
     return id;
   }
@@ -64,7 +62,6 @@ public class ErrorApiDto {
    * @return code
   */
   @NotNull 
-  @Schema(name = "code", description = "A string coding the error type. This is given to caller so he can translate them if required.", required = true)
   public String getCode() {
     return code;
   }
@@ -83,7 +80,6 @@ public class ErrorApiDto {
    * @return timestamp
   */
   @NotNull 
-  @Schema(name = "timestamp", required = true)
   public Integer getTimestamp() {
     return timestamp;
   }
@@ -102,7 +98,6 @@ public class ErrorApiDto {
    * @return message
   */
   
-  @Schema(name = "message", description = "A short localized string that describes the error.", required = false)
   public String getMessage() {
     return message;
   }

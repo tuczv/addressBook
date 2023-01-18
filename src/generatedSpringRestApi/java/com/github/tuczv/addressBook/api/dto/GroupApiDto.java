@@ -9,7 +9,6 @@ import java.util.UUID;
 import java.time.OffsetDateTime;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -42,7 +41,6 @@ public class GroupApiDto {
    * @return id
   */
   @Valid 
-  @Schema(name = "id", required = false)
   public UUID getId() {
     return id;
   }
@@ -61,7 +59,6 @@ public class GroupApiDto {
    * @return name
   */
   
-  @Schema(name = "name", required = false)
   public String getName() {
     return name;
   }
@@ -80,7 +77,6 @@ public class GroupApiDto {
    * @return user
   */
   
-  @Schema(name = "user", required = false)
   public Object getUser() {
     return user;
   }

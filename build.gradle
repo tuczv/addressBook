@@ -49,10 +49,10 @@ repositories {
 }
 
 dependencies {
-    springBom enforcedPlatform("org.springframework.boot:spring-boot-dependencies:3.0.0")
-    compileOnly group: 'io.swagger.core.v3', name: 'swagger-annotations', version: '2.2.4'
-    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
-    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    springBom enforcedPlatform("org.springframework.boot:spring-boot-dependencies:$springBootVersion")
+    compileOnly group: 'io.swagger', name: 'swagger-annotations', version: "$swaggerAnnotationsVersion"
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: "$lombokVersion"
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: "$lombokVersion"
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
@@ -70,7 +70,7 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation group: 'org.webjars', name: 'webjars-locator-core', version: '0.52'
     implementation group: 'org.webjars', name: 'swagger-ui', version: '4.14.3'
-    testImplementation 'org.testcontainers:testcontainers:1.17.4'
+    testImplementation group: 'org.testcontainers', name:'testcontainers', version: "$testContainersVersion"
 }
 
 openApiGenerate {
@@ -83,13 +83,13 @@ openApiGenerate {
     modelPackage = "${project.group}.${project.name}.api.dto"
     modelNameSuffix = 'ApiDto'
     configOptions = [
-            library                : 'spring-boot',
             sourceFolder           : '',
             skipOverwrite          : false,
             skipDefaultInterface   : true,
             useTags                : true,
             interfaceOnly          : true,
             hideGenerationTimestamp: true,
+            documentationProvider  : 'none',
     ].collectEntries { [it.key, it.value as String] }
     additionalProperties = [
             useSpringfox   : false,
