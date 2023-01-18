@@ -27,7 +27,7 @@ public class User {
     @Size(min = 3, max = 10)
     private String secret;
 
-    private Set<Authority> authorities = new HashSet<>();
+    //private Set<Authority> authorities = new HashSet<>();
 
     public User() {
     }
@@ -38,7 +38,7 @@ public class User {
         this.password = user.getPassword();
         this.email = user.getEmail();
         this.secret = user.getSecret();
-        this.authorities = user.getAuthorities();
+        //this.authorities = user.getAuthorities();
     }
 
     public User(String username, String password) {
@@ -46,7 +46,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.secret = secret;
-        this.authorities = authorities;
+        //this.authorities = authorities;
     }
 
     public String getId() {
@@ -89,11 +89,11 @@ public class User {
         this.secret = secret;
     }
 
-    public Set<Authority> getAuthorities() {
+  /*  public Set<Authority> getAuthorities() {
         return authorities;
     }
 
     public void setAuthorities(Set<Authority> authorities) {
         this.authorities = authorities;
-    }
+    }*/
 }

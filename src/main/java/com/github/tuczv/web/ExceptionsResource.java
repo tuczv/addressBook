@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.web;
 
 import com.github.tuczv.web.exceptions.UserAlreadyExistException;
@@ -25,3 +26,4 @@ public class ExceptionsResource {
     }
 
 }
+*/

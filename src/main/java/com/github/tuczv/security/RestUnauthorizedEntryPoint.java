@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.security;
 
 import org.slf4j.Logger;
@@ -23,3 +24,4 @@ public class RestUnauthorizedEntryPoint implements AuthenticationEntryPoint {
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
+*/

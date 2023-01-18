@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.web;
 
 import com.github.tuczv.domain.User;
@@ -72,3 +73,4 @@ public class UserResource {
         return userRepository.save(resetUser);
     }
 }
+*/

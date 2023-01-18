@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.security;
 
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -8,7 +9,9 @@ public final class SecurityUtils {
     public SecurityUtils() {
     }
 
-    /*Get current login*/
+    */
+/*Get current login*//*
+
     public static String getCurrentLoginUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = null;
@@ -22,3 +25,4 @@ public final class SecurityUtils {
         return username;
     }
 }
+*/

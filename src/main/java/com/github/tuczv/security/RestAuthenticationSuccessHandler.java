@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.security;
 
 import org.springframework.security.core.Authentication;
@@ -17,3 +18,4 @@ public class RestAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuc
         clearAuthenticationAttributes(request);
     }
 }
+*/

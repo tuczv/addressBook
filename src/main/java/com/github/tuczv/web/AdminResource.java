@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.web;
 
 
@@ -62,3 +63,4 @@ public class AdminResource {
     }
 
 }
+*/

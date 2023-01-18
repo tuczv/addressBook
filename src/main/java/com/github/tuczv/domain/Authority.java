@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -42,3 +43,4 @@ public class Authority implements GrantedAuthority {
         this.users = users;
     }
 }
+*/

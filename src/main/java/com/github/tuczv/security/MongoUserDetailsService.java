@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.security;
 
 import com.github.tuczv.domain.User;
@@ -44,3 +45,4 @@ public class MongoUserDetailsService implements UserDetailsService {
     }
 
 }
+*/

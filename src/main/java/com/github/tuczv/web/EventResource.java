@@ -4,7 +4,7 @@ import com.github.tuczv.domain.CalendarEvent;
 import com.github.tuczv.domain.User;
 import com.github.tuczv.repository.EventsRepository;
 import com.github.tuczv.repository.UserRepository;
-import com.github.tuczv.security.SecurityUtils;
+//import com.github.tuczv.security.SecurityUtils;
 import com.github.tuczv.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +24,11 @@ public class EventResource {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/events", method = RequestMethod.GET)
+ /*   @RequestMapping(value = "/events", method = RequestMethod.GET)
     public List<CalendarEvent> getEvents() {
         User user = userRepository.findByUsername(SecurityUtils.getCurrentLoginUser());
         return eventService.getEventsByUser(user);
-    }
+    }*/
 
     @RequestMapping(value = "/events", method = RequestMethod.POST)
     public @ResponseBody void newEvent(@RequestBody CalendarEvent event) {

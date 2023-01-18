@@ -6,7 +6,7 @@ import com.github.tuczv.domain.User;
 import com.github.tuczv.repository.ContactRepository;
 import com.github.tuczv.repository.GroupRepository;
 import com.github.tuczv.repository.UserRepository;
-import com.github.tuczv.security.SecurityUtils;
+//import com.github.tuczv.security.SecurityUtils;
 import com.github.tuczv.service.ContactService;
 import com.github.tuczv.service.GroupService;
 import org.slf4j.Logger;
@@ -46,12 +46,12 @@ public class MainResource {
         return contactRepository.findAll();
     }*/
 
-    @RequestMapping(value = "/contacts", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/contacts", method = RequestMethod.GET)
     public List<Contact> getContacts() {
         String user = SecurityUtils.getCurrentLoginUser();
         List<Contact> contacts = contactRepository.getContactsByUser(user);
         return contacts;
-    }
+    }*/
 
     @RequestMapping(value = "/contacts/{id}", method = RequestMethod.POST)
     public @ResponseBody void saveContact(@PathVariable("id") String id, @RequestBody Contact contact) {
@@ -132,13 +132,13 @@ public class MainResource {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/groups", method = RequestMethod.GET)
+  /*  @RequestMapping(value = "/groups", method = RequestMethod.GET)
     public List<Group> getGroups() {
         User user = userRepository.findByUsername(SecurityUtils.getCurrentLoginUser());
         List<Group> groups = groupService.getGroupsByUser(user);
         return groups;
     }
-
+*/
 
     @RequestMapping(value = "/groups/{id}", method = RequestMethod.POST)
     public @ResponseBody void saveGroup(@PathVariable("id") String id, @RequestBody Group group) {

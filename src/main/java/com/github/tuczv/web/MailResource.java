@@ -4,7 +4,7 @@ import com.github.tuczv.domain.Mail;
 import com.github.tuczv.domain.User;
 import com.github.tuczv.repository.MailRepository;
 import com.github.tuczv.repository.UserRepository;
-import com.github.tuczv.security.SecurityUtils;
+//import com.github.tuczv.security.SecurityUtils;
 import com.github.tuczv.service.MailService;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,12 +32,12 @@ public class MailResource {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "/emails", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/emails", method = RequestMethod.GET)
     public List<Mail> getEmails() {
         User user = userRepository.findByUsername(SecurityUtils.getCurrentLoginUser());
         List<Mail> mailList = mailService.getMailsByUser(user);
         return mailList;
-    }
+    }*/
 
     @RequestMapping(value = "/emails", method = RequestMethod.POST)
     public @ResponseBody void sendEmail(@RequestBody Mail mail) {

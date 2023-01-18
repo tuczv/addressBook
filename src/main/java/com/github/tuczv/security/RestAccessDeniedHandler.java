@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.security;
 
 import org.springframework.security.access.AccessDeniedException;
@@ -17,3 +18,4 @@ public class RestAccessDeniedHandler implements AccessDeniedHandler {
         httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED);
     }
 }
+*/

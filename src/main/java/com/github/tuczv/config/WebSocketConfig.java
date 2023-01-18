@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.config;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -23,3 +24,4 @@ public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
         stompEndpointRegistry.addEndpoint("/websocket").withSockJS();
     }
 }
+*/

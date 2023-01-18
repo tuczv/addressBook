@@ -1,6 +1,6 @@
 package com.github.tuczv;
 
-import com.github.tuczv.repository.AuthorityRepo;
+//import com.github.tuczv.repository.AuthorityRepo;
 import com.github.tuczv.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,8 +17,8 @@ public class SpringbootAngularjsAddressbookApplication implements CommandLineRun
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    AuthorityRepo authorityRepo;
+    /*@Autowired
+    AuthorityRepo authorityRepo;*/
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootAngularjsAddressbookApplication.class, args);

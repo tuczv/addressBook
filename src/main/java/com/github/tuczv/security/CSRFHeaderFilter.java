@@ -1,3 +1,4 @@
+/*
 package com.github.tuczv.security;
 
 import org.springframework.security.web.csrf.CsrfToken;
@@ -28,3 +29,4 @@ public class CSRFHeaderFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 }
+*/
