@@ -52,9 +52,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(authenticationProvider());
         */
 /*
-         * .inMemoryAuthentication().withUser("ram").password("ram").roles("ADMIN"
-         * );
-         *//*
+ * .inMemoryAuthentication().withUser("ram").password("ram").roles("ADMIN"
+ * );
+ *//*
 
     }
 

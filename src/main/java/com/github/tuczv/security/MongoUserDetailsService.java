@@ -1,8 +1,8 @@
 /*
 package com.github.tuczv.security;
 
-import com.github.tuczv.domain.User;
-import com.github.tuczv.repository.UserRepository;
+import com.github.tuczv.user.User;
+import com.github.tuczv.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
