@@ -42,6 +42,6 @@ public class MailResource {
 
     @RequestMapping(value = "/emails/{id}", method = RequestMethod.DELETE)
     public void deleteEmail(@PathVariable("id") String id) {
-        mailRepository.delete(id);
+        mailRepository.deleteById(id);
     }
 }

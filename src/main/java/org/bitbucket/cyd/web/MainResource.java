@@ -98,7 +98,7 @@ public class MainResource {
     @RequestMapping(value = "/contacts/{id}", method = RequestMethod.DELETE)
     public void deleteContact(@PathVariable("id") String id) {
         logger.info("Success deleting");
-        contactRepository.delete(id);
+        contactRepository.deleteById(id);
     }
 
     @RequestMapping(value= "/contacts", method = RequestMethod.DELETE)
@@ -182,7 +182,7 @@ public class MainResource {
     @RequestMapping(value = "/groups/{id}", method = RequestMethod.DELETE)
     public void deleteGroup(@PathVariable("id") String id) {
         logger.info("Success deleting");
-        groupRepository.delete(id);
+        groupRepository.deleteById(id);
     }
 
     @RequestMapping(value = "/contacts/group/{group}", method = RequestMethod.GET)

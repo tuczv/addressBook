@@ -47,6 +47,6 @@ public class EventResource {
 
     @RequestMapping(value = "/events/{id}", method = RequestMethod.DELETE)
     public void remove(@PathVariable("id") String id) {
-        eventsRepository.delete(id);
+        eventsRepository.deleteById(id);
     }
 }

@@ -1,3 +1,4 @@
+/*
 package org.bitbucket.cyd.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestAuthenticationSuccessHandler restAuthenticationSuccessHandler;
 
+*/
 /*	@Autowired
-	private RestAuthenticationFailureHandler restAuthenticationFailureHandler;*/
+	private RestAuthenticationFailureHandler restAuthenticationFailureHandler;*//*
+
 
 
     @Bean
@@ -49,10 +52,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         auth.userDetailsService(mongoUserDetailService);
         auth.authenticationProvider(authenticationProvider());
-		/*
+		*/
+/*
 		 * .inMemoryAuthentication().withUser("ram").password("ram").roles("ADMIN"
 		 * );
-		 */
+		 *//*
+
     }
 
     @Bean
@@ -95,3 +100,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return repository;
     }
 }
+*/

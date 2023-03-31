@@ -46,7 +46,7 @@ public class AdminResource {
 
     @RequestMapping(value = "/users/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable("id") String id) {
-        userRepository.delete(id);
+        userRepository.deleteById(id);
     }
     
     @RequestMapping(value= "/users", method = RequestMethod.DELETE)
