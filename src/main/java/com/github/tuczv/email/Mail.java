@@ -1,12 +1,11 @@
 package com.github.tuczv.email;
 
 import com.github.tuczv.user.User;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Document(collection = "mails")
 public class Mail {

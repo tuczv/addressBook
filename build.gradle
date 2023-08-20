@@ -10,7 +10,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
     springBom
-
+    generatedSpringRestApi
     annotationProcessor.extendsFrom springBom
     compileOnly.extendsFrom springBom
     implementation.extendsFrom springBom
@@ -67,9 +67,9 @@ dependencies {
     //implementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo:3.5.0'
     implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    //implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation group: 'org.webjars', name: 'webjars-locator-core', version: '0.52'
-    implementation group: 'org.webjars', name: 'swagger-ui', version: '4.14.3'
+    implementation group: 'org.webjars', name: 'swagger-ui', version: '4.10.3'
     testImplementation group: 'org.testcontainers', name: 'testcontainers', version: "$testContainersVersion"
 }
 
@@ -93,6 +93,7 @@ openApiGenerate {
             useTags                : true,
             interfaceOnly          : true,
             hideGenerationTimestamp: true,
+            useSpringBoot3         : true,
             documentationProvider  : 'none',
     ].collectEntries { [it.key, it.value as String] }
     additionalProperties = [

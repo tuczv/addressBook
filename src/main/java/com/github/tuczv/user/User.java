@@ -1,10 +1,9 @@
 package com.github.tuczv.user;
 
+import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import javax.validation.constraints.Size;
 
 @Document(collection = "users")
 public class User {

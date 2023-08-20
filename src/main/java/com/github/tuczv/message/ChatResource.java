@@ -1,6 +1,5 @@
 package com.github.tuczv.message;
 
-import org.apache.commons.lang3.time.DateFormatUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class ChatResource {
     @MessageMapping("/chat")
     @SendTo("/topic/chat")
     public Message send(Message userMessage) throws Exception {
-        userMessage.setDate(DateFormatUtils.format(new Date(System.currentTimeMillis()), "yyyy-MM-dd HH:mm:ss"));
+        //userMessage.setDate(DateFormatUtils.format(new Date(System.currentTimeMillis()), "yyyy-MM-dd HH:mm:ss"));
         userMessage.getAuthor();
         logger.info("sent message success");
         return messageRepository.save(userMessage);
